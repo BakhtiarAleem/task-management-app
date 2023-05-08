@@ -1,0 +1,64 @@
+$mobile-sm-width: 414px;
+$mobile-width: 767px;
+$tablet-width: 768px;
+$tablet-landscape-width: 1140px;
+$tablet-full-width: 1024px;
+$window-small-width: 1300px;
+$Desktop1380: 1400px;
+$Desktop1440: 1500px;
+
+@mixin mobileS {
+    @media (max-width: #{$mobile-sm-width}) {
+        @content;
+    }
+}
+
+@mixin tabletF {
+    @media (max-width: #{$tablet-full-width}) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: #{$mobile-width}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: #{$tablet-width}) {
+        @content;
+    }
+}
+
+@mixin tabletL {
+    @media (max-width: #{$tablet-landscape-width}) {
+        @content;
+    }
+}
+
+@mixin windowS {
+    @media (max-width: #{$window-small-width}) {
+        @content;
+    }
+}
+
+@mixin Desktop1380 {
+    @media (max-width: #{$Desktop1380}) {
+        @content;
+    }
+}
+
+@mixin Desktop1440 {
+    @media (max-width: #{$Desktop1440}) {
+        @content;
+    }
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}

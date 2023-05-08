@@ -1,0 +1,268 @@
+label {
+    font-size: $label-font-size;
+    font-family: $font-bold;
+    color: $secondary;
+}
+
+// upload file
+.upload-section {
+    position: relative;
+    height: 45px;
+    cursor: pointer;
+    input[type='file'] {
+        position: relative;
+        top: 4px;
+        height: 50px;
+        outline: none;
+        cursor: pointer;
+        font-size: 0;
+    }
+
+    .image-uploader {
+        width: 100%;
+        float: left;
+        position: absolute;
+        top: 3px;
+        background-color: $white;
+        z-index: 1;
+        pointer-events: none;
+
+        .upload-icon {
+            position: absolute;
+            top: 13px;
+            left: 12px;
+            i {
+                font-size: 18px;
+                color: $primary;
+            }
+        }
+
+        .profile-picture {
+            width: 42px;
+            height: 42px;
+            float: left;
+            position: absolute;
+            background-size: cover;
+            background-position: 50% 50%;
+            border: 1px solid $input-border-color;
+            border-radius: $upload-border-radius;
+
+            img {
+                width: 100%;
+                border-radius: $card-border-radius;
+                display: block;
+            }
+        }
+
+        .profile-label {
+            width: calc(100% - 42px);
+            float: right;
+            padding: 2px 0 0 7px;
+
+            label {
+                vertical-align: -webkit-baseline-middle;
+                span {
+                    display: block;
+                    font-family: $font_regular;
+                    font-size: $input-font-size;
+                    margin-top: 3px;
+                    color: $primary;
+                }
+            }
+        }
+    }
+    .custom-file-label {
+        display: none;
+    }
+}
+
+.form-control {
+    box-shadow: 0px 1px 0px 0.5px rgba(0, 0, 0, 0.1) inset !important;
+    &:focus {
+        border-color: $primary;
+    }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/*
+    Customize checkbox
+*/
+.customize-checkbox {
+    position: relative;
+    padding-left: 22px;
+    .custom-control-label {
+        font-family: $font-regular;
+        padding-top: 3px;
+        padding-left: 6px;
+
+        @include mobile {
+            padding-left: 0;
+        }
+
+        &:before {
+            border-radius: 2px;
+            border-color: $input-border-color !important;
+            box-shadow: none !important;
+            background: none !important;
+        }
+        &:after {
+            display: none;
+        }
+    }
+    .custom-checkbox {
+        padding-left: 2px;
+    }
+    input {
+        background: none !important;
+    }
+    .checked-img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        background: url('./assets/images/icons/checked.svg') !important;
+        background-position: center;
+        background-repeat: no-repeat !important;
+        margin-left: 2px;
+        background-size: 100% auto !important;
+        left: -21px;
+        top: 5px;
+        display: none;
+        @include tabletL {
+            left: -28px;
+            top: 3px;
+        }
+    }
+    .custom-control-input {
+        left: -21px;
+        top: 6px;
+        z-index: 9;
+    }
+    input.custom-control-input[type='checkbox']:checked + label:before,
+    input.custom-control-input[type='checkbox']:active {
+        background: none !important;
+    }
+    input.custom-control-input[type='checkbox']:checked
+        + .custom-control-label
+        .checked-img {
+        display: block;
+    }
+}
+
+.btn {
+    &.btn-secondary {
+        background-color: $pink;
+        border-color: $pink;
+    }
+}
+
+// textarea
+textarea {
+    resize: none;
+    height: 67px !important;
+}
+
+.custom-control-label {
+    &:before {
+        width: 20px;
+        height: 20px;
+        top: 0;
+        background-color: $body-bg;
+        border-color: $modal-header-border-color;
+    }
+
+    span {
+        margin-left: 9px;
+        @include font-size(0.875);
+    }
+}
+
+// radio button
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: none;
+    width: 12px;
+    height: 12px;
+    background-color: $primary;
+    left: -20px;
+    top: 4px;
+    border-radius: 100%;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: transparent;
+    border-color: $modal-header-border-color;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    border-color: transparent;
+}
+
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    background-color: transparent;
+    border-color: $modal-header-border-color;
+}
+
+// checkbox
+
+.customize-checkbox {
+    .custom-control-label {
+        &:before {
+            width: 14px;
+            height: 14px;
+        }
+
+        .checked-img {
+            left: -31px;
+            top: 1px;
+        }
+    }
+}
+
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel .ck-toolbar,
+.ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+    border-color: $grey-lite !important;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+    border-color: $grey-lite !important;
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+.ck.ck-toolbar__separator {
+    background: $grey-lite !important;
+}
+
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
+    min-height: 120px;
+    padding-left: 14px;
+}
+
+.ck.ck-content.ck-editor__editable {
+    min-height: 120px !important;
+    height: 120px !important;
+    padding-left: 14px;
+    &:focus {
+        border-color: $primary !important;
+    }
+}
+.preview-image {
+    &.image-uploader {
+        .profile-picture {
+            background-color: #fff;
+        }
+    }
+}

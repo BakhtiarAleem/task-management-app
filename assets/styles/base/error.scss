@@ -1,0 +1,59 @@
+.error-page {
+    overflow: hidden;
+    .not-found-main {
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        margin-top: -50px;
+    }
+    .not-found {
+        position: relative;
+        width: 100%;
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+    }
+    .not-found .not-found-panel {
+        text-align: center;
+    }
+    .not-found .not-found-panel h1 {
+        font-size: 6rem;
+        line-height: normal;
+        margin-bottom: -10px;
+        color: $primary;
+        @include mobile {
+            font-size: 42px;
+            margin-bottom: 6px;
+        }
+    }
+    .not-found .not-found-panel h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        @include mobile {
+            font-size: 1rem;
+            max-width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+    .not-found .not-found-panel p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        @include mobile {
+            font-size: 1rem;
+            max-width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+    .footer {
+        display: none;
+    }
+    .error-image {
+        max-width: 400px;
+        width: 85%;
+        margin: 0 auto 20px;
+    }
+}

@@ -1,0 +1,23 @@
+.btn-group-toggle {
+    .btn-outline-primary {
+        height: $input-height;
+        font-family: $font_regular;
+        border: 1px solid $border-opacity !important;
+        outline: none;
+        color: $primary;
+        box-shadow: none !important;
+        background-color: $white;
+
+        span {
+            display: inline-block;
+            padding-top: 1px;
+            @include font-size(0.75);
+        }
+
+        &.active {
+            border: 1px $modal-header-border-color solid;
+            background-color: transparent !important;
+            color: $secondary !important;
+        }
+    }
+}

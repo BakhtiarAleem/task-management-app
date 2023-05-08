@@ -1,0 +1,148 @@
+// theming
+$grey-darkest: #1a1a1a;
+$grey-dark: #57505f;
+$grey-medium: #706978;
+$grey-lite: #d9d9d9;
+$grey-xlite: #e9eae3;
+
+$body-bg: #f7f7f7;
+$body-color: $grey-dark;
+$white: #fff;
+$border-radius: 4px;
+$border-opacity: rgba(208, 210, 197, 0.5);
+$primary: #138d90;
+$secondary: $grey-darkest;
+$success: #41b031;
+$light: #eef0f4;
+$dark: #838383;
+$danger: #dc3545;
+$pink: #aa2f78;
+$yellow: #ffb54c;
+$radio-check: #9d9f8f;
+
+$theme-colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'light': $light,
+    'dark': $dark,
+    'danger': $danger
+);
+
+// header height
+$header-height: 52px !default;
+
+// upload image
+$upload-border-radius: 8px;
+
+$font-family-base: 'AvenirNextRegular' !default;
+$headings-font-family: 'LeagueSpartan-Bold' !default;
+$headings-color: $secondary !default;
+$label-color: $secondary !default;
+
+//font sizes
+$font-size-base: 0.875rem !default;
+$font-size-sm: $font-size-base - 0.125rem !default;
+$font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+
+$font-size-h1: floor(($font-size-base * 2.6)) !default; // ~36px
+$font-size-h2: floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h3: ceil(($font-size-base * 1.7)) !default; // ~24px
+$font-size-h4: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h5: $font-size-base !default;
+$font-size-h6: ceil(($font-size-base * 0.85)) !default; // ~12px
+
+// card
+$card-bg: $white !default;
+$card-border-radius: 12px !default;
+$card-border-color: transparent !default;
+$card-padding: 0 0;
+// box shadow
+$box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.04);
+$front-card-shadow: 0px 0px 30px $grey-xlite;
+
+// input
+$input-bg: $white !default;
+$input-color: #706978 !default;
+$input-border-color: #d9d9d9 !default;
+$input-border-radius: $border-radius !default;
+$input-height: 38px !default;
+$input-font-size: 14px;
+
+$label-font-size: 14px;
+
+// button
+$btn-border-radius: 19px !default;
+
+// link
+$link-color: $primary !default;
+$link-hover-color: darken($link-color, 5%) !default;
+
+// modal
+$modal-inner-padding: 24px 24px 0 !default;
+$modal-title-line-height: 24px !default;
+$modal-title-font-size: 16px !default;
+$modal-header-border-color: #d0d2c5 !default;
+$modal-header-padding: 17px 24px 11px 24px !default;
+
+$modal-content-border-radius: $upload-border-radius !default;
+
+//** Modal footer border color
+$modal-footer-border-color: $modal-header-border-color !default;
+
+$modal-lg: 900px !default;
+$modal-md: 400px !default;
+$modal-sm: 300px !default;
+
+$zindex-modal-background: 1040 !default;
+$zindex-modal: 1050 !default;
+
+// form group
+$form-group-margin-bottom: 24px !default;
+
+//Buttons
+$button-size: $font-size-base;
+$button-family: $font-bold;
+$button-padding: 7px 28px;
+$toggle-button-padding: 7px 10px;
+$second-button-color: #706a77;
+$default-button-color: #706a77;
+
+//state colors
+
+$state-success-text: #3c763d !default;
+$state-success-bg: #000 !default;
+$state-success-border: darken(adjust-hue($state-success-bg, -10), 5%) !default;
+
+$state-info-text: #31708f !default;
+$state-info-bg: #d9edf7 !default;
+$state-info-border: darken(adjust-hue($state-info-bg, -10), 7%) !default;
+
+$state-warning-text: #8a6d3b !default;
+$state-warning-bg: #fcf8e3 !default;
+$state-warning-border: darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+
+$state-danger-text: #a94442 !default;
+$state-danger-bg: #f2dede !default;
+$state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
+
+/*
+    alert
+*/
+
+$alert-success-bg: #d4edda !default;
+$alert-success-text: #155724 !default;
+$alert-success-border: #c3e6cb !default;
+
+$alert-info-bg: #d1ecf1 !default;
+$alert-info-text: #0c5460 !default;
+$alert-info-border: #bee5eb !default;
+
+$alert-warning-bg: #fff3cd !default;
+$alert-warning-text: #856404 !default;
+$alert-warning-border: #ffeeba !default;
+
+$alert-danger-bg: #f8d7da !default;
+$alert-danger-text: #721c24 !default;
+$alert-danger-border: #f5c6cb !default;

@@ -1,0 +1,14 @@
+.category-report {
+    width: 100%;
+    height: 400px;
+    @include mobile {
+        width: 700px;
+    }
+}
+
+.system-chart {
+    @include mobile {
+        overflow: hidden;
+        overflow-x: auto;
+    }
+}

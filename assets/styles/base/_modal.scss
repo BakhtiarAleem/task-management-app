@@ -1,0 +1,136 @@
+// Modal
+.modal {
+    .modal-dialog {
+        margin: 4rem auto;
+
+        @include mobile {
+            margin: 0;
+            max-width: 100%;
+            height: 100%;
+        }
+
+        .modal-content {
+            @include mobile {
+                border-radius: 0;
+            }
+
+            @include mobile {
+                height: 100%;
+            }
+
+            .modal-header {
+                background-color: $body-bg;
+                border-bottom: 1px $border-opacity solid !important;
+
+                @include mobile {
+                    padding: 17px 24px 36px 24px;
+                }
+
+                .modal-title {
+                    font-size: $modal-title-font-size;
+                }
+                .close {
+                    padding: 10px 10px 0 0;
+                    font-size: 32px;
+                    color: $input-color;
+                    outline: none;
+                }
+            }
+
+            .modal-body {
+                .customize-checkbox {
+                    .custom-control-input {
+                        top: 0;
+                    }
+
+                    .custom-control-label {
+                        padding-top: 0 !important;
+
+                        &:before {
+                            top: 1px;
+                        }
+
+                        .checked-img {
+                            left: -24px;
+                            top: 2px;
+                        }
+                    }
+                }
+
+                .modal-content-area {
+                    p {
+                        margin-bottom: 24px;
+                    }
+
+                    @include mobile {
+                        height: calc(100% - 55px);
+                        background-color: $white;
+                    }
+                }
+            }
+
+            .modal-footer {
+                background-color: $body-bg;
+                padding: 8px 24px;
+                border-top: 1px $border-opacity solid !important;
+
+                @include mobile {
+                    border-radius: 0;
+                }
+
+                .btn-primary {
+                    min-width: 146px;
+                }
+
+                .btn-link {
+                    padding-left: 0;
+                    color: $input-color;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    .btn-group-toggle {
+        width: 100%;
+
+        .btn {
+            height: $input-height;
+            box-shadow: none;
+            font-family: $font_regular;
+            background-color: transparent;
+            color: $primary;
+            border-color: $primary;
+            cursor: pointer;
+            &:first-child {
+                border-radius: $upload-border-radius 0 0 $upload-border-radius;
+            }
+
+            &:last-child {
+                border-radius: 0 $upload-border-radius $upload-border-radius 0;
+            }
+
+            &.active {
+                background-color: $primary;
+                font-family: $font_bold;
+                border: 1px $primary solid;
+            }
+
+            &:active {
+                background-color: transparent;
+                border-color: $primary;
+                color: $primary;
+            }
+
+            span {
+                @include mobile {
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+}

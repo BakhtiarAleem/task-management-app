@@ -1,0 +1,136 @@
+header {
+    background-color: #fff;
+    padding: 0;
+    height: $header-height;
+    z-index: 99;
+    position: relative;
+    @include mobile {
+        height: 42px;
+    }
+    .fixed-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: #fff;
+        height: 52px;
+        box-shadow: $box-shadow;
+        @include tablet {
+            padding-left: 0 !important;
+        }
+        @include mobile {
+            height: 42px;
+        }
+    }
+    .logo {
+        margin-top: 11px;
+        width: 132px;
+        @include mobile {
+            margin-top: 8px;
+            width: 115px;
+        }
+    }
+    &.menu-style-2 {
+        .navigation {
+            ul {
+                text-align: center;
+                margin: 0 auto;
+                margin-right: 55px;
+                li {
+                    padding: 0;
+                    position: relative;
+                    width: 64px;
+                    margin: 5.5px 12px;
+                    @mixin windowS {
+                        margin: 5.5px 6px;
+                    }
+
+                    &.router-link-exact-active {
+                        color: $pink;
+                        i {
+                            background-color: $pink;
+                            color: #fff;
+                            margin: 0 auto;
+                        }
+                        span {
+                            color: $pink;
+                        }
+                        &:before {
+                            background-color: #e9eae1 !important;
+                        }
+                    }
+                    &.router-link-active {
+                        &:not(.router-link-exact-active) {
+                            color: $primary;
+                            i {
+                                background-color: $primary;
+                                color: #fff;
+                            }
+                        }
+
+                        &:before {
+                            background-color: $primary;
+                        }
+                    }
+
+                    a {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0 0;
+
+                        i {
+                            padding-right: 0px;
+                            background-color: #f7f7f7;
+                            padding: 6px 6px;
+                            color: #706978;
+                            border-radius: 100px;
+                            font-size: 19px;
+                            width: 31px;
+                            height: 31px;
+                            display: flex;
+                            align-content: center;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0 auto;
+                        }
+                        span {
+                            @include font-size(0.5);
+                            text-transform: uppercase;
+                            margin-top: 1px;
+                        }
+                    }
+                    &:before {
+                        content: '';
+                        left: 58px;
+                        width: 36px;
+                        height: 1px;
+                        position: absolute;
+                        background-color: $grey-xlite;
+                        // top: -14px;
+                        top: -12px;
+                        bottom: 0;
+                        margin: auto;
+                    }
+                    &:last-child {
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.auth-header {
+    padding: 20px 0;
+
+    .logo {
+        width: auto;
+        img {
+            width: auto;
+            height: 41px;
+        }
+    }
+}

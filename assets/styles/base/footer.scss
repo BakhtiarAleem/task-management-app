@@ -1,0 +1,20 @@
+.footer {
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $body-bg;
+    z-index: 9;
+    p {
+        border-top: solid 1px $grey-xlite;
+        padding-top: 20px;
+        height: 40px;
+        color: $input-color;
+    }
+}
+
+.login-page {
+    .footer {
+        position: fixed;
+    }
+}

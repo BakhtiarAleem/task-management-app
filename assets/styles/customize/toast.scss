@@ -1,0 +1,19 @@
+.toasted {
+    &.bubble {
+        &.error {
+            background: $alert-danger-bg !important;
+            color: $alert-danger-text;
+            border-color: $alert-danger-border;
+        }
+        &.success {
+            background: $alert-success-bg !important;
+            color: $alert-success-text;
+            border-color: $alert-success-border;
+        }
+        &.info {
+            background: $alert-info-bg !important;
+            color: $alert-info-text;
+            border-color: $alert-info-border;
+        }
+    }
+}

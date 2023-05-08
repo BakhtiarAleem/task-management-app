@@ -11,5 +11,15 @@
   "devDependencies": {
     "@types/node": "^18",
     "nuxt": "^3.4.2"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.7",
+    "@supabase/supabase-js": "^2.21.0",
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue": "^2.23.1",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "vue": "^3.2.47",
+    "vuex": "^4.0.2"
   }
 }
