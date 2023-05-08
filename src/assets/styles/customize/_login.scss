@@ -1,0 +1,87 @@
+.login-page {
+    overflow: visible;
+}
+.login-middle-aligner {
+    height: calc(100vh - 180px);
+    margin-top: 15px;
+    @include Desktop1380 {
+    }
+    &.verify-password {
+        @include Desktop1380 {
+            height: auto;
+            margin-bottom: 50px;
+        }
+    }
+}
+.login-wrapper {
+    max-width: 100%;
+    background: url('src/assets/images/login-graphics.png');
+    background-repeat: no-repeat;
+    background-size: 630px auto;
+    background-position: right;
+    min-height: 467px;
+    justify-content: flex-start;
+    overflow: hidden;
+    @include tabletL {
+        background-size: 453px auto;
+    }
+    .login-card {
+        width: 100%;
+        max-width: 536px;
+        @include Desktop1380 {
+            max-width: 500px;
+        }
+        @include windowS {
+            max-width: 446px;
+        }
+        @include tablet {
+            max-width: 500px;
+            margin: auto;
+        }
+    }
+    @include tablet {
+        padding-top: 360px;
+        background-position: top;
+        padding-bottom: 20px;
+        .welcome-heading,
+        .welcome-sub-heading,
+        .backToLogin,
+        .need-help-text {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    }
+}
+.go-back-login {
+    top: 9px;
+}
+
+.confirm-password {
+    .btn-primary {
+        min-width: 180px;
+    }
+}
+
+.auth-card-body {
+    .btn-primary {
+        min-width: 120px !important;
+    }
+
+    .customize-checkbox {
+        .custom-control-label {
+            padding-top: 0;
+            padding-left: 0px;
+
+            &:before {
+                top: 2px;
+            }
+
+            .checked-img {
+                left: -24px;
+                top: 3px;
+            }
+        }
+    }
+}
