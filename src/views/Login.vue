@@ -1,15 +1,21 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-
+import { useRouter } from 'vue-router';
 import store from "/store";
 const email = ref('');
 const password = ref("");
+
+const router = useRouter();
 
 async function handleSignin() {
   store.dispatch('loginUser',{
     email: email.value,
     password: password.value,
-  })
+  }).then((e) => {
+  if(e === 'success'){
+    router.push('/orginization')
+  }
+})
     }
 </script>
 
