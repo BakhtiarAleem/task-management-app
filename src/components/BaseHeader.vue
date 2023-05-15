@@ -1,5 +1,37 @@
+<script setup>
+import { ref, computed } from 'vue'
+import BaseLogo from '/src/components/BaseLogo.vue'
+import { useRouter } from 'vue-router';
+import store from "/store";
+
+const props = defineProps({
+    navigations: Array,
+    addClass: String
+})
+
+const settingBox = ref(false);
+const addClassClick = ref(false);
+const user = computed(() => store?.state?.user || false);
+const router = useRouter();
+
+function clickAway() {
+    settingBox.value = false
+}
+
+async function logOut() {
+    await store.dispatch('logOut').then((value) => {
+        router.push('/')
+    })
+    router.push('/')
+}
+
+</script>
+
+
+
 <template>
     <header class="header" :class="addClass">
+      
         <div class="fixed-header" :class="$route.meta.organizationPage">
             <div class="container">
                 <div class="row">
@@ -21,16 +53,6 @@
                                     v-for="(navigation, index) in navigations"
                                     :key="index"
                                     @click="addClassClick ^= true"
-                                    :class="[
-                                        $route.meta.sessionStep ==
-                                        navigation.sessionStep
-                                            ? 'router-link-exact-active'
-                                            : '',
-                                        $route.meta.sessionStep >=
-                                        navigation.sessionStep
-                                            ? 'router-link-active'
-                                            : '',
-                                    ]"
                                 >
                                     <router-link :to="navigation.link">
                                         <i :class="navigation.icon"></i>
@@ -50,11 +72,11 @@
                                             class="user-avatar  rounded-circle mr-2"
                                         >
                                             <img
-                                                src="@/assets/images/dummy/team-members/image3.png"
+                                                src="/src/assets/images/dummy/team-members/image3.png"
                                             />
                                         </span>
-                                        <span class="user-detail">
-                                            Shannon Arvizu
+                                        <span class="user-detail">                                         
+                                            {{ user.user_metadata.first_name }} {{ user.user_metadata.last_name }}
                                             <p>Super Admin</p>
                                         </span>
                                         <i class="icon-caret"></i>
@@ -73,7 +95,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/">
+                                            <a class="cursor-pointer" @click="logOut">
                                                 <i class="icon-logout"></i>
                                                 Sign out
                                             </a>
@@ -86,7 +108,7 @@
                                             class="user-avatar login-avator rounded-circle mr-2"
                                         >
                                             <img
-                                                src="@/assets/images/dummy/team-members/cygnis.png"
+                                                src="/src/assets/images/dummy/team-members/cygnis.png"
                                             />
                                         </span>
                                         <span class="user-detail align-middle">
@@ -102,73 +124,3 @@
         </div>
     </header>
 </template>
-
-<script>
-import { directive as onClickaway } from 'vue-clickaway'
-export default {
-    /*
-        |--------------------------------------------------------------------------
-        | Directives
-        |--------------------------------------------------------------------------
-        */
-    directives: {
-        onClickaway: onClickaway,
-    },
-    /*
-        |--------------------------------------------------------------------------
-        | Component > props
-        |--------------------------------------------------------------------------
-        */
-    props: {
-        /**
-         * Value to determine the current compose mode which
-         * varies between 'add' and 'edit'
-         */
-        navigations: {
-            type: Array,
-            default: null,
-        },
-        addClass: {
-            type: String,
-            default: null,
-        },
-    }, // End of Component > props
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > data
-        |--------------------------------------------------------------------------
-        */
-    data() {
-        return {
-            settingBox: false,
-            addClassClick: false,
-        }
-    }, // End of Component > data
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > computed
-        |--------------------------------------------------------------------------
-        */
-    computed: {}, // End of Component > computed
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > methods
-        |--------------------------------------------------------------------------
-        */
-    methods: {
-        clickAway() {
-            this.settingBox = false
-        },
-    }, // End of Component > methods
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > mounted
-        |--------------------------------------------------------------------------
-        */
-    mounted() {}, // End of Component > mounted
-} // End of export default
-</script>

@@ -38,7 +38,6 @@ const showDescription = ref(false);
             <div class="card-body card-listing-body">
                 <!-- Create new  item -->
                 <div
-                    v-b-modal.form
                     v-if="addCard"
                     class="team-new"
                 >
@@ -48,7 +47,7 @@ const showDescription = ref(false);
                 <!-- Create new  item End-->
 
                 <!-- Create Item -->
-                <div v-if="mainHeading !== null" class="card-data">
+                <div v-if="!addCard" class="card-data">
                     <!--show menu iocn-->
                     <div class="detail-menu" @click="showDetails = true">
                         <i class="icon-three-dots"></i>

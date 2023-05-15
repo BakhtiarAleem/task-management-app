@@ -1,13 +1,13 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-// import addOrganizationPopup from '/src/components/popups/AddOrganizationPopup.vue'
+import addOrganizationPopup from '/src/components/popups/AddOrganizationPopup.vue'
 import CardBlock from '/src/components/CardBlock.vue'
 // import actionpopup from '/src/components/popups/ActionPopup.vue'
 import store from "/store";
 
 
             const titleBarHeading = ref('Manage Organizations');
-            const modalSetting = ref(false);
+            const modalClick = ref(false);
             const cardMenuLinks = ref([
                 {
                     menuText: 'fdas',
@@ -57,7 +57,7 @@ import store from "/store";
 
 
 async function orginization() {
-    store.dispatch('project').then((value) => {
+    await store.dispatch('project').then((value) => {
         if(value){
             manageCards.value = value
         }
@@ -78,13 +78,14 @@ onMounted(() => {
 
 <template>
     <div class="col-md-12">
+        <h3 class="main-heading">{{ titleBarHeading }}</h3>
         <div v-if="manageCards" class="row">
             <!--new team card-->
             <CardBlock
                 addCard
                 cssClass="add-new-team-card"
-                v-b-modal.form
                 addItemText="New Organization"
+                @click="modalClick = true"
             ></CardBlock>
             <!--new team card end-->
             <!--Teams details card-->
@@ -104,7 +105,6 @@ onMounted(() => {
                             <li>
                                 <router-link
                                     class=""
-                                    :to="{ name: 'manage-member' }"
                                 >
                                     <i class="icon-team"></i>
                                     <span>Team members</span>
@@ -113,7 +113,6 @@ onMounted(() => {
                             <li>
                                 <router-link
                                     class=""
-                                    :to="{ name: 'manage-session' }"
                                 >
                                     <i class="icon-session"></i>
                                     <span>Sessions</span>
@@ -126,13 +125,13 @@ onMounted(() => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" v-b-modal.form>
+                                <a href="#">
                                     <i class="icon-edit"></i>
                                     Modify
                                 </a>
                             </li>
                             <li>
-                                <a href="#" v-b-modal.action-popup>
+                                <a href="#">
                                     <i class="icon-download"></i>
                                     Archive
                                 </a>
@@ -142,8 +141,8 @@ onMounted(() => {
                 </div>
             </CardBlock>
         </div>
-        <!-- <addOrganizationPopup></addOrganizationPopup>
-        <actionpopup
+        <addOrganizationPopup :popup="modalClick" @close="modalClick = false"></addOrganizationPopup>
+        <!-- <actionpopup
             title="Archive"
             content="Are you sure you want to archive this organization?"
             btnText="Archive"

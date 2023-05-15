@@ -39,8 +39,18 @@ export default createStore({
             toast.error(error)
           }
     },
-    verifyLogin({ commit }) {
-      if(localStorage.getItem("token") != null || localStorage.getItem("token") != []){
+    async register ({ commit }, value) {      
+      try {
+          const loggedIn = await supabase.auth.signUp(value);
+          toast.success('Register User')
+          console.log(loggedIn)         
+        } catch (error) {
+          toast.error(error)
+        }
+  },
+    async verifyLogin({ commit }) {
+      const token = await localStorage.getItem("token")
+      if(token != null){
         const tokenData = localStorage.getItem("token")
         const timeStamp = Math.round(+new Date()/1000)
         var decoded = jwt_decode(tokenData);
@@ -63,6 +73,9 @@ export default createStore({
         let project = await supabase.from('project').select().contains('users', [''+ userId +'']);
         return project.data
       }
+    },
+    async logOut({ commit }) {
+      await localStorage.setItem("token", null);
     }
   }
 });

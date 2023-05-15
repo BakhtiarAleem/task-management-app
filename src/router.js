@@ -12,6 +12,14 @@ export default createRouter({
       },
     },
     {
+      name:'Register',
+      path: '/register',
+      component: () => import('././views/Register.vue'),
+      meta:{
+        auth: false,
+      },
+    },
+    {
       name:'orginization',
       path: '/orginization',
       component: () => import('././views/orginization/index.vue'),

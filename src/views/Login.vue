@@ -16,12 +16,12 @@ async function handleSignin() {
     router.push('/orginization')
   }
 })
-    }
+}
 </script>
 
 <template>
   <div>
-    <h5 class="welcome-heading">Sign in to your account</h5>
+    <h3 class="welcome-heading">Sign in to your account</h3>
     <div class="card">
       <div class="card-body auth-card-body">
         <form @submit.prevent="handleSignin">

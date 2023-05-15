@@ -10,7 +10,12 @@
     }
 }
 .welcome-heading {
-    font-size: $font-size-h5 + 0.2;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.main-heading {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .welcome-sub-heading {
     font-size: $font-size-base + 0.125rem;
