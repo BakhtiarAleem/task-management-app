@@ -1,8 +1,9 @@
 // Modal
 .modal {
+    transition: 0.3s ease-in-out;
     .modal-dialog {
+        transition: 0.3s ease-in-out;
         margin: 4rem auto;
-
         @include mobile {
             margin: 0;
             max-width: 100%;
@@ -134,8 +135,19 @@
         }
     }
     &.fade{
+        transition: 0.3s ease-in-out;
+        .modal-dialog{
+            transition: 0.3s ease-in-out;
+            transform: translate(0, -130%);
+        }
         &.show{
+            transition: 0.3s ease-in-out;
             display: block;
+            background-color: rgb(17 17 17 / 53%);
+            .modal-dialog{
+                transition: 0.3s ease-in-out;
+                transform: translate(0, 0%);
+            }
         }
     }
 }

@@ -49,10 +49,10 @@ export default createStore({
         }
   },
     async verifyLogin({ commit }) {
-      const token = await localStorage.getItem("token")
-      if(token != null){
+      const token = await localStorage.getItem("token")      
+      if(token != "null"){
         const tokenData = localStorage.getItem("token")
-        const timeStamp = Math.round(+new Date()/1000)
+        const timeStamp = Math.round(new Date()/1000)
         var decoded = jwt_decode(tokenData);
         if(timeStamp >= decoded.exp){
           localStorage.setItem("token", null);
@@ -70,12 +70,40 @@ export default createStore({
     async project ({ commit }, value) {   
       if(localStorage.getItem("token") != null || localStorage.getItem("token") != []){
         const userId = this.state?.user?.id || this.state?.user?.sub
-        let project = await supabase.from('project').select().contains('users', [''+ userId +'']);
+        let referencedRow = await supabase
+         .from('team')
+         .select('*')
+         .eq('user_id', userId)
+
+         const idPresets = referencedRow.data
+         const referencedProjectId = idPresets.map((row) => row.project_id);
+
+         let project = await supabase
+         .from('project')
+         .select('*, team ( user_id, designation, project_id )')
+         .in('id', referencedProjectId);
         return project.data
       }
     },
+    async projectTypes ({ commit }, value) {   
+      let projectTypes = await supabase
+         .from('project_type')
+         .select('*')
+         return projectTypes.data
+      
+    },
+
+    // async addOrginization ({ commit }, value) {   
+    //   let orginiation = await supabase.from('project')
+    //   .insert([
+    //     { username: value, full_name: value, avatar_url: value, website: value,  },
+    //   ])
+    //      return projectTypes.data
+      
+    // },
     async logOut({ commit }) {
       await localStorage.setItem("token", null);
+      toast.error('Sign Out')  
     }
   }
 });

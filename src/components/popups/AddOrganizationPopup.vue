@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import store from "/store";
 const optionsSelect = ref([
     {
         value: null,
@@ -15,8 +16,24 @@ const optionsSelect = ref([
     },
 ]);
 
+async function callOrginizationType() {
+    await store.dispatch('projectTypes').then((value) => {
+        optionsSelect.value = value
+    })
+}
+
+async function submitForm() {
+    await store.dispatch('projectTypes').then((value) => {
+        optionsSelect.value = value
+    })
+}
+
 const props = defineProps({
   popup: Boolean
+})
+
+onMounted(() => {
+    callOrginizationType()
 })
 
 const emit = defineEmits(['close'])
@@ -32,37 +49,37 @@ const emit = defineEmits(['close'])
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Add Organization</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" @click="emit('close', false)" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <form @submit="">
             <div class="modal-body">
                 <div class="modal-content-area">
+
+
                     <div class="form-group">
                         <label>Name</label>
-                        <b-form-input
-                            type="text"
-                            placeholder="Enter company / organization name"
-                        />
+                        <input type="text" class="form-control" placeholder="Enter company / organization name" />
                     </div>
 
                     <div class="form-group">
-                        <base-select-box
-                            labelText="Diagnostics category"
-                            :options="optionsSelect"
-                        ></base-select-box>
+                        <label>Category</label>
+                        <select class="custom-select">  
+                            <option v-for="(option, index) in optionsSelect" :key="index" :value="option.name">{{ option.name }}</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Short bio</label>
-                        <b-form-textarea
-                            placeholder="Write short description about organization"
-                        />
+                        <input type="text" class="form-control" placeholder="Write short description about organization" />
                     </div>
-
-                    <base-upload-picture
-                        uploadLabel="Organization logo"
-                        uploadContent="Click here to upload team logo or icon"
-                    >
-                    </base-upload-picture>
+                    <div class="form-group">
+                        <label class="custom-file-label" for="inputGroupFile03">Upload Image</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile03">                           
+                        </div>
+                    </div>
+                
+                
                 </div>
             </div>
             <div class="modal-footer">
@@ -70,6 +87,7 @@ const emit = defineEmits(['close'])
 
                 <button @click="emit('close', false)" class="btn btn-primary">Submit</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
