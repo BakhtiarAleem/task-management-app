@@ -13,7 +13,7 @@ async function handleSignin() {
     password: password.value,
   }).then((e) => {
   if(e === 'success'){
-    router.push('/orginization')
+    router.push('/orginizations')
   }
 })
 }

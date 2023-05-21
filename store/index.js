@@ -93,14 +93,22 @@ export default createStore({
       
     },
 
-    // async addOrginization ({ commit }, value) {   
-    //   let orginiation = await supabase.from('project')
-    //   .insert([
-    //     { username: value, full_name: value, avatar_url: value, website: value,  },
-    //   ])
-    //      return projectTypes.data
+    async addOrginization ({ commit }, value) {   
+      const userId = this.state?.user?.id || this.state?.user?.sub
+      let orginiation = await supabase.from('project')
+      .insert([
+        { name: value.name, description: value.description, type: value.type, project_created: userId  },
+      ])
+      let checkOrginization = await supabase.from('project').select("*").eq('name', value.name);
+      let team = await supabase.from('team')
+      .insert([
+        { designation: 'Owner', project_id: checkOrginization.data[0].id , user_id: userId  },
+      ])
+      console.log(team)
+      toast.success('Orgnization Added') 
+      return orginiation.data
       
-    // },
+    },
     async logOut({ commit }) {
       await localStorage.setItem("token", null);
       toast.error('Sign Out')  

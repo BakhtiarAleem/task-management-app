@@ -59,6 +59,7 @@ import store from "/store";
 async function orginization() {
     await store.dispatch('project').then((value) => {
         if(value){
+            manageCards.value = null
             manageCards.value = value
         }
     })

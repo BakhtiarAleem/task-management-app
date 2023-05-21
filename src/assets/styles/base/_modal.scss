@@ -1,6 +1,8 @@
 // Modal
 .modal {
     transition: 0.3s ease-in-out;
+    transform: translateY(-150%);
+    display: block;
     .modal-dialog {
         transition: 0.3s ease-in-out;
         margin: 4rem auto;
@@ -143,6 +145,7 @@
         &.show{
             transition: 0.3s ease-in-out;
             display: block;
+            transform: translateY(0%);
             background-color: rgb(17 17 17 / 53%);
             .modal-dialog{
                 transition: 0.3s ease-in-out;

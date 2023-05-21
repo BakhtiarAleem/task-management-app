@@ -21,7 +21,7 @@ export default createRouter({
     },
     {
       name:'orginization',
-      path: '/orginization',
+      path: '/orginizations',
       component: () => import('././views/orginization/index.vue'),
       meta:{
         auth: true,
