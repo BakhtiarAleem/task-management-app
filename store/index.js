@@ -42,8 +42,7 @@ export default createStore({
     async register ({ commit }, value) {      
       try {
           const loggedIn = await supabase.auth.signUp(value);
-          toast.success('Register User')
-          console.log(loggedIn)         
+          toast.success('Register User')      
         } catch (error) {
           toast.error(error)
         }
@@ -95,16 +94,17 @@ export default createStore({
 
     async addOrginization ({ commit }, value) {   
       const userId = this.state?.user?.id || this.state?.user?.sub
+      let projectimage  = await supabase.storage.from('project').upload(value.name, value.uploadImage);
+      let dataImage = projectimage.data.path
       let orginiation = await supabase.from('project')
       .insert([
-        { name: value.name, description: value.description, type: value.type, project_created: userId  },
+        { name: value.name, description: value.description, project_image: '' + dataImage + '', type: value.type, project_created: userId },
       ])
       let checkOrginization = await supabase.from('project').select("*").eq('name', value.name);
       let team = await supabase.from('team')
       .insert([
         { designation: 'Owner', project_id: checkOrginization.data[0].id , user_id: userId  },
       ])
-      console.log(team)
       toast.success('Orgnization Added') 
       return orginiation.data
       

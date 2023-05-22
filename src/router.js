@@ -20,9 +20,9 @@ export default createRouter({
       },
     },
     {
-      name:'orginization',
-      path: '/orginizations',
-      component: () => import('././views/orginization/index.vue'),
+      name:'organizations',
+      path: '/organizations',
+      component: () => import('././views/organizations/index.vue'),
       meta:{
         auth: true,
       },

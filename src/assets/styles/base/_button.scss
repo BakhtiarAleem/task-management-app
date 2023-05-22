@@ -15,8 +15,10 @@
         @include font-size(0.5);
         margin-right: 4px;
     }
+    &.btn-primary {
+        color: #fff;
+    }
 }
-
 .btn-secondary{
     &:active{
         background: $pink !important;

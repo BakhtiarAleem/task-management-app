@@ -80,6 +80,16 @@ onMounted(() => {
 <template>
     <div class="col-md-12">
         <h3 class="main-heading">{{ titleBarHeading }}</h3>
+        <div v-if="!manageCards" class="row">
+            <!--new team card-->
+            <CardBlock
+                addCard
+                cssClass="add-new-team-card"
+                addItemText="New Organization"
+                @click="modalClick = true"
+            ></CardBlock>
+            <!--new team card end-->
+        </div>
         <div v-if="manageCards" class="row">
             <!--new team card-->
             <CardBlock
@@ -93,7 +103,7 @@ onMounted(() => {
             <CardBlock
                 v-for="(manage, index) in manageCards"
                 :key="index"
-                :mainImage="manage.image"
+                :mainImage="manage.project_image"
                 :mainHeading="manage.name"
                 :subHeading="manage.type"
                 :descprition="manage.description"

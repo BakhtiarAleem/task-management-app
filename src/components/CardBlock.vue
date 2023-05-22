@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-
 const props = defineProps({
     cssClass: String,
     statusClass: String,
@@ -23,6 +22,12 @@ const teammembersarry = ref([]);
 const showDetails = ref(false);
 const limitationList = ref(5);
 const showDescription = ref(false);
+
+
+function imageUrl(url) {
+    return ''+ import.meta.env.VITE_SUPABASE_URL + '/storage/v1/object/public/project/' + url
+}
+
 
 
 </script>
@@ -68,7 +73,7 @@ const showDescription = ref(false);
                     >
                         <div class="image-section">
                             <img
-                                :src="'/src/assets/images/'+ mainImage"/>
+                                :src="imageUrl(mainImage)"/>
                         </div>
                     </div>
                     <!--image end -->

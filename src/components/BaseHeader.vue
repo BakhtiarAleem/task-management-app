@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import BaseLogo from '/src/components/BaseLogo.vue'
 import { useRouter } from 'vue-router';
 import store from "/store";
@@ -21,8 +21,11 @@ function clickAway() {
 async function logOut() {
     await store.dispatch('logOut').then((value) => {
         router.push('/')
+        nextTick(() => {
+            router.push('/')
+        })
+      
     })
-    router.push('/')
 }
 
 </script>

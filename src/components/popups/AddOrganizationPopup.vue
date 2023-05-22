@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
 import store from "/store";
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const optionsSelect = ref([
     {
         value: null,
@@ -32,14 +34,15 @@ async function submitForm(val) {
     await store.dispatch('addOrginization', data).then(() => {
         store.dispatch('project')
         emit('close', false)
+        router.go(0)
     })
 }
 
 
 
 
-function imageUpload(val) {
-    console.log(imageUpload)
+function imageUpload(event) {
+    uploadImage.value = event.target.files[0]
 }
 
 const props = defineProps({
