@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import store from "/store";
 export default createRouter({
   history: createWebHistory(),
   routes: [
@@ -20,12 +20,33 @@ export default createRouter({
       },
     },
     {
-      name:'organizations',
+      name: 'organizations',
       path: '/organizations',
-      component: () => import('././views/organizations/index.vue'),
-      meta:{
-        auth: true,
-      },
+      component: () => import('././views/organizations/index.vue'),     
+      meta:{        
+        auth: true,  
+      },       
     },
+    {
+      name: 'organizations-detail',
+      path: '/organizations/:id',
+      component: () => import('././views/organizations/detail-page.vue'),
+      auth: true,
+      meta:{        
+        detailPage: true,
+      },      
+    },
+
   ],
 })
+function checkAuth(to, from, next) 
+{
+    if(store.getters.token){
+      next();
+      alert(1)
+    }
+    else{
+      alert(1)
+      next("/");
+    }
+}

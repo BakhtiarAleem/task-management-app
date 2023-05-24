@@ -79,7 +79,7 @@ async function logOut() {
                                             />
                                         </span>
                                         <span class="user-detail">                                         
-                                            {{ user.user_metadata.first_name }} {{ user.user_metadata.last_name }}
+                                            {{ user?.user_metadata?.first_name }} {{ user?.user_metadata?.last_name }}
                                             <p>Super Admin</p>
                                         </span>
                                         <i class="icon-caret"></i>

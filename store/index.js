@@ -20,6 +20,14 @@ export default createStore({
         state.token = value
       }, 
   },
+  getters: {
+    loginUser: (state) => {
+      return state.user
+    },
+    token: (state) => {
+      return state.token
+    },
+  },
   actions: {
     async loginUser ({ commit }, value) {      
         try {

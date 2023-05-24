@@ -1,7 +1,8 @@
 <script setup>
 import AuthLayout from './layouts/auth.vue'
 import DefaultLayout from './layouts/default.vue'
-import { ref, watch, onMounted, computed } from 'vue'
+import BlockLoader from './components/BlockLoader.vue'
+import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import store from "/store";
 import { useRouter, useRoute } from 'vue-router';
 
@@ -10,39 +11,64 @@ const router = useRouter();
 
 const route = useRoute();
 
-const authentication = computed(() => store?.state?.token)
+const authToken = computed(() => store.getters.token)
 
-function verifyLogin() {
-  store.dispatch('verifyLogin')
+
+const isLoading = ref(true)
+
+const currentRoute = computed(() => router.currentRoute.value.path)
+const authdata = computed(() => router.currentRoute.value.meta.auth)
+
+async function verifyLogin() {
+  if(authToken){
+    await store.dispatch('verifyLogin')
+  }
 }
 
 
-watch(authentication, (currentValue) => {
+watch(authToken, (currentValue) => {
   return currentValue
     });
 
 
-function auth(){
-  if(route.meta.auth == true && authentication == false){
-    router.push('/')
-  }
+
+
+async function onPageLoad() {
+  isLoading.value = true
+  setTimeout(() => {
+    if(authToken.value && authdata.value ){
+    }
+    else if(currentRoute.value === '/' || currentRoute.value === '/register'){
+    }
+    else{
+      router.push('/')
+    }
+  }, 1000)
+  isLoading.value = false
 }
 
-onMounted(() => {
+
+
+onMounted(async () => {
+
   verifyLogin();
-  auth();
+  onPageLoad();
 })
+
 
 </script>
 
 <template>
   <div>
-    <AuthLayout v-if="!authentication">
-    <router-view />
-  </AuthLayout>
-  <DefaultLayout v-if="authentication">
-    <router-view />
-  </DefaultLayout>
+    <BlockLoader v-if="isLoading" />
+    <div v-if="!isLoading">
+      <AuthLayout v-if="!authToken">
+      <router-view />
+    </AuthLayout>
+    <DefaultLayout v-if="authToken">
+      <router-view />
+    </DefaultLayout>
   </div>
+</div>
 
 </template>
