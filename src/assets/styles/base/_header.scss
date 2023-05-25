@@ -22,8 +22,10 @@ header {
         }
     }
     .logo {
-        margin-top: 11px;
-        width: 132px;
+        // margin-top: 11px;
+        // width: 132px;
+        margin-top: 0px;
+        width: auto;
         @include mobile {
             margin-top: 8px;
             width: 115px;
@@ -129,10 +131,10 @@ header {
     padding: 20px 0;
 
     .logo {
-        width: auto;
+        width: 250px;
         img {
             width: auto;
-            height: 41px;
+            height: auto;
         }
     }
 }
