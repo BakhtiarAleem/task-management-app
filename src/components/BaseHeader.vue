@@ -50,7 +50,7 @@ async function logOut() {
                         :class="[addClassClick ? 'header-block' : '']"
                         class="col-lg-10 col-md-9 menu-header"
                     >
-                        <div v-if="!$route.meta.hideNav" class="navigation">
+                        <div class="navigation">
                             <ul>
                                 <li
                                     v-for="(navigation, index) in navigations"
@@ -104,20 +104,6 @@ async function logOut() {
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
-                                <li v-if="$route.meta.noHeader">
-                                    <router-link class="" to="">
-                                        <span
-                                            class="user-avatar login-avator rounded-circle mr-2"
-                                        >
-                                            <img
-                                                src="/src/assets/images/dummy/team-members/cygnis.png"
-                                            />
-                                        </span>
-                                        <span class="user-detail align-middle">
-                                            Cygnis Media
-                                        </span>
-                                    </router-link>
                                 </li>
                             </ul>
                         </div>

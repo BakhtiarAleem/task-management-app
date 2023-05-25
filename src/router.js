@@ -30,9 +30,9 @@ export default createRouter({
     {
       name: 'organizations-detail',
       path: '/organizations/:id',
-      component: () => import('././views/organizations/detail-page.vue'),
-      auth: true,
-      meta:{        
+      component: () => import('././views/organizations/detail-page.vue'),     
+      meta:{    
+        auth: true,    
         detailPage: true,
       },      
     },
