@@ -128,7 +128,7 @@ export default createStore({
     async projectIssues ({ commit }, value) {   
       let projectTypes = await supabase
          .from('tasks')
-         .select('*, status_task ( id, name )')
+         .select('*, status_task ( id, name, color_indicator )')
          .eq('project_id', value)
          return projectTypes.data   
     },

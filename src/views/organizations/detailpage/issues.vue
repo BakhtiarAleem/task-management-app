@@ -29,7 +29,18 @@ onMounted(() => {
                 <i class="icon-business-bag"></i>
             </div>
             <h3>Issues</h3>
-        </div>        
-        {{ projectIssue }}
+        </div>    
+        <div class="issue-listing">
+            <div v-for="(issues, index) in projectIssue" :key="index" class="issue-item">
+                <div class="bullet-icon" :style="{'background-color': issues.status_task.color_indicator}">
+                </div>
+                <div class="item-title">
+                    <p>{{ issues.task_name }}</p>
+                </div>
+                <div class="status" :style="{'background-color': issues.status_task.color_indicator}">
+                    {{ issues.status_task.name }}
+                </div>
+            </div>
+        </div>  
     </div>
 </template>
