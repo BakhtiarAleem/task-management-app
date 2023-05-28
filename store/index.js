@@ -11,6 +11,7 @@ export default createStore({
   state: {
     user: null,
     token: null,
+    projectSelected: null,
   },
   mutations: {
     loginUser(state, value) {
@@ -19,6 +20,9 @@ export default createStore({
     setToken(state, value) {
         state.token = value
       }, 
+    setProjectSelected(state, value) {
+      state.projectSelected = value
+    },       
   },
   getters: {
     loginUser: (state) => {
@@ -26,6 +30,9 @@ export default createStore({
     },
     token: (state) => {
       return state.token
+    },
+    projectSelected: (state) => {
+      return state.projectSelected
     },
   },
   actions: {
@@ -89,6 +96,15 @@ export default createStore({
          .from('project')
          .select('*, team ( user_id, designation, project_id )')
          .in('id', referencedProjectId);
+
+        //  SELECT project.*, team.*, auth.users.*
+        //  FROM project
+        //  JOIN team ON team.project_id = project.id
+        //  JOIN auth.users ON auth.users.id::uuid = team.user_id
+        //  WHERE auth.users.id = '367d2f64-2b83-43fb-95d7-20ef15007baf';
+        // let project = await supabase.rpc('get_project_details')    
+        // console.log(project)
+
         return project.data
       }
     },
@@ -96,9 +112,27 @@ export default createStore({
       let projectTypes = await supabase
          .from('project_type')
          .select('*')
-         return projectTypes.data
-      
+         return projectTypes.data      
     },
+
+
+    async projectDetail ({ commit }, value) {   
+      let projectDetail = await supabase
+         .from('project')
+         .select('*')
+         .eq('id', value)
+         return projectDetail.data      
+    },
+
+    
+    async projectIssues ({ commit }, value) {   
+      let projectTypes = await supabase
+         .from('tasks')
+         .select('*, status_task ( id, name )')
+         .eq('project_id', value)
+         return projectTypes.data   
+    },
+
 
     async addOrginization ({ commit }, value) {   
       const userId = this.state?.user?.id || this.state?.user?.sub

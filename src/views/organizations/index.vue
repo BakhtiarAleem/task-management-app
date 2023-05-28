@@ -103,6 +103,7 @@ onMounted(() => {
             <CardBlock
                 v-for="(manage, index) in manageCards"
                 :key="index"
+                :id="manage.id"
                 :mainImage="manage.project_image"
                 :mainHeading="manage.name"
                 :subHeading="manage.type"

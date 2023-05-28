@@ -38,15 +38,15 @@ watch(authToken, (currentValue) => {
 
 async function onPageLoad() {
   isLoading.value = true
-  setTimeout(() => {
-    if(authToken.value && authdata.value ){
-    }
-    else if(currentRoute.value === '/' || currentRoute.value === '/register'){
-    }
-    else{
-      router.push('/')
-    }
-  }, 1000)
+  // setTimeout(() => {
+  //   if(authToken.value && authdata.value ){
+  //   }
+  //   else if(currentRoute.value === '/' || currentRoute.value === '/register'){
+  //   }
+  //   else{
+  //     router.push('/')
+  //   }
+  // }, 1000)
   isLoading.value = false
 }
 

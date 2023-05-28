@@ -7,7 +7,7 @@ const props = defineProps({
 })
 function imageUrl(url) {
     // return ''+ import.meta.env.VITE_SUPABASE_URL + '/storage/v1/object/public/project/' + url
-    return ''+ import.meta.env.VITE_SUPABASE_URL + '/storage/v1/object/public/project/Lever'
+    return ''+ import.meta.env.VITE_SUPABASE_URL + '/storage/v1/object/public/project/' + props.image
 }
 </script>
 
@@ -18,30 +18,44 @@ function imageUrl(url) {
                 <div
                     class="project-logo">                   
                     <div class="image-section">
-                        <img
-                            :src="imageUrl(image)"/>
+                        <img v-if="image" :src="imageUrl(image)"/>
                     </div>                  
                 </div>
                 <div class="project-details">
-                    <h4>Lever</h4>
-                    <h5>Web Development</h5>
+                    <h4 v-if="name">{{ name }}</h4>
+                    <h5 v-if="type">{{ type }}</h5>
                 </div>
                 <div class="navigation">
                     <ul>
                         <li>
-                            <router-link to="/organizations">
+                            <router-link :to="{
+    name: 'organizations-detail-sprint',
+    params: {
+      id: 29
+    }
+  }">
                                 <i class="icon-final-ico"></i>
-                                <span>BackLog</span>
+                                <span>Sprint</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/organizations">
+                             <router-link :to="{
+    name: 'organizations-detail-issues',
+    params: {
+      id: 29
+    }
+  }">
                                 <i class="icon-business-bag"></i>
                                 <span>Issues</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/organizations">
+                             <router-link :to="{
+    name: 'organizations-detail-settings',
+    params: {
+      id: 29
+    }
+  }">
                                 <i class="icon-admin"></i>
                                 <span>Settings</span>
                             </router-link>

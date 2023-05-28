@@ -15,7 +15,11 @@ const props = defineProps({
     emailAddress: String,
     joinDate: String,
     addCard: Boolean,
+    id: String,
 })
+
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 
 const teammembersarry = ref([]);
@@ -56,6 +60,16 @@ function imageUrl(url) {
                     <!--show menu iocn-->
                     <div class="detail-menu" @click="showDetails = true">
                         <i class="icon-three-dots"></i>
+                    </div>
+
+                    <div class="anchor-link">
+                        <router-link :to="{
+    name: 'organizations-detail',
+    params: {
+      id: id
+    }
+  }">
+                        </router-link>
                     </div>
                     <!--show menu  iocn end-->
                     <!-- stautus blts -->
@@ -210,126 +224,3 @@ function imageUrl(url) {
         </div>
     </div>
 </template>
-
-<!-- <script>
-export default {
-    /*
-        |--------------------------------------------------------------------------
-        | Component > props
-        |--------------------------------------------------------------------------
-        */
-    props: {
-        /**
-         * Value to determine the current compose mode which
-         * varies between 'add' and 'edit'
-         */
-        cssClass: {
-            type: String,
-            default: null,
-        },
-        statusClass: {
-            type: String,
-            default: null,
-        },
-        mainImage: {
-            type: String,
-            default: null,
-        },
-        addItemText: {
-            type: String,
-            default: 'Add Admin',
-        },
-        mainHeading: {
-            type: String,
-            default: null,
-        },
-        subHeading: {
-            type: String,
-            default: null,
-        },
-        descprition: {
-            type: String,
-            default: null,
-        },
-        sessionTime: {
-            type: String,
-            default: 'Scheduled',
-        },
-        sessionType: {
-            type: String,
-            default: null,
-        },
-        teammembers: {
-            type: Array,
-            default: null,
-        },
-        menuLinks: {
-            type: Array,
-            default: null,
-        },
-        emailAddress: {
-            type: String,
-            default: null,
-        },
-        joinDate: {
-            type: String,
-            default: null,
-        },
-        addCard: {
-            type: Boolean,
-            default: false,
-        },
-    }, // End of Component > props
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > data
-        |--------------------------------------------------------------------------
-        */
-    data() {
-        return {
-            teammembersarry: [],
-            showDetails: false,
-            limitationList: 5,
-            showDescription: false,
-        }
-    }, // End of Component > data
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > computed
-        |--------------------------------------------------------------------------
-        */
-    computed: {}, // End of Component > computed
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > methods
-        |--------------------------------------------------------------------------
-        */
-    methods: {
-        additionalText(add) {
-            return 'btn-' + add
-        },
-        pushingVal() {
-            this.teammembersarry.push(this.teammembers)
-        },
-        clickFunc() {
-            this.$emit('card-click')
-        },
-        linkClick($var) {
-            var valueget = $var.toLowerCase().replace(/ /g, '')
-            this.$emit(valueget)
-        },
-    }, // End of Component > methods
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > mounted
-        |--------------------------------------------------------------------------
-        */
-    mounted() {
-        this.pushingVal()
-    }, // End of Component > mounted
-} // End of export default
-</script> -->
