@@ -1,11 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import AddIssuePopup from '/src/components/popups/AddIssuePopup.vue'
 import store from "/store";
 const id = ref('');
 const route = useRoute();
 const projectIssue = ref();
-
+const modalClick = ref(false);
 
 async function projectLoad() {
     id.value = route.params.id;
@@ -29,6 +30,9 @@ onMounted(() => {
                 <i class="icon-business-bag"></i>
             </div>
             <h3>Issues</h3>
+            <div class="add-issues">
+                <button @click="modalClick = true" class="btn btn-secondary" type="button"><i class="icon-add-member"></i><span>Add Issue</span></button>
+            </div>
         </div>    
         <div class="issue-listing">
             <div v-for="(issues, index) in projectIssue" :key="index" class="issue-item">
@@ -42,5 +46,6 @@ onMounted(() => {
                 </div>
             </div>
         </div>  
+        <AddIssuePopup :popup="modalClick" @close="modalClick = false"></AddIssuePopup>
     </div>
 </template>

@@ -11,6 +11,8 @@
   "dependencies": {
     "@popperjs/core": "^2.11.7",
     "@supabase/supabase-js": "^2.21.0",
+    "@vueform/multiselect": "^2.6.2",
+    "@vueup/vue-quill": "^1.2.0",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "jwt-decode": "^3.1.2",

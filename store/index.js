@@ -12,6 +12,7 @@ export default createStore({
     user: null,
     token: null,
     projectSelected: null,
+    taskStatus: null,
   },
   mutations: {
     loginUser(state, value) {
@@ -22,7 +23,10 @@ export default createStore({
       }, 
     setProjectSelected(state, value) {
       state.projectSelected = value
-    },       
+    }, 
+    setTaskStatus(state, value) {
+      state.taskStatus = value
+    },      
   },
   getters: {
     loginUser: (state) => {
@@ -33,6 +37,9 @@ export default createStore({
     },
     projectSelected: (state) => {
       return state.projectSelected
+    },
+    taskStatus: (state) => {
+      return state.taskStatus
     },
   },
   actions: {
@@ -97,14 +104,6 @@ export default createStore({
          .select('*, team ( user_id, designation, project_id )')
          .in('id', referencedProjectId);
 
-        //  SELECT project.*, team.*, auth.users.*
-        //  FROM project
-        //  JOIN team ON team.project_id = project.id
-        //  JOIN auth.users ON auth.users.id::uuid = team.user_id
-        //  WHERE auth.users.id = '367d2f64-2b83-43fb-95d7-20ef15007baf';
-        // let project = await supabase.rpc('get_project_details')    
-        // console.log(project)
-
         return project.data
       }
     },
@@ -151,6 +150,13 @@ export default createStore({
       return orginiation.data
       
     },
+
+    async taskStatus ({ commit }) {   
+      let taskStatus = await supabase
+      .from('status_task').select('*')
+      this.state.taskStatus = taskStatus.data 
+    },
+
     async logOut({ commit }) {
       await localStorage.setItem("token", null);
       toast.error('Sign Out')  

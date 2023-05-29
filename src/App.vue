@@ -28,6 +28,12 @@ async function verifyLogin() {
   }
 }
 
+async function taskStatus() {
+  if(authToken){
+    await store.dispatch('taskStatus')
+  }
+}
+
 
 watch(authToken, (currentValue) => {
   return currentValue
@@ -56,6 +62,7 @@ onMounted(async () => {
 
   verifyLogin();
   onPageLoad();
+  taskStatus();
 })
 
 
