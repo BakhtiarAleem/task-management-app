@@ -1,30 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from "/store";
-
 const routes = [
   {
-    name:'login',
+    name:'landing-page',
     path: '/',
+    component: () => import('././views/front/Landing.vue'),
+    meta: {
+      advertisementPage: true,
+    },  
+  },
+  {
+    name:'about',
+    path: '/about',
+    component: () => import('././views/front/About.vue'),
+    meta: {
+      advertisementPage: true,
+    },  
+  },
+  {
+    name:'request-demo',
+    path: '/request-demo',
+    component: () => import('././views/front/RequestDemo.vue'),
+    meta: {
+      advertisementPage: true,
+    },  
+  },
+  {
+    name:'login',
+    path: '/login/',
     component: () => import('././views/Login.vue'),
-    meta:{
-      auth: false,
-    },
   },
   {
     name:'Register',
-    path: '/register',
+    path: '/register/',
     component: () => import('././views/Register.vue'),
-    meta:{
-      auth: false,
-    },
   },
   {
     name: 'organizations',
     path: '/organizations/',
     component: () => import('././views/organizations/index.vue'),     
-    meta:{        
-      auth: true,  
-    },       
+    meta: {
+      requiresAuth: true,
+    },  
   },
   {
     name: 'organizations-detail',
@@ -34,7 +51,7 @@ const routes = [
       name: "organizations-detail-sprint"
   },     
     meta:{    
-      auth: true,    
+      requiresAuth: true,    
       detailPage: true,
     }, 
     children: [
@@ -43,7 +60,7 @@ const routes = [
         path: '/organizations/:id/sprint/',
         component: () => import('././views/organizations/detailpage/sprint.vue'),
         meta:{    
-          auth: true,    
+          requiresAuth: true,    
           detailPage: true,
         }, 
       },
@@ -52,7 +69,7 @@ const routes = [
         path: '/organizations/:id/issues/',
         component: () => import('././views/organizations/detailpage/issues.vue'),
         meta:{    
-          auth: true,    
+          requiresAuth: true,    
           detailPage: true,
         }, 
       },
@@ -61,7 +78,7 @@ const routes = [
         path: '/organizations/:id/settings/',
         component: () => import('././views/organizations/detailpage/settings.vue'),
         meta:{    
-          auth: true,    
+          requiresAuth: true,    
           detailPage: true,
         }, 
       },
@@ -69,7 +86,28 @@ const routes = [
   },
 
 ];
-export default createRouter({
+// export default createRouter({
+//   history: createWebHistory(),
+//   routes,
+// })
+const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
+
+
+// router.afterEach((to, from, next) => {
+//   // get current user info
+//   const currentUser = localStorage.getItem('token');  
+//   const requiresAuth = to.meta.requiresAuth
+//   console.log(currentUser)
+//   console.log(to.meta.requiresAuth)
+//   if(requiresAuth && currentUser === 'null') {
+//     router.push('/login/')
+//   }
+//   else {
+//     next()
+//   }
+// })
+
+export default router

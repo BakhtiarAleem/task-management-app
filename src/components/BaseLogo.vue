@@ -12,7 +12,7 @@ anchorClass: {
 
 <template>
     <div class="logo">
-        <router-link :class="anchorClass" to="/">
+        <router-link :class="anchorClass" :to="{name: 'login'}">
             <img src="/src/assets/images/logo.svg" />
         </router-link>
     </div>

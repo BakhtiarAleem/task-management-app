@@ -3,6 +3,13 @@
 import { ref } from 'vue'
 import BaseHeader from '/src/components/BaseHeader.vue'
 
+const props = defineProps({
+hideNavigationHeader: {
+    type: Boolean,
+  },
+})
+
+
 const navigationData = ref([
                 {
                     icon: 'icon-buildings',
@@ -19,7 +26,7 @@ const navigationData = ref([
 
 <template>
     <div class="container">
-        <BaseHeader :navigations="navigationData"/>
+        <BaseHeader v-if="!hideNavigationHeader" :navigations="navigationData"/>
         <router-view />
     </div>
 </template>

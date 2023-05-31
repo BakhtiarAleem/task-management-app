@@ -66,6 +66,8 @@
 		width: 100%;
 		top: 0;
 		z-index: 9;
+		left: 0;
+		right: 0;
 		@include tabletL {
 			max-width: 1020px;
 		}

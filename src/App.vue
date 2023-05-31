@@ -17,9 +17,11 @@ const authToken = computed(() => store.getters.token)
 
 const isLoading = ref(true)
 
-const currentRoute = computed(() => router.currentRoute.value.path)
-const authdata = computed(() => router.currentRoute.value.meta.auth)
+// const currentRoute = computed(() => router.currentRoute.value.path)
+// const authdata = computed(() => router.currentRoute.value.meta.auth)
 const detailPage = computed(() => router.currentRoute.value.meta.detailPage)
+const advertisementPage = computed(() => router.currentRoute.value.meta.advertisementPage)
+
 
 
 async function verifyLogin() {
@@ -72,15 +74,22 @@ onMounted(async () => {
   <div>
     <BlockLoader v-if="isLoading" />
     <div v-if="!isLoading">
-      <AuthLayout v-if="!authToken && !detailPage">
-      <router-view />
-    </AuthLayout>
-    <DefaultLayout v-if="authToken && !detailPage">
-      <router-view />
-    </DefaultLayout>
-    <DetailLayout v-if="authToken && detailPage">
-      <router-view />
-    </DetailLayout>
+      <div v-if="advertisementPage" class="front-site">
+        <DefaultLayout hideNavigationHeader>
+          <router-view />
+      </DefaultLayout>
+      </div>
+      <div v-if="!advertisementPage">
+          <AuthLayout v-if="!authToken && !detailPage">
+          <router-view />
+        </AuthLayout>
+        <DefaultLayout v-if="authToken && !detailPage">
+          <router-view />
+        </DefaultLayout>
+        <DetailLayout v-if="authToken && detailPage">
+          <router-view />
+        </DetailLayout>
+      </div>
   </div>
 </div>
 
