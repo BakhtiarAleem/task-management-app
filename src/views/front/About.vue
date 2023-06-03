@@ -14,10 +14,8 @@
                                         Teams
                                     </h2>
                                     <h3>
-                                        Team IQ is a powerful product of Epic
-                                        Teams which will help companies to
-                                        develop the kind of leaders that most
-                                        CEOs can only dream about.
+                                        Task Issues is a powerful product of Mary Softwares which will help Organization to
+                                        Managed their tasks and projects.
                                     </h3>
                                     <router-link
                                         to="/request-demo"
@@ -37,18 +35,16 @@
                     </div>
                 </div>
             </div>
-            <!-- About Epic Team -->
+            <!-- About Task Issues -->
             <div class="about-epic-section">
                 <div class="front-container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                             <h2>
-                                About Epic Teams
+                                About Task Issues
                             </h2>
                             <h3>
-                                Epic Teams takes a customized and
-                                results-oriented approach to develop your
-                                managers and produce extraordinary outcomes.
+                                Task Issues help you to complete your tasks with simple and easy steps. we don't want people's to get stuck in complexity. 
                             </h3>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
@@ -65,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <!-- About Epic Team End-->
+            <!-- About Task Issues End-->
         </div>
 
         <!-- Founder start -->
@@ -81,13 +77,11 @@
                         <div class="middle-aligner">
                             <div class="inner">
                                 <h2>
-                                    Hi! I'm Dr. Shannon Arvizu and the founder
-                                    of Epic Teams.
+                                    Hi! I'm Bakhtiar Aleem and the founder
+                                    of Mary Softwares.
                                 </h2>
                                 <p>
-                                    My passion for transforming managers into
-                                    team leaders can be traced back to when I
-                                    first gained my chops as a sociologist.
+                                    My passion is to provide solutions with simple and easy steps.
                                 </p>
                                 <p>
                                     While researching entrepreneurs and movement
@@ -113,7 +107,7 @@
         <!-- Founder End -->
 
         <!-- advisor -->
-        <div class="front-section section-advisors front-grey-section">
+       <!--  <div class="front-section section-advisors front-grey-section">
             <span class="simple-curve"></span>
             <div class="front-container">
                 <h2>Our Advisors</h2>
@@ -124,7 +118,7 @@
                 </h3>
                 <advisor :customers="customer"></advisor>
             </div>
-        </div>
+        </div> -->
         <!-- advisor end -->
         <!-- clients logo -->
         <clients-logo

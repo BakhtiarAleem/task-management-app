@@ -3,6 +3,9 @@
 	font-size: 1rem;
 	color: $grey-dark;
 	overflow-x: hidden;
+	@include tabletL {
+		padding-top: 70px;
+	}
 	.main-content {
 		padding-bottom: 0;
 	}
@@ -77,6 +80,11 @@
 		.logo {
 			max-width: 174px;
 			float: left;
+			&.task-issue-logo{
+			    max-width: 164px;
+				width: 100%;
+				margin-top: -16px;
+			}
 			@include tablet {
 				max-width: 144px;
 			}
@@ -163,7 +171,7 @@
 							display: none;
 						}
 						&.router-link-exact-active {
-							background: $yellow;
+							background: $pink;
 							color: #fff !important;
 							border: none;
 						}
@@ -199,7 +207,7 @@
 		.menu-button {
 			@include mobile {
 				right: 0;
-				top: -11px;
+				top: -9px;
 				display: block;
 			}
 		}
@@ -938,10 +946,10 @@
 .request-demo-banner {
 	&.inner-banner {
 		@include tablet {
-			padding-top: 50px;
+			padding-top: 30px;
 		}
 		@include mobile {
-			padding-top: 24px;
+			padding-top: 10px;
 		}
 	}
 }

@@ -1,12 +1,12 @@
 <template>
     <div class="front-container">
-        <h2>Experience Team IQ for Yourself</h2>
+        <h2>Experience Task Issues for Yourself</h2>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 ">
                 <p>
-                    Epic Teams research-based approach to OKRs ensures that your
-                    leaders stay on track to deliver results and continually get
-                    better at what they do.
+                    Task Issues ensures that your
+                    organization to stay on track to deliver results and continually get
+                    better at what you do.
                 </p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 text-right">

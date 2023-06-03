@@ -7,15 +7,14 @@ import { ref, watch, onMounted, computed, nextTick } from 'vue'
 import store from "/store";
 import { useRouter, useRoute } from 'vue-router';
 
+const siteName = 'Task Issues'
 
 const router = useRouter();
+const isLoading = ref(false)
 
-const route = useRoute();
 
 const authToken = computed(() => store.getters.token)
 
-
-const isLoading = ref(true)
 
 // const currentRoute = computed(() => router.currentRoute.value.path)
 // const authdata = computed(() => router.currentRoute.value.meta.auth)
@@ -44,26 +43,9 @@ watch(authToken, (currentValue) => {
 
 
 
-async function onPageLoad() {
-  isLoading.value = true
-  // setTimeout(() => {
-  //   if(authToken.value && authdata.value ){
-  //   }
-  //   else if(currentRoute.value === '/' || currentRoute.value === '/register'){
-  //   }
-  //   else{
-  //     router.push('/')
-  //   }
-  // }, 1000)
-  isLoading.value = false
-}
-
-
-
 onMounted(async () => {
 
   verifyLogin();
-  onPageLoad();
   taskStatus();
 })
 

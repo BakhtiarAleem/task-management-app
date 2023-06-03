@@ -6,7 +6,7 @@
                 <li v-for="(logo, index) in clientLogos" :key="index">
                     <router-link :to="logo.logoLink">
                         <img
-                            :src="'/src/assets/images/front/logos/' + logo.logoImage"
+                            :src="`/src/assets/images/front/logos/${logo.logoImage}`"
                         />
                     </router-link>
                 </li>

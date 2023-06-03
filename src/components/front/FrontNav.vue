@@ -1,3 +1,47 @@
+
+<script setup>
+import { ref, onMounted } from 'vue'
+
+
+const props = defineProps({
+    mode: {
+    type: String,
+    default: 'add',
+  },
+})
+
+function onClick() {
+    isActive.value = false;
+    window.scrollTo(0, 0)
+}
+
+function toggleClass() {
+    isActive.value = !isActive.value
+}
+
+const isActive = ref(false)
+const listing = ref([
+                {
+                    menuLabel: 'Product',
+                    menuLink: '/',
+                },
+                {
+                    menuLabel: 'About',
+                    menuLink: '/about',
+                },
+                {
+                    menuLabel: 'Member Login',
+                    menuLink: '/login',
+                },
+                {
+                    menuLabel: 'Request a Demo',
+                    menuLink: '/request-demo',
+                    cssClass: 'btn btn-primary',
+                },
+            ])
+
+</script>
+
 <template>
     <div class="front-nav">
         <ul :class="[isActive ? 'LandingMenuShow' : 'LandingMenuHide']">
@@ -19,82 +63,3 @@
         <span class="icon-close landing-menu-cancel"></span>
     </div>
 </template>
-<script>
-export default {
-    components: {},
-    /*
-        |--------------------------------------------------------------------------
-        | Component > props
-        |--------------------------------------------------------------------------
-        */
-    props: {
-        /**
-         * Value to determine the current compose mode which
-         * varies between 'add' and 'edit'
-         */
-        mode: {
-            type: String,
-            default: 'add',
-        },
-    }, // End of Component > props
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > data
-        |--------------------------------------------------------------------------
-        */
-    data() {
-        return {
-            isActive: false,
-            listing: [
-                {
-                    menuLabel: 'Product',
-                    menuLink: '/',
-                },
-                {
-                    menuLabel: 'About',
-                    menuLink: '/about',
-                },
-                {
-                    menuLabel: 'Member Login',
-                    menuLink: '/login',
-                },
-                {
-                    menuLabel: 'Request a Demo',
-                    menuLink: '/request-demo',
-                    cssClass: 'btn btn-primary',
-                },
-            ],
-        }
-    }, // End of Component > data
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > computed
-        |--------------------------------------------------------------------------
-        */
-    computed: {}, // End of Component > computed
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > methods
-        |--------------------------------------------------------------------------
-        */
-    methods: {
-        onClick() {
-            window.scrollTo(0, 0)
-        },
-        toggleClass: function(event) {
-            this.isActive != true
-        },
-    }, // End of Component > methods
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > mounted
-        |--------------------------------------------------------------------------
-        */
-    mounted() {},
-    // End of Component > mounted
-} // End of export default
-</script>

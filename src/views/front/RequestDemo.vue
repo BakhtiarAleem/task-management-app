@@ -30,53 +30,35 @@
                                             <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label>Full Name</label>
-                                                    <b-form-input
-                                                        type="text"
-                                                        placeholder="Enter your full name"
-                                                    />
+                                                    <input class="form-control" placeholder="Enter your full name" id="fullname" type="text" v-model="fullname" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label>Phone Number</label>
-                                                    <b-form-input
-                                                        type="number"
-                                                        placeholder="Enter your phone number"
-                                                    />
+                                                    <input class="form-control" placeholder="Enter your phone number" id="phoneno" type="number" v-model="phoneno" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Email Address</label>
-                                                    <b-form-input
-                                                        type="email"
-                                                        placeholder="Enter your email address"
-                                                    />
+                                                    <input class="form-control" placeholder="Enter your email address" id="email" type="email" v-model="email" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Subject</label>
-                                                    <b-form-input
-                                                        type="text"
-                                                        placeholder="Enter reason to message"
-                                                    />
+                                                    <input class="form-control" placeholder="Enter reason to message" id="subject" type="text" v-model="subject" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Message</label>
-                                                    <b-form-textarea
-                                                        placeholder="Start typing your message"
-                                                        rows="6"
-                                                    />
+                                                    <textarea class="form-control" placeholder="Start typing your message" rows="6" v-model="message"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
-                                                <base-button
-                                                    text="Submit"
-                                                    styles="primary"
-                                                ></base-button>
+                                                <button class="btn btn-primary" type="submit">Submit</button>
                                             </div>
                                         </div>
                                     </form>
@@ -91,20 +73,15 @@
                         <div class="contact-details">
                             <ul>
                                 <li>
-                                    <span>
-                                        +1 415-493-8471
-                                    </span>
+                                    <a href="tel:+923132406028">
+                                        <span>
+                                            +92 3132406028
+                                        </span>
+                                    </a>
                                 </li>
                                 <li>
                                     <span>
-                                        <a href="#">hello@epicteams.co</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span>
-                                        South Park, Serving Sillcon Valley's
-                                        High Growth Companies, San Francisco, CA
-                                        94301, US
+                                        <a href="mailto:bakhtiar.aleem93@gmail.com">bakhtiar.aleem93@gmail.com</a>
                                     </span>
                                 </li>
                             </ul>
