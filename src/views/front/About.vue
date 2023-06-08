@@ -1,8 +1,69 @@
+<script setup>
+import { ref } from 'vue'
+import frontHeader from '/src/components/front/FrontHeader.vue'
+// import advisor from '/src/components/front/Advisor.vue'
+import clientsLogo from '/src/components/front/ClientsLogo.vue'
+import frontFooter from '/src/components/front/FrontFooter.vue'
+import teamExperience from '/src/components/front/TeamExperience.vue'
+
+
+
+import Img1 from '/src/assets/images/front/logos/vuejs.svg'
+import Img2 from '/src/assets/images/front/logos/supabase.svg'
+import Img3 from '/src/assets/images/front/logos/github-mark.svg'
+
+
+const logos = ref([
+                {
+                    logoImage: Img1,
+                    logoLink: '/',
+                },
+                {
+                    logoImage: Img2,
+                    logoLink: '/',
+                },
+                {
+                    logoImage: Img3,
+                    logoLink: '/',
+                },
+                
+            ]);
+
+
+            // const customer = ref([
+            //     {
+            //         customerImage: 'mike-bailen.png',
+            //         advisorName: 'Mike Bailen',
+            //         desc:
+            //             "Mike is the VP of People at Lever and a seasoned People Team Leader who understands the importance of a dual focus on recruiting and retention. While at Lever, Mike has spearheaded initiatives to empower leaders and teams for high performance, while placing the company's efforts towards diversity and inclusion at the heart of everything they do. \n Prior to Lever, Mike was the Director of Recruiting at Eventbrite and the former Head of Talent at Zappos.",
+            //         advisorDesignation: 'Lever',
+            //     },
+            //     {
+            //         customerImage: 'inessa.png',
+            //         advisorName: "Inessa O'Childs",
+            //         desc:
+            //             'Inessa is a serial entrepreneur currently working at the intersection of food and technology as the Co-Founder of the Future Food Center in San Francisco. She believes strongly in the power of high performance teams for creating wide-scale social impact. \n Inessa is also the CEO and founder of Global Privat, as well as a partner with Seraph Groupand Astia Angels. In this capacity, she provides capital and support to early-stage companies.',
+            //         advisorDesignation: 'Future Food Center',
+            //     },
+            //     {
+            //         customerImage: 'rob.png',
+            //         advisorName: 'Rob Hall',
+            //         desc:
+            //             "Rob is the VP of Product and Design at Zendrive. He relies on the performance of his teams every day to build things people want, with data and machine learning as core building blocks. \n At Zendrive, Rob's team works at the intersection of exponential networks ofconnected sensors, behavior change, and the future of transportation. \n Rob also teaches data science and coaches General Assembly's data science instructors.",
+            //         advisorDesignation: 'Zendrive',
+            //     },
+            // ])
+            
+
+</script>
+
+
+
 <template>
     <div class="about-section">
         <!-- banner -->
         <div class="inner-banner">
-            <front-header></front-header>
+            <frontHeader></frontHeader>
             <div class="front-container request-demo">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
@@ -121,132 +182,19 @@
         </div> -->
         <!-- advisor end -->
         <!-- clients logo -->
-        <clients-logo
-            mainHeading="TEAM IQ TRUSTED WITH SOME OF THE WORLD'S BEST COMPANIES"
+        <clientsLogo
+            mainHeading="TASK ISSUES TRUSTED WITH SOME OF THE WORLD'S BEST COMPANIES"
             :clientLogos="logos"
-        ></clients-logo>
+        ></clientsLogo>
         <!-- clients logo end -->
         <!-- team section-->
         <div
             class="front-section team-section front-grey-section wave-design text-left"
         >
-            <team-experience></team-experience>
+            <teamExperience></teamExperience>
         </div>
         <!-- team section end -->
 
-        <front-footer></front-footer>
+        <frontFooter></frontFooter>
     </div>
 </template>
-
-<script>
-import frontHeader from '/src/components/front/FrontHeader.vue'
-import advisor from '/src/components/front/Advisor.vue'
-import clientsLogo from '/src/components/front/ClientsLogo.vue'
-import frontFooter from '/src/components/front/FrontFooter.vue'
-import teamExperience from '/src/components/front/TeamExperience.vue'
-export default {
-    components: {
-        frontHeader,
-        advisor,
-        clientsLogo,
-        frontFooter,
-        teamExperience,
-    },
-    /*
-        |--------------------------------------------------------------------------
-        | Component > props
-        |--------------------------------------------------------------------------
-        */
-    props: {
-        /**
-         * Value to determine the current compose mode which
-         * varies between 'add' and 'edit'
-         */
-        mode: {
-            type: String,
-            default: 'add',
-        },
-    }, // End of Component > props
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > data
-        |--------------------------------------------------------------------------
-        */
-    data() {
-        return {
-            customer: [
-                {
-                    customerImage: 'mike-bailen.png',
-                    advisorName: 'Mike Bailen',
-                    desc:
-                        "Mike is the VP of People at Lever and a seasoned People Team Leader who understands the importance of a dual focus on recruiting and retention. While at Lever, Mike has spearheaded initiatives to empower leaders and teams for high performance, while placing the company's efforts towards diversity and inclusion at the heart of everything they do. \n Prior to Lever, Mike was the Director of Recruiting at Eventbrite and the former Head of Talent at Zappos.",
-                    advisorDesignation: 'Lever',
-                },
-                {
-                    customerImage: 'inessa.png',
-                    advisorName: "Inessa O'Childs",
-                    desc:
-                        'Inessa is a serial entrepreneur currently working at the intersection of food and technology as the Co-Founder of the Future Food Center in San Francisco. She believes strongly in the power of high performance teams for creating wide-scale social impact. \n Inessa is also the CEO and founder of Global Privat, as well as a partner with Seraph Groupand Astia Angels. In this capacity, she provides capital and support to early-stage companies.',
-                    advisorDesignation: 'Future Food Center',
-                },
-                {
-                    customerImage: 'rob.png',
-                    advisorName: 'Rob Hall',
-                    desc:
-                        "Rob is the VP of Product and Design at Zendrive. He relies on the performance of his teams every day to build things people want, with data and machine learning as core building blocks. \n At Zendrive, Rob's team works at the intersection of exponential networks ofconnected sensors, behavior change, and the future of transportation. \n Rob also teaches data science and coaches General Assembly's data science instructors.",
-                    advisorDesignation: 'Zendrive',
-                },
-            ],
-            logos: [
-                {
-                    logoImage: '72andsunny.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'lever.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'ea.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'zendrive.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'studio-dental.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'cygnis.png',
-                    logoLink: '/',
-                },
-            ],
-        }
-    }, // End of Component > data
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > computed
-        |--------------------------------------------------------------------------
-        */
-    computed: {}, // End of Component > computed
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > methods
-        |--------------------------------------------------------------------------
-        */
-    methods: {}, // End of Component > methods
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > mounted
-        |--------------------------------------------------------------------------
-        */
-    mounted() {},
-    // End of Component > mounted
-} // End of export default
-</script>

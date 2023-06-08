@@ -228,32 +228,6 @@
 		@include mobile {
 			background-size: 500px auto;
 		}
-		&:after {
-			content: '';
-			position: absolute;
-			bottom: -0.5px;
-			width: 100%;
-			left: 0;
-			height: 32px;
-			z-index: 9;
-			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f3f4f0+1,ecece7+100 */
-			background: #f3f4f0; /* Old browsers */
-			background: -moz-linear-gradient(
-				top,
-				#f3f4f0 1%,
-				#ecece7 100%
-			); /* FF3.6-15 */
-			background: -webkit-linear-gradient(
-				top,
-				#f3f4f0 1%,
-				#ecece7 100%
-			); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(
-				to bottom,
-				#f3f4f0 1%,
-				#ecece7 100%
-			); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-		}
 		.front-container {
 			position: relative;
 		}
@@ -316,7 +290,7 @@
 		background-size: 830px auto;
 		position: relative;
 		padding-top: 120px;
-		background-image: url('./assets/images/front/request-demo-curve.png');
+		// background-image: url('./assets/images/front/request-demo-curve.png');
 
 		.content {
 			width: 620px;
@@ -456,9 +430,9 @@
 		position: relative;
 		background-repeat: repeat-x;
 		background-position: center top;
-		background-image: url('./assets/images/front/wave.png');
+		// background-image: url('./assets/images/front/wave.png');
 		background-size: 1200px auto;
-		padding-top: 160px;
+		padding-top: 100px;
 		@include mobile {
 			padding-top: 85px;
 		}

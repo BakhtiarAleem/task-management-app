@@ -1,8 +1,32 @@
+
+<script setup>
+import { ref } from 'vue'
+import FrontHeader from '/src/components/front/FrontHeader.vue'
+import FrontFooter from '/src/components/front/FrontFooter.vue'
+import BaseLoader from '/src/components/BaseLoader.vue'
+import store from "/store";
+const requestDemo = ref({
+    fullname: null,
+    phoneno: null,
+    email: null,
+    subject: null,
+    message: null,
+});
+const isLoading = ref(false);
+async function requestDemoSubmit() {
+  isLoading.value = true;
+  store.dispatch('requestDemo',requestDemo.value).then((e) => {
+  isLoading.value = false;
+})
+}
+</script>
+
+
 <template>
     <div>
         <!-- banner -->
         <div class="request-demo-banner inner-banner">
-            <front-header></front-header>
+            <FrontHeader></FrontHeader>
             <div class="front-container">
                 <div class="row">
                     <div
@@ -25,40 +49,45 @@
                                     message and we'll get back to you shortly.
                                 </h3>
                                 <div class="form-section">
-                                    <form action="" method="">
+                                    <form @submit.prevent="requestDemoSubmit">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label>Full Name</label>
-                                                    <input class="form-control" placeholder="Enter your full name" id="fullname" type="text" v-model="fullname" />
+                                                    <input class="form-control" placeholder="Enter your full name" id="fullname" type="text" required v-model="requestDemo.fullname" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label>Phone Number</label>
-                                                    <input class="form-control" placeholder="Enter your phone number" id="phoneno" type="number" v-model="phoneno" />
+                                                    <input class="form-control" placeholder="Enter your phone number" id="phoneno" type="number" required v-model="requestDemo.phoneno" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Email Address</label>
-                                                    <input class="form-control" placeholder="Enter your email address" id="email" type="email" v-model="email" />
+                                                    <input class="form-control" placeholder="Enter your email address" id="email" type="email" required v-model="requestDemo.email" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Subject</label>
-                                                    <input class="form-control" placeholder="Enter reason to message" id="subject" type="text" v-model="subject" />
+                                                    <input class="form-control" placeholder="Enter reason to message" id="subject" type="text" required v-model="requestDemo.subject" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Message</label>
-                                                    <textarea class="form-control" placeholder="Start typing your message" rows="6" v-model="message"></textarea>
+                                                    <textarea class="form-control" placeholder="Start typing your message" rows="6" required v-model="requestDemo.message"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
-                                                <button class="btn btn-primary" type="submit">Submit</button>
+                                                <button class="btn btn-primary" :class="isLoading ? 'disabled' : ''" type="submit">
+                                                    Sign in
+                                                    <span>
+                                                        <BaseLoader/>
+                                                    </span>
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -91,63 +120,6 @@
             </div>
         </div>
 
-        <front-footer></front-footer>
+        <FrontFooter></FrontFooter>
     </div>
 </template>
-
-<script>
-import frontHeader from '/src/components/front/FrontHeader.vue'
-import frontFooter from '/src/components/front/FrontFooter.vue'
-export default {
-    components: {
-        frontHeader,
-        frontFooter,
-    },
-    /*
-        |--------------------------------------------------------------------------
-        | Component > props
-        |--------------------------------------------------------------------------
-        */
-    props: {
-        /**
-         * Value to determine the current compose mode which
-         * varies between 'add' and 'edit'
-         */
-        mode: {
-            type: String,
-            default: 'add',
-        },
-    }, // End of Component > props
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > data
-        |--------------------------------------------------------------------------
-        */
-    data() {
-        return {}
-    }, // End of Component > data
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > computed
-        |--------------------------------------------------------------------------
-        */
-    computed: {}, // End of Component > computed
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > methods
-        |--------------------------------------------------------------------------
-        */
-    methods: {}, // End of Component > methods
-
-    /*
-        |--------------------------------------------------------------------------
-        | Component > mounted
-        |--------------------------------------------------------------------------
-        */
-    mounted() {},
-    // End of Component > mounted
-} // End of export default
-</script>

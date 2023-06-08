@@ -510,7 +510,7 @@
         position: fixed;
         bottom: 43px;
         right: 0;
-        width: 70px;
+        width: 200px;
         z-index: 10;
         .card {
             background: $primary !important;
@@ -522,13 +522,17 @@
                 padding-bottom: 0 !important;
                 font-size: 17px !important;
                 color: #fff !important;
+                margin-right: 12px;
+                margin-top: -1px;
             }
             .team-new {
                 margin: 0 auto !important;
+                flex-direction: row !important; 
             }
         }
         h5 {
-            display: none;
+            display: inline-block;
+            color: #fff !important;
         }
     }
     @include mobile {

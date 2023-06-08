@@ -1,18 +1,21 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
+import BaseLoader from '/src/components/BaseLoader.vue'
+import {useToast} from 'vue-toast-notification';
 import store from "/store";
 const firstname = ref('');
 const lastname = ref('');
 const email = ref('');
 const password = ref("");
 const confirmPassword = ref("");
-
-
+const isLoading = ref(false);
+const toast = useToast();
 const router = useRouter();
 
 async function handerSignUp() {
-    if(password.value === confirmPassword.value){
+if(password.value === confirmPassword.value){
+    isLoading.value = true
   store.dispatch('register',{
     email: email.value,
     password: password.value,
@@ -23,8 +26,12 @@ async function handerSignUp() {
     },
   },
   }).then((e) => {
-    router.push('/')
+    isLoading.value = false
+    router.push('/login')
 })
+}
+else{
+    toast.error('New Password and Confirm Password does not match')
 }
     }
 </script>
@@ -56,7 +63,7 @@ async function handerSignUp() {
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">New Password</label>
                         <input class="form-control" id="password" type="password" v-model="password" />
                     </div>
                 </div>
@@ -68,18 +75,16 @@ async function handerSignUp() {
                 </div>
             </div>          
             <div>
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary" :class="isLoading ? 'disabled' : ''" type="submit">
+                    Register
+                    <span>
+                        <BaseLoader/>
+                    </span>
+                </button>
+                <button type="button" @click="()=> router.push('/login')" class="btn btn-link right-side-btn">Login to account</button>
             </div>
         </form>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.hello {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 3rem;
-  padding: 10rem;
-}
-</style >

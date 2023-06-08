@@ -5,9 +5,7 @@
             <ul>
                 <li v-for="(logo, index) in clientLogos" :key="index">
                     <router-link :to="logo.logoLink">
-                        <img
-                            :src="`/src/assets/images/front/logos/${logo.logoImage}`"
-                        />
+                        <img :src="logo.logoImage" />
                     </router-link>
                 </li>
             </ul>

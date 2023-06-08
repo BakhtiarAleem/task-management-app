@@ -1,19 +1,38 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import AddIssuePopup from '/src/components/popups/AddIssuePopup.vue'
 import store from "/store";
+
+
+
+
+
+
+
 const id = ref('');
 const route = useRoute();
 const projectIssue = ref();
 const modalClick = ref(false);
 
+
+
+
+
+
+
+
 async function projectLoad() {
     id.value = route.params.id;
     await store.dispatch('projectIssues', id.value).then((val) => {
-        projectIssue.value = val
+        projectIssue.value = val   
+       console.log(projectIssue.value)
     })
 }
+
+
+
+
 
 onMounted(() => {
     projectLoad()
@@ -35,16 +54,41 @@ onMounted(() => {
             </div>
         </div>    
         <div class="issue-listing">
-            <div v-for="(issues, index) in projectIssue" :key="index" class="issue-item">
-                <div class="bullet-icon" :style="{'background-color': issues.status_task.color_indicator}">
+            <table class="table b-table table-striped table-hover">
+                <thead>
+                <tr>
+                   <th>ID</th> 
+                   <th>Task</th> 
+                   <th>Assign to</th>
+                   <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(issues, index) in projectIssue" :key="index">
+                    <td>
+                        {{ issues.id }}
+                    </td>
+                    <td>
+                        <div class="bullet-icon" :style="{'background-color': issues.status_task.color_indicator}">
                 </div>
                 <div class="item-title">
                     <p>{{ issues.task_name }}</p>
                 </div>
-                <div class="status" :style="{'background-color': issues.status_task.color_indicator}">
+                    </td>
+                    <td>
+                        {{ issues.assign_to }}
+                    </td>
+                    <td>
+                        <div class="status inline-status-table" :style="{'background-color': issues.status_task.color_indicator}">
                     {{ issues.status_task.name }}
                 </div>
-            </div>
+                     
+                    </td>
+                </tr>
+            </tbody>
+            </table>          
+
+
         </div>  
         <AddIssuePopup :popup="modalClick" @close="modalClick = false"></AddIssuePopup>
     </div>

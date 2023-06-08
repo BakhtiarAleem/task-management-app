@@ -13,8 +13,6 @@ const optionsSelect = ref([
     },
 ]);
 const name = ref();
-const taskStatus = ref(store?.getters?.taskStatus);
-const taskStatusSelected = ref(taskStatus[0]?.name ? taskStatus[0].name : null);
 const description = ref();
 const uploadImage = ref();
 
@@ -28,14 +26,21 @@ const userSelection = ref([
         { name: 'Phoenix', language: 'Elixir' }
       ]);
 
+      const authToken = computed(() => store.getters.token)
+      const taskStatus = computed(() => store.getters.taskStatus)
 
+      const taskStatusSelected = ref(taskStatus[0]?.name ? taskStatus[0].name : null);
 
 
 async function submitForm(val) {
     val.preventDefault();    
 }
 
-
+async function taskStatusFunction() {
+  if(authToken){
+    await store.dispatch('taskStatus')
+  }
+}
 
 
 function imageUpload(event) {
@@ -53,6 +58,7 @@ watch(taskStatusSelected, (currentValue) => {
 
 
 onMounted(() => {
+    taskStatusFunction();
 })
 
 const emit = defineEmits(['close'])

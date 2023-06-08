@@ -64,11 +64,11 @@ function imageUrl(url) {
 
                     <div class="anchor-link">
                         <router-link :to="{
-    name: 'organizations-detail',
-    params: {
-      id: id
-    }
-  }">
+                            name: 'organizations-detail',
+                            params: {
+                            id: id
+                            }
+                        }">
                         </router-link>
                     </div>
                     <!--show menu  iocn end-->

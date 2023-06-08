@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import addOrganizationPopup from '/src/components/popups/AddOrganizationPopup.vue'
 import CardBlock from '/src/components/CardBlock.vue'
 // import actionpopup from '/src/components/popups/ActionPopup.vue'
@@ -54,15 +54,17 @@ import store from "/store";
 
             const manageCards = ref();
 
-
+            const authToken = computed(() => store.getters.token)
 
 async function orginization() {
-    await store.dispatch('project').then((value) => {
-        if(value){
-            manageCards.value = null
-            manageCards.value = value
-        }
-    })
+    if(authToken.value != 'null'){
+        await store.dispatch('project').then((value) => {
+            if(value){
+                manageCards.value = null
+                manageCards.value = value
+            }
+        })
+    }
 }
 
 

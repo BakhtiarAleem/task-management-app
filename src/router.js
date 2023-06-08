@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from "/store";
+import NotFound from '/src/NotFound.vue'
 const routes = [
   {
     name:'landing-page',
     path: '/',
-    component: () => import('././views/front/Landing.vue'),
+    component: () => import(/* webpackChunkName: "Home" */ '././views/front/Landing.vue'),
     meta: {
       advertisementPage: true,
       title:'Homepage | Task Issues',
@@ -13,7 +14,7 @@ const routes = [
   {
     name:'about',
     path: '/about',
-    component: () => import('././views/front/About.vue'),
+    component: () => import(/* webpackChunkName: "Home" */ '././views/front/About.vue'),
     meta: {
       advertisementPage: true,
       title:'About | Task Issues',
@@ -22,34 +23,44 @@ const routes = [
   {
     name:'request-demo',
     path: '/request-demo',
-    component: () => import('././views/front/RequestDemo.vue'),
+    component: () => import(/* webpackChunkName: "Home" */ '././views/front/RequestDemo.vue'),
     meta: {
       advertisementPage: true,
       title:'Request a Demo | Task Issues',
     },  
   },
+  { path: '/:pathMatch(.*)*', component: NotFound },
   {
     name:'login',
     path: '/login/',
-    component: () => import('././views/Login.vue'),
+    component: () => import(/* webpackChunkName: "LoginRegister" */ '././views/Login.vue'),
     meta: {
-      requiresAuth: true,
       title:'Login | Task Issues',
+      layout: 'auth',
     },  
   },
   {
     name:'Register',
     path: '/register/',
-    component: () => import('././views/Register.vue'),
+    component: () => import(/* webpackChunkName: "LoginRegister" */ '././views/Register.vue'),
+    meta: {
+      title:'Register | Task Issues',
+      layout: 'auth',
+    },  
+  },
+  {
+    name:'Confirm',
+    path: '/confirm/',
+    component: () => import(/* webpackChunkName: "LoginRegister" */ '././views/Confirm.vue'),
     meta: {
       requiresAuth: true,
-      title:'Register | Task Issues',
+      title:'Confirm User | Task Issues',
     },  
   },
   {
     name: 'organizations',
     path: '/organizations/',
-    component: () => import('././views/organizations/index.vue'),     
+    component: () => import(/* webpackChunkName: "Organizations" */ '././views/organizations/index.vue'),     
     meta: {
       requiresAuth: true,
       title:'Organizations | Task Issues',
@@ -58,7 +69,7 @@ const routes = [
   {
     name: 'organizations-detail',
     path: '/organizations/:id/',
-    component: () => import('././views/organizations/detailpage/index.vue'),
+    component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/index.vue'),
     redirect: {
       name: "organizations-detail-sprint"
   },     
@@ -71,7 +82,7 @@ const routes = [
       {
         name: 'organizations-detail-sprint',
         path: '/organizations/:id/sprint/',
-        component: () => import('././views/organizations/detailpage/sprint.vue'),
+        component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/sprint.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
@@ -81,7 +92,7 @@ const routes = [
       {
         name: 'organizations-detail-issues',
         path: '/organizations/:id/issues/',
-        component: () => import('././views/organizations/detailpage/issues.vue'),
+        component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/issues.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
@@ -91,7 +102,7 @@ const routes = [
       {
         name: 'organizations-detail-settings',
         path: '/organizations/:id/settings/',
-        component: () => import('././views/organizations/detailpage/settings.vue'),
+        component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/settings.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
@@ -100,7 +111,15 @@ const routes = [
       },
     ],     
   },
-
+  {
+    name: 'settings',
+    path: '/settings/',
+    component: () => import(/* webpackChunkName: "Settings" */ '././views/settings/index.vue'),     
+    meta: {
+      requiresAuth: true,
+      title:'Settings | Task Issues',
+    },  
+  },
 ];
 
 const router = createRouter({
@@ -110,6 +129,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
+  if(localStorage.getItem("token") && to.fullPath === '/login'){
+    next({ name: 'organizations' })
+  }
+  if(localStorage.getItem("token") && to.fullPath === '/login/'){
+    next({ name: 'organizations' })
+  }
+  if(to.meta.requiresAuth){
+    if(!localStorage.getItem("token")){
+      next({ name: 'login' })
+    }   
+  }
   next();
 });
 

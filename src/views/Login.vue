@@ -2,12 +2,15 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router';
 import store from "/store";
+import BaseLoader from '/src/components/BaseLoader.vue'
 const email = ref('');
 const password = ref("");
+const isLoading = ref(false);
 
 const router = useRouter();
 
 async function handleSignin() {
+  isLoading.value = true;
   store.dispatch('loginUser',{
     email: email.value,
     password: password.value,
@@ -15,6 +18,7 @@ async function handleSignin() {
   if(e === 'success'){
     router.push('/organizations')
   }
+  isLoading.value = false;
 })
 }
 </script>
@@ -34,18 +38,16 @@ async function handleSignin() {
             <input class="form-control" id="password" type="password" v-model="password" />
           </div>
           <div>
-            <button class="btn btn-primary" type="submit">Sign in</button>
+            <button class="btn btn-primary" :class="isLoading ? 'disabled' : ''" type="submit">
+              Sign in
+              <span>
+                <BaseLoader/>
+              </span>
+            </button>
+            <button type="button" @click="()=> router.push('/register')" class="btn btn-link right-side-btn">Create an account</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.hello {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 3rem;
-  padding: 10rem;
-}
-</style >

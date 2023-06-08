@@ -12,6 +12,8 @@ const props = defineProps({
 const settingBox = ref(false);
 const addClassClick = ref(false);
 const user = computed(() => store?.state?.user || false);
+const username = computed(() => store?.state?.profile?.username || 'Anyonomous');
+const role = computed(() => store?.state?.profile?.role || '');
 const router = useRouter();
 
 function clickAway() {
@@ -79,8 +81,8 @@ async function logOut() {
                                             />
                                         </span>
                                         <span class="user-detail">                                         
-                                            {{ user?.user_metadata?.first_name }} {{ user?.user_metadata?.last_name }}
-                                            <p>Super Admin</p>
+                                            {{ username }}
+                                            <p>{{ role }}</p>
                                         </span>
                                         <i class="icon-caret"></i>
                                     </router-link>

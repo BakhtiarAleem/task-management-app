@@ -2335,6 +2335,7 @@ ul.teamDescLength {
     border-radius: 3px;
     @include mobile {
         top: 7px;
+        width: auto;
     }
     span {
         width: 20px;

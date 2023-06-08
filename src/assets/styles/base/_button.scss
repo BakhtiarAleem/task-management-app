@@ -4,6 +4,12 @@
     padding: $button-padding;
     min-width: 120px;
     position: relative;
+    &.disabled {
+        color: transparent !important;
+        .loader {
+            display: block;
+        }
+    }
     &:focus {
         box-shadow: none !important;
     }

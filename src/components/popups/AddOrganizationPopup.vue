@@ -14,11 +14,14 @@ const category = ref(optionsSelect[0]?.name ? optionsSelect[0].name : null);
 const description = ref();
 const uploadImage = ref();
 
+const authToken = computed(() => store.getters.token)
 
 async function callOrginizationType() {
-    await store.dispatch('projectTypes').then((value) => {
-        optionsSelect.value = value
-    })
+    if(authToken.value != 'null'){
+        await store.dispatch('projectTypes').then((value) => {
+            optionsSelect.value = value
+        })
+    }
 }
 
 

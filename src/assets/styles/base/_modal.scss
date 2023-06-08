@@ -26,7 +26,10 @@
                 border-bottom: 1px $border-opacity solid !important;
 
                 @include mobile {
-                    padding: 17px 24px 36px 24px;
+                    padding: 12px 24px 5px 24px;
+                    button.btn-close {
+                        margin-top: -7px;
+                    }
                 }
 
                 .modal-title {
@@ -79,6 +82,9 @@
 
                 @include mobile {
                     border-radius: 0;
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
                 }
 
                 .btn-primary {

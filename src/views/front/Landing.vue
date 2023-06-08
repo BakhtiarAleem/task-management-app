@@ -1,38 +1,48 @@
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import FrontHeader from '/src/components/front/FrontHeader.vue'
-import ClientsLogo from '/src/components/front/ClientsLogo.vue'
-import Advisor from '/src/components/front/Advisor.vue'
-import FrontFooter from '/src/components/front/FrontFooter.vue'
-import FrontPageLoader from '/src/components/front/FrontPageLoader.vue'
-import TeamExperience from '/src/components/front/TeamExperience.vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
+
+const FrontHeader = defineAsyncComponent(() =>
+  import('/src/components/front/FrontHeader.vue')
+)
+const ClientsLogo = defineAsyncComponent(() =>
+  import('/src/components/front/ClientsLogo.vue')
+)
+
+const FrontFooter = defineAsyncComponent(() =>
+  import('/src/components/front/FrontFooter.vue')
+)
+
+const TeamExperience = defineAsyncComponent(() =>
+  import('/src/components/front/TeamExperience.vue')
+)
+
+// import Advisor from '/src/components/front/Advisor.vue'
+// import FrontPageLoader from '/src/components/front/FrontPageLoader.vue'
+
+import Img1 from '/src/assets/images/front/logos/vuejs.svg'
+import Img2 from '/src/assets/images/front/logos/supabase.svg'
+import Img3 from '/src/assets/images/front/logos/github-mark.svg'
+import Img4 from '/src/assets/images/front/landing/goals.png'
+import Img5 from '/src/assets/images/front/landing/diagnose.png'
+import Img6 from '/src/assets/images/front/landing/design.png'
+import Img7 from '/src/assets/images/front/landing/track.png'
+
 
 const logos = ref([
                 {
-                    logoImage: '72andsunny.png',
+                    logoImage: Img1,
                     logoLink: '/',
                 },
                 {
-                    logoImage: 'lever.png',
+                    logoImage: Img2,
                     logoLink: '/',
                 },
                 {
-                    logoImage: 'ea.png',
+                    logoImage: Img3,
                     logoLink: '/',
                 },
-                {
-                    logoImage: 'zendrive.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'studio-dental.png',
-                    logoLink: '/',
-                },
-                {
-                    logoImage: 'cygnis.png',
-                    logoLink: '/',
-                },
+                
             ]);
 const customer = ref([
                 {
@@ -62,28 +72,28 @@ const customer = ref([
             ]);
 const categories = ref([
                 {
-                    cateImage: 'goals.png',
+                    cateImage: Img4,
                     title: 'Identify & Define Goals',
                     desc:
                         'Step by step collaborative process allow teams to identify and define high-level goals.',
                 },
                 {
-                    cateImage: 'diagnose.png',
+                    cateImage: Img5,
                     title: 'Diagnose Problems',
                     desc:
                         'Take a quick diagnostic on the key behaviors that help teams to continuously deliver high value.',
                 },
                 {
-                    cateImage: 'design.png',
-                    title: 'Design & Implement Solution',
+                    cateImage: Img6,
+                    title: 'Implement Solution',
                     desc:
                         'Define action plan by identifying areas to improve and implement realistic solution for teams.',
                 },
                 {
-                    cateImage: 'track.png',
+                    cateImage: Img7,
                     title: 'Track Progress',
                     desc:
-                        'Tune-up and assessment sessions help teams to check progress and revised action plan accordingly. ',
+                        'Tune-up Track sessions help team and members to check progress and revised action plan accordingly. ',
                 },
             ]);
 </script>
@@ -123,7 +133,7 @@ const categories = ref([
         <!-- banner end-->
         <!-- clients logo -->
         <ClientsLogo
-            mainHeading="Task Issues TRUSTED WITH SOME OF THE WORLD'S BEST COMPANIES"
+            mainHeading="TASK ISSUES TRUSTED WITH SOME OF THE WORLD'S BEST COMPANIES"
             :clientLogos="logos"
         ></ClientsLogo>
         <!-- clients logo end -->
@@ -141,9 +151,7 @@ const categories = ref([
                         :key="index"
                     >
                         <div class="category-image">
-                            <img
-                                :src="`/src/assets/images/front/landing/${category.cateImage}`"
-                            />
+                            <img :src="category.cateImage" />
                         </div>
                         <h4>{{ category.title }}</h4>
                         <p>{{ category.desc }}</p>
