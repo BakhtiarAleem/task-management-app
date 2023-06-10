@@ -3,11 +3,13 @@ import { ref, onMounted, computed } from 'vue'
 import addProjectPopup from '/src/components/popups/AddProjectPopup.vue'
 import CardBlock from '/src/components/CardBlock.vue'
 // import actionpopup from '/src/components/popups/ActionPopup.vue'
+import BlockLoader from '/src/components/BlockLoader.vue'
 import store from "/store";
 
 
             const titleBarHeading = ref('Manage Projects');
             const modalClick = ref(false);
+            const isLoading = ref(true);           
             const cardMenuLinks = ref([
                 {
                     menuText: 'fdas',
@@ -58,10 +60,12 @@ import store from "/store";
 
 async function orginization() {
     if(authToken.value != 'null'){
+        isLoading.value = true
         await store.dispatch('project').then((value) => {
             if(value){
                 manageCards.value = null
                 manageCards.value = value
+                isLoading.value = false
             }
         })
     }
@@ -82,62 +86,65 @@ onMounted(() => {
 <template>
     <div class="col-md-12">
         <h3 class="main-heading">{{ titleBarHeading }}</h3>
-        <div v-if="!manageCards" class="row">
-            <!--new team card-->
-            <CardBlock
-                addCard
-                cssClass="add-new-team-card"
-                addItemText="New Project"
-                @click="modalClick = true"
-            ></CardBlock>
-            <!--new team card end-->
-        </div>
-        <div v-if="manageCards" class="row">
-            <!--new team card-->
-            <CardBlock
-                addCard
-                cssClass="add-new-team-card"
-                addItemText="New Project"
-                @click="modalClick = true"
-            ></CardBlock>
-            <!--new team card end-->
-            <!--Teams details card-->
-            <CardBlock
-                v-for="(manage, index) in manageCards"
-                :key="index"
-                :id="manage.id"
-                :mainImage="manage.project_image"
-                :mainHeading="manage.name"
-                :subHeading="manage.type"
-                :descprition="manage.description"
-                :teammembers="manage.team"
-                @card-click="redirect"
-            >
-            <template v-slot:menu>
-                    <div>
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-team"></i>
-                                    <span>Team members</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-edit"></i>
-                                    Modify
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-download"></i>
-                                    Archive
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </template>
-            </CardBlock>
+        <BlockLoader class="loader-page" v-if="isLoading" />
+        <div v-if="!isLoading" >
+            <div v-if="!manageCards" class="row">
+                <!--new team card-->
+                <CardBlock
+                    addCard
+                    cssClass="add-new-team-card"
+                    addItemText="New Project"
+                    @click="modalClick = true"
+                ></CardBlock>
+                <!--new team card end-->
+            </div>
+            <div v-if="manageCards" class="row">
+                <!--new team card-->
+                <CardBlock
+                    addCard
+                    cssClass="add-new-team-card"
+                    addItemText="New Project"
+                    @click="modalClick = true"
+                ></CardBlock>
+                <!--new team card end-->
+                <!--Teams details card-->
+                <CardBlock
+                    v-for="(manage, index) in manageCards"
+                    :key="index"
+                    :id="manage.id"
+                    :mainImage="manage.project_image"
+                    :mainHeading="manage.name"
+                    :subHeading="manage.type"
+                    :descprition="manage.description"
+                    :teammembers="manage.team"
+                    @card-click="redirect"
+                >
+                <template v-slot:menu>
+                        <div>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-team"></i>
+                                        <span>Team members</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-edit"></i>
+                                        Modify
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-download"></i>
+                                        Archive
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </CardBlock>
+            </div>
         </div>
         <addProjectPopup :popup="modalClick" @close="modalClick = false"></addProjectPopup>
         <!-- <actionpopup
