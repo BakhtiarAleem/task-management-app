@@ -16,7 +16,7 @@ async function handleSignin() {
     password: password.value,
   }).then((e) => {
   if(e === 'success'){
-    router.push('/organizations')
+    router.push('/projects')
   }
   isLoading.value = false;
 })

@@ -33,6 +33,11 @@ function imageUrl(url) {
 }
 
 
+function initialAvatar(value){
+    return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
+}
+
+
 
 </script>
 
@@ -64,7 +69,7 @@ function imageUrl(url) {
 
                     <div class="anchor-link">
                         <router-link :to="{
-                            name: 'organizations-detail',
+                            name: 'projects-detail',
                             params: {
                             id: id
                             }
@@ -168,17 +173,19 @@ function imageUrl(url) {
                         >
                             <p>{{ emailAddress }}</p>
                         </div>
-                        <!-- team members -->
+                        <!-- team members -->                       
                         <div class="card-members" v-if="teammembers != null">
                             <!-- team members loop -->
                             <div
                                 v-for="(teammember, index) in teammembers"
                                 :key="index"
-                                v-if="index < limitationList"
+                                
                                 class="member-block"
                             >
+                            <div class="tooltip-container" v-tooltip="teammember.user_id.full_name" v-if="index < limitationList">
                                 <img
-                                    :src="'/src//assets/images/dummy/team-members/'+ teammember.image"/>
+                                    :src="teammember.user_id.avatar_url === null ? initialAvatar(teammember.user_id.full_name) : teammember.user_id.avatar_url"/>
+                                </div>
                             </div>
                             <!-- team members loop end -->
                             <!-- if members more then 5 -->

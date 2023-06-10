@@ -62,7 +62,6 @@ export default createStore({
               .eq('id', this.state.user.id)
               localStorage.setItem("profile", JSON.stringify(data[0]));
               this.state.profile = JSON.parse(localStorage.getItem("profile"))
-              console.log(this.state.profile)
               return 'success'
             }
           } catch (error) {
@@ -124,7 +123,7 @@ export default createStore({
         const userId = this.state?.user?.id || this.state?.user?.sub
         let referencedRow = await supabase
          .from('team')
-         .select('*')
+         .select('*, profiles ( username, full_name, role )')
          .eq('user_id', userId)
 
          const idPresets = referencedRow.data
@@ -132,7 +131,7 @@ export default createStore({
 
          let project = await supabase
          .from('project')
-         .select('*, team ( user_id, designation, project_id )')
+         .select('*, team ( user_id(username,website,full_name,avatar_url,role) )')
          .in('id', referencedProjectId);
 
         return project.data

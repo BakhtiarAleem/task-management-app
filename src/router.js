@@ -58,55 +58,55 @@ const routes = [
     },  
   },
   {
-    name: 'organizations',
-    path: '/organizations/',
-    component: () => import(/* webpackChunkName: "Organizations" */ '././views/organizations/index.vue'),     
+    name: 'projects',
+    path: '/projects/',
+    component: () => import(/* webpackChunkName: "projects" */ '././views/projects/index.vue'),     
     meta: {
       requiresAuth: true,
-      title:'Organizations | Task Issues',
+      title:'Projects | Task Issues',
     },  
   },
   {
-    name: 'organizations-detail',
-    path: '/organizations/:id/',
-    component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/index.vue'),
+    name: 'projects-detail',
+    path: '/projects/:id/',
+    component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/index.vue'),
     redirect: {
-      name: "organizations-detail-sprint"
+      name: "projects-detail-sprint"
   },     
     meta:{    
       requiresAuth: true,    
       detailPage: true,
-      title:'Organizations Detail | Task Issues',
+      title:'Project Detail | Task Issues',
     }, 
     children: [
       {
-        name: 'organizations-detail-sprint',
-        path: '/organizations/:id/sprint/',
-        component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/sprint.vue'),
+        name: 'projects-detail-sprint',
+        path: '/projects/:id/sprint/',
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/sprint.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
-          title:'Sprint | Organizations Detail | Task Issues',
+          title:'Sprint | Project Detail | Task Issues',
         }, 
       },
       {
-        name: 'organizations-detail-issues',
-        path: '/organizations/:id/issues/',
-        component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/issues.vue'),
+        name: 'projects-detail-issues',
+        path: '/projects/:id/issues/',
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/issues.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
-          title:'Issues | Organizations Detail | Task Issues',
+          title:'Issues | Project Detail | Task Issues',
         }, 
       },
       {
-        name: 'organizations-detail-settings',
-        path: '/organizations/:id/settings/',
-        component: () => import(/* webpackChunkName: "OrganizationsDetail" */'././views/organizations/detailpage/settings.vue'),
+        name: 'projects-detail-settings',
+        path: '/projects/:id/settings/',
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/settings.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
-          title:'Settings | Organizations Detail | Task Issues',
+          title:'Settings | Project Detail | Task Issues',
         }, 
       },
     ],     
@@ -130,10 +130,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
   if(localStorage.getItem("token") && to.fullPath === '/login'){
-    next({ name: 'organizations' })
+    next({ name: 'projects' })
   }
   if(localStorage.getItem("token") && to.fullPath === '/login/'){
-    next({ name: 'organizations' })
+    next({ name: 'projects' })
   }
   if(to.meta.requiresAuth){
     if(!localStorage.getItem("token")){

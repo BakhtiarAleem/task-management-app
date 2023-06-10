@@ -6,7 +6,7 @@ const navigationData = ref([
                 {
                     icon: 'icon-buildings',
                     name: 'Organizations',
-                    link: '/organizations',
+                    link: '/projects',
                 },
                 {
                     icon: 'icon-setting',

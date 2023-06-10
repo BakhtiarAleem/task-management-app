@@ -6,13 +6,15 @@ const router = useRouter();
 const optionsSelect = ref([
     {
         value: null,
-        text: 'Select organization diagnostics category',
+        text: 'Select Projects diagnostics category',
     },
 ]);
 const name = ref();
 const category = ref(optionsSelect[0]?.name ? optionsSelect[0].name : null);
 const description = ref();
 const uploadImage = ref();
+const uploadPlaceholderImage = ref('/company-placeholder.png');
+
 
 const authToken = computed(() => store.getters.token)
 
@@ -74,7 +76,7 @@ const emit = defineEmits(['close'])
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Add Organization</h5>
+            <h5 class="modal-title">Add Projects</h5>
             <button type="button" @click="emit('close', false)" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form @submit="submitForm">
@@ -98,9 +100,17 @@ const emit = defineEmits(['close'])
                         <input type="text" v-model="description" class="form-control" placeholder="Write short description about organization" />
                     </div>
                     <div class="form-group">
-                        <label class="custom-file-label" for="inputGroupFile03">Upload Image</label>
-                        <div class="custom-file">
-                            <input type="file" @change="imageUpload" class="custom-file-input" id="inputGroupFile03">                           
+                        <div class="row">
+                            <div class="col-md-10">
+                                <label class="custom-file-label" for="inputGroupFile03">Upload Image</label>
+                                <div class="custom-file">
+                                    <input type="file" @change="imageUpload" class="custom-file-input form-control" id="inputGroupFile03">                           
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="custom-image" :style="{'background-image': 'url('+ uploadPlaceholderImage +')'}">                                 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 

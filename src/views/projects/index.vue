@@ -1,12 +1,12 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import addOrganizationPopup from '/src/components/popups/AddOrganizationPopup.vue'
+import addProjectPopup from '/src/components/popups/AddProjectPopup.vue'
 import CardBlock from '/src/components/CardBlock.vue'
 // import actionpopup from '/src/components/popups/ActionPopup.vue'
 import store from "/store";
 
 
-            const titleBarHeading = ref('Manage Organizations');
+            const titleBarHeading = ref('Manage Projects');
             const modalClick = ref(false);
             const cardMenuLinks = ref([
                 {
@@ -15,7 +15,7 @@ import store from "/store";
             ]);
             const breadcrumbs = ref([
                 {
-                    text: 'Manage Organizations',
+                    text: 'Manage Projects',
                     href: '#',
                 },
             ]);            
@@ -87,7 +87,7 @@ onMounted(() => {
             <CardBlock
                 addCard
                 cssClass="add-new-team-card"
-                addItemText="New Organization"
+                addItemText="New Project"
                 @click="modalClick = true"
             ></CardBlock>
             <!--new team card end-->
@@ -97,7 +97,7 @@ onMounted(() => {
             <CardBlock
                 addCard
                 cssClass="add-new-team-card"
-                addItemText="New Organization"
+                addItemText="New Project"
                 @click="modalClick = true"
             ></CardBlock>
             <!--new team card end-->
@@ -110,32 +110,16 @@ onMounted(() => {
                 :mainHeading="manage.name"
                 :subHeading="manage.type"
                 :descprition="manage.description"
-                :teammembers="manage.users"
+                :teammembers="manage.team"
                 @card-click="redirect"
             >
-                <div slot="menu">
+            <template v-slot:menu>
                     <div>
                         <ul>
                             <li>
-                                <router-link
-                                    class=""
-                                >
+                                <a href="#">
                                     <i class="icon-team"></i>
                                     <span>Team members</span>
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link
-                                    class=""
-                                >
-                                    <i class="icon-session"></i>
-                                    <span>Sessions</span>
-                                </router-link>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="icon-Report"></i>
-                                    Reports
                                 </a>
                             </li>
                             <li>
@@ -152,10 +136,10 @@ onMounted(() => {
                             </li>
                         </ul>
                     </div>
-                </div>
+                </template>
             </CardBlock>
         </div>
-        <addOrganizationPopup :popup="modalClick" @close="modalClick = false"></addOrganizationPopup>
+        <addProjectPopup :popup="modalClick" @close="modalClick = false"></addProjectPopup>
         <!-- <actionpopup
             title="Archive"
             content="Are you sure you want to archive this organization?"

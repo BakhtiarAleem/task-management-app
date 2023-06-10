@@ -13,8 +13,8 @@ hideNavigationHeader: {
 const navigationData = ref([
                 {
                     icon: 'icon-buildings',
-                    name: 'Organizations',
-                    link: '/organizations',
+                    name: 'Projects',
+                    link: '/projects',
                 },
                 {
                     icon: 'icon-setting',

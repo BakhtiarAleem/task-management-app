@@ -29,7 +29,7 @@ function imageUrl(url) {
                     <ul>
                         <li>
                             <router-link :to="{
-    name: 'organizations-detail-sprint',
+    name: 'projects-detail-sprint',
     params: {
       id: 29
     }
@@ -40,7 +40,7 @@ function imageUrl(url) {
                         </li>
                         <li>
                              <router-link :to="{
-    name: 'organizations-detail-issues',
+    name: 'projects-detail-issues',
     params: {
       id: 29
     }
@@ -51,7 +51,7 @@ function imageUrl(url) {
                         </li>
                         <li>
                              <router-link :to="{
-    name: 'organizations-detail-settings',
+    name: 'projects-detail-settings',
     params: {
       id: 29
     }
