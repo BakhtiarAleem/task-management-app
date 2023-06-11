@@ -20,7 +20,7 @@ async function requestDemoSubmit() {
 })
 }
 
-import requestDemo from '/src/assets/images/front/request-demo.png'
+import requestDemoImage from '/src/assets/images/front/request-demo.png'
 import loadingImage from '/image-loading-small.gif'
 import errorImage from '/image-error.png'
 
@@ -102,7 +102,7 @@ import errorImage from '/image-error.png'
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="requeest-graphics">
-                            <img v-lazy="{ src: requestDemo, loading: loadingImage, error: errorImage }" />
+                            <img v-lazy="{ src: requestDemoImage, loading: loadingImage, error: errorImage }" />
                         </div>
                         <div class="contact-details">
                             <ul>
