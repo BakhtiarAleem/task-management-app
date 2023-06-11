@@ -1,3 +1,5 @@
 <template>
-    <div class="loader">Loading...</div>
+    <div class="loader">
+        <img src="/loader.svg" />
+    </div>
 </template>

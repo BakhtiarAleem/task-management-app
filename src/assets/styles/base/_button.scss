@@ -6,6 +6,8 @@
     position: relative;
     &.disabled {
         color: transparent !important;
+        background-color: #ccc;
+        border-color: #ccc;
         .loader {
             display: block;
         }

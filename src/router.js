@@ -128,6 +128,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  store.commit('setLoading', true);
   document.title = to.meta.title;
   if(localStorage.getItem("token") && to.fullPath === '/login'){
     next({ name: 'projects' })
@@ -142,6 +143,12 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+
+
+router.afterEach((to, from) => {
+  store.commit('setLoading', false);
+});
+
 
 // router.afterEach((to, from, next) => {
 //   // get current user info

@@ -373,3 +373,35 @@ header.header .fixed-header .logo {
     overflow: hidden;
     border-radius: 6px;
 }
+
+img[lazy="loading"] {
+    padding: 100px 40px;
+    margin: auto;
+}
+
+.logo-block-loader {
+    width: 200px;
+}
+
+.logo-animation {
+    position: relative;
+    animation-name: logokeyframe;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes logokeyframe {
+    0%  {    
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+}

@@ -126,7 +126,8 @@ const categories = ref([
                     </div>
                 </div>
                 <div class="landing-graphics">
-                    <img src="/src/assets/images/front/landing-header-bg.png" />
+                    <img
+                    v-lazy="{ src: '/src/assets/images/front/landing-header-bg.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
                 </div>
             </div>
         </div>
@@ -151,7 +152,7 @@ const categories = ref([
                         :key="index"
                     >
                         <div class="category-image">
-                            <img :src="category.cateImage" />
+                            <img v-lazy="{ src: category.cateImage, loading: '/image-loading-small.gif', error: '/image-error.png' }" /> />
                         </div>
                         <h4>{{ category.title }}</h4>
                         <p>{{ category.desc }}</p>
@@ -172,7 +173,7 @@ const categories = ref([
                 </h3>
             </div>
             <div class="web-screenshots">
-                <img src="/src/assets/images/front/landing/web-screens.png" />
+                <img v-lazy="{ src: '/src/assets/images/front/landing/web-screens.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
             </div>
             <span class="simple-curve"></span>
         </div>

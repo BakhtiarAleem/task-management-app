@@ -88,9 +88,7 @@ const logos = ref([
                         </div>
                         <div class="banner-right-content">
                             <div class="landing-graphics">
-                                <img
-                                    src="/src/assets/images/front/landing-people.png"
-                                />
+                                <img v-lazy="{ src: '/src/assets/images/front/landing-people.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
                             </div>
                         </div>
                     </div>
@@ -112,9 +110,7 @@ const logos = ref([
                             <div class="middle-aligner">
                                 <div class="inner">
                                     <div class="landing-graphics">
-                                        <img
-                                            src="/src/assets/images/front/epic-team.png"
-                                        />
+                                        <img v-lazy="{ src: '/src/assets/images/front/epic-team.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +127,7 @@ const logos = ref([
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="landing-graphics">
-                            <img src="/src/assets/images/front/founder.png" />
+                            <img v-lazy="{ src: '/src/assets/images/front/founder.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">

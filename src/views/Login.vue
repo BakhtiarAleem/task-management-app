@@ -39,10 +39,8 @@ async function handleSignin() {
           </div>
           <div>
             <button class="btn btn-primary" :class="isLoading ? 'disabled' : ''" type="submit">
-              Sign in
-              <span>
+              Sign in           
                 <BaseLoader/>
-              </span>
             </button>
             <button type="button" @click="()=> router.push('/register')" class="btn btn-link right-side-btn">Create an account</button>
           </div>

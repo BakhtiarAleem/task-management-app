@@ -5,7 +5,7 @@
             <ul>
                 <li v-for="(logo, index) in clientLogos" :key="index">
                     <router-link :to="logo.logoLink">
-                        <img :src="logo.logoImage" />
+                        <img v-lazy="{ src: logo.logoImage, loading: '/image-loading-small.gif', error: '/image-error.png' }" />
                     </router-link>
                 </li>
             </ul>

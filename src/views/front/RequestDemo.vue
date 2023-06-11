@@ -97,7 +97,7 @@ async function requestDemoSubmit() {
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="requeest-graphics">
-                            <img src="/src/assets/images/front/request-demo.png" />
+                            <img v-lazy="{ src: '/src/assets/images/front/request-demo.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
                         </div>
                         <div class="contact-details">
                             <ul>

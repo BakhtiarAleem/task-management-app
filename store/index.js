@@ -14,6 +14,7 @@ export default createStore({
     token: localStorage.getItem("token") ? localStorage.getItem("token") : null,
     projectSelected: null,
     taskStatus: null,
+    loading: true,
   },
   mutations: {
     loginUser(state, value) {
@@ -28,6 +29,9 @@ export default createStore({
     setTaskStatus(state, value) {
       state.taskStatus = value
     },      
+    setLoading(state, value) {
+      state.loading = value
+    },      
   },
   getters: {
     loginUser: (state) => {
@@ -41,6 +45,9 @@ export default createStore({
     },
     taskStatus: (state) => {
       return state.taskStatus
+    },
+    loading: (state) => {
+      return state.loading
     },
   },
   actions: {

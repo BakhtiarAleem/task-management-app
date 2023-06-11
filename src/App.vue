@@ -11,8 +11,8 @@ import { useRouter, useRoute } from 'vue-router';
 const siteName = 'Task Issues'
 
 const router = useRouter();
-const isLoading = ref(false)
 
+const isLoading = computed(() => store.getters.loading)
 
 const authToken = computed(() => store.getters.token)
 
