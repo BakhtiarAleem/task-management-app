@@ -30,30 +30,13 @@ const logos = ref([
             ]);
 
 
-            // const customer = ref([
-            //     {
-            //         customerImage: 'mike-bailen.png',
-            //         advisorName: 'Mike Bailen',
-            //         desc:
-            //             "Mike is the VP of People at Lever and a seasoned People Team Leader who understands the importance of a dual focus on recruiting and retention. While at Lever, Mike has spearheaded initiatives to empower leaders and teams for high performance, while placing the company's efforts towards diversity and inclusion at the heart of everything they do. \n Prior to Lever, Mike was the Director of Recruiting at Eventbrite and the former Head of Talent at Zappos.",
-            //         advisorDesignation: 'Lever',
-            //     },
-            //     {
-            //         customerImage: 'inessa.png',
-            //         advisorName: "Inessa O'Childs",
-            //         desc:
-            //             'Inessa is a serial entrepreneur currently working at the intersection of food and technology as the Co-Founder of the Future Food Center in San Francisco. She believes strongly in the power of high performance teams for creating wide-scale social impact. \n Inessa is also the CEO and founder of Global Privat, as well as a partner with Seraph Groupand Astia Angels. In this capacity, she provides capital and support to early-stage companies.',
-            //         advisorDesignation: 'Future Food Center',
-            //     },
-            //     {
-            //         customerImage: 'rob.png',
-            //         advisorName: 'Rob Hall',
-            //         desc:
-            //             "Rob is the VP of Product and Design at Zendrive. He relies on the performance of his teams every day to build things people want, with data and machine learning as core building blocks. \n At Zendrive, Rob's team works at the intersection of exponential networks ofconnected sensors, behavior change, and the future of transportation. \n Rob also teaches data science and coaches General Assembly's data science instructors.",
-            //         advisorDesignation: 'Zendrive',
-            //     },
-            // ])
-            
+import people from '/src/assets/images/front/landing-people.png'
+import loadingImage from '/image-loading-small.gif'
+import errorImage from '/image-error.png'
+import marysoftwares from '/src/assets/images/front/marysoftwares.png'
+import founder from '/src/assets/images/front/founder.png'
+
+
 
 </script>
 
@@ -88,7 +71,7 @@ const logos = ref([
                         </div>
                         <div class="banner-right-content">
                             <div class="landing-graphics">
-                                <img v-lazy="{ src: '/src/assets/images/front/landing-people.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
+                                <img v-lazy="{ src: people, loading: loadingImage, error: errorImage }" />
                             </div>
                         </div>
                     </div>
@@ -110,7 +93,7 @@ const logos = ref([
                             <div class="middle-aligner">
                                 <div class="inner">
                                     <div class="landing-graphics">
-                                        <img v-lazy="{ src: '/src/assets/images/front/epic-team.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
+                                        <img v-lazy="{ src: marysoftwares, loading: loadingImage, error: errorImage }" />
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +110,7 @@ const logos = ref([
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="landing-graphics">
-                            <img v-lazy="{ src: '/src/assets/images/front/founder.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
+                            <img v-lazy="{ src: founder, loading: loadingImage, error: errorImage }" />
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">

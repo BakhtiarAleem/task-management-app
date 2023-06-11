@@ -19,6 +19,11 @@ async function requestDemoSubmit() {
   isLoading.value = false;
 })
 }
+
+import requestDemo from '/src/assets/images/front/request-demo.png'
+import loadingImage from '/image-loading-small.gif'
+import errorImage from '/image-error.png'
+
 </script>
 
 
@@ -97,7 +102,7 @@ async function requestDemoSubmit() {
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <div class="requeest-graphics">
-                            <img v-lazy="{ src: '/src/assets/images/front/request-demo.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
+                            <img v-lazy="{ src: requestDemo, loading: loadingImage, error: errorImage }" />
                         </div>
                         <div class="contact-details">
                             <ul>

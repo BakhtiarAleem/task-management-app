@@ -29,6 +29,13 @@ import Img6 from '/src/assets/images/front/landing/design.png'
 import Img7 from '/src/assets/images/front/landing/track.png'
 
 
+import frontImage from '/src/assets/images/front/landing-header-bg.png'
+import loadingImage from '/image-loading-small.gif'
+import errorImage from '/image-error.png'
+import webscreen from '/src/assets/images/front/landing/web-screens.png'
+
+
+
 const logos = ref([
                 {
                     logoImage: Img1,
@@ -43,32 +50,6 @@ const logos = ref([
                     logoLink: '/',
                 },
                 
-            ]);
-const customer = ref([
-                {
-                    customerImage: 'zendrive-client.png',
-                    customerLogo: 'zendrive-logo.png',
-                    name: 'Mor Sidi,',
-                    desc:
-                        "In the first few weeks since we've delivered the Epic Teams trainings, we are already seeing a positive shift in people development.",
-                    designation: 'Head of People Ops at Zendrive',
-                },
-                {
-                    customerImage: 'alltrails-client.png',
-                    customerLogo: 'alltrails.png',
-                    name: 'Jade Van Doren,',
-                    desc:
-                        'Our Epic Teams experience produced immediately actionable changes that made our team happier and more productive the next day.',
-                    designation: 'CEO at AllTrails',
-                },
-                {
-                    customerImage: 'covo-client.png',
-                    customerLogo: 'covo.png',
-                    name: 'Rebecca Brian Pan,',
-                    desc:
-                        'Epic Teams has helped our organization immensely. We are a qualitatively different team now than we were six months ago.',
-                    designation: 'CEO at Covo',
-                },
             ]);
 const categories = ref([
                 {
@@ -127,7 +108,7 @@ const categories = ref([
                 </div>
                 <div class="landing-graphics">
                     <img
-                    v-lazy="{ src: '/src/assets/images/front/landing-header-bg.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
+                    v-lazy="{ src: frontImage, loading: loadingImage, error: errorImage }" />
                 </div>
             </div>
         </div>
@@ -152,7 +133,7 @@ const categories = ref([
                         :key="index"
                     >
                         <div class="category-image">
-                            <img v-lazy="{ src: category.cateImage, loading: '/image-loading-small.gif', error: '/image-error.png' }" /> />
+                            <img v-lazy="{ src: category.cateImage, loading: loadingImage, error: errorImage }" />
                         </div>
                         <h4>{{ category.title }}</h4>
                         <p>{{ category.desc }}</p>
@@ -173,7 +154,7 @@ const categories = ref([
                 </h3>
             </div>
             <div class="web-screenshots">
-                <img v-lazy="{ src: '/src/assets/images/front/landing/web-screens.png', loading: '/image-loading-small.gif', error: '/image-error.png' }" />
+                <img v-lazy="{ src: webscreen, loading: loadingImage, error: errorImage }" />
             </div>
             <span class="simple-curve"></span>
         </div>
