@@ -390,6 +390,12 @@ img[lazy="loading"] {
     animation-iteration-count: infinite;
 }
 
+.character-label-icon, .character-option-icon {
+    width: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-right: 8px;
+}
 
 @keyframes logokeyframe {
     0%  {    

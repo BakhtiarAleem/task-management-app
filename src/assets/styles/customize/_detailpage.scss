@@ -38,11 +38,33 @@
                 }
             }
         }
+        @include mobile {
+            width: 100%;
+            height: calc(100vh - 44px);
+            display: none;
+            &.mobile-active{
+                display: block;
+            }
+        }
     }
     .detail-inner-content-area{    
         width: calc(100% - 252px);
         display: inline-block;    
         padding-top: 20px;
+        @include mobile {
+            width: 100%;
+            height: auto;
+            position: relative;
+            top: 0;
+        }
+    }
+    .table-responsive .table-content {
+        @include mobile {
+            width: 460px;
+            table {
+                margin-bottom: 0;
+            }
+        }
     }
     .project-logo {
         display: inline-block;
@@ -224,5 +246,23 @@
             top: 0;
             left: 0;
         }
+    }
+}
+.detail-product-sidebar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 28px;
+    width: 40px;
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background-color: $pink;
+    color: #fff;
+
+    @include mobile {
+        display: flex;
     }
 }

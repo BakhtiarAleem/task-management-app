@@ -1,40 +1,48 @@
 <script setup>
-
+import BaseMultiSelect from '/src/components/BaseMultiSelect.vue'
 import { ref, onMounted, computed, watch } from 'vue'
-// const Multiselect = await import('@vueform/multiselect').then(module => module.default);
 import BaseEditor from '/src/components/BaseEditor.vue'
 import store from "/store";
 import { useRouter } from 'vue-router';
 const router = useRouter();
-const optionsSelect = ref([
-    {
-        value: null,
-        text: 'Select organization diagnostics category',
-    },
-]);
 const name = ref();
 const description = ref();
-const uploadImage = ref();
 
+const authToken = computed(() => store.getters.token)
+const taskStatus = computed(() => store.getters.taskStatus)
 
-const userSelected = ref({ name: 'Vue.js', language: 'JavaScript' });
-const userSelection = ref([
-        { name: 'Vue.js', language: 'JavaScript' },
-        { name: 'Rails', language: 'Ruby' },
-        { name: 'Sinatra', language: 'Ruby' },
-        { name: 'Laravel', language: 'PHP' },
-        { name: 'Phoenix', language: 'Elixir' }
-      ]);
+const profileList = ref([]);
+const selectedProfile = ref();
+const taskStatusSelected = ref(taskStatus[0]?.name ? taskStatus[0].name : null);
 
-      const authToken = computed(() => store.getters.token)
-      const taskStatus = computed(() => store.getters.taskStatus)
-
-      const taskStatusSelected = ref(taskStatus[0]?.name ? taskStatus[0].name : null);
 
 
 async function submitForm(val) {
     val.preventDefault();    
+    await store.dispatch('addIssue',{
+        project_id: store.getters.projectSelected,
+        task_name: name.value,
+        task_description: description.value,
+        task_status_id: taskStatusSelected.value,
+        assign_to: selectedProfile.value,
+  }).then((e) => {        
+     console.log(e)
+    }) 
 }
+
+function initialAvatar(value){
+    return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
+}
+
+async function profile() {
+    await store.dispatch('userProfile').then((e) => {        
+        for (let i = 0; i < e.length; i++) {
+        let image = e[i].avatar_url === null ? initialAvatar(e[i].username) : e[i].avatar_url
+        profileList.value.push({username: e[i].username, value: e[i].id, icon: image })
+        }
+    })
+}
+
 
 async function taskStatusFunction() {
   if(authToken){
@@ -42,9 +50,13 @@ async function taskStatusFunction() {
   }
 }
 
+function taskDescription(n){
+    description.value = n
+}
 
-function imageUpload(event) {
-    uploadImage.value = event.target.files[0]
+
+function assignTaskTo(n){
+    selectedProfile.value = n
 }
 
 const props = defineProps({
@@ -59,6 +71,7 @@ watch(taskStatusSelected, (currentValue) => {
 
 onMounted(() => {
     taskStatusFunction();
+    profile();
 })
 
 const emit = defineEmits(['close'])
@@ -81,17 +94,17 @@ const emit = defineEmits(['close'])
                 <div class="modal-content-area">
                     <div class="form-group">
                         <label>Task Name</label>
-                        <input type="text" v-model="name" class="form-control" placeholder="Enter Task Name" />
+                        <input type="text" v-model="name" class="form-control" placeholder="Enter Task Name" required />
                     </div>
 
                     <div class="form-group">
                         <label>Task Description</label>
-                        <BaseEditor />                    
+                        <BaseEditor @value="taskDescription" />                    
                     </div>
 
                     <div class="form-group">
                         <label>Task Status</label>
-                        <select v-model="taskStatusSelected" class="custom-select">  
+                        <select v-model="taskStatusSelected" class="custom-select" required>  
                             <option disabled value="null">Select Task Status</option>
                             <option v-for="(option, index) in taskStatus" :key="index" :value="option.id" class="text-capitilize">{{ option.name }}</option>
                         </select>
@@ -99,10 +112,12 @@ const emit = defineEmits(['close'])
 
                     <div class="form-group">
                         <label>Assign Task To</label>
+                        <!-- <Multiselect v-model="assignTaskValue" :options="assignTaskOption"></Multiselect>
                         <select v-model="taskStatusSelected" class="custom-select">  
                             <option disabled value="null">Select Users</option>
                             <option v-for="(option, index) in taskStatus" :key="index" :value="option.id" class="text-capitilize">{{ option.name }}</option>
-                        </select>
+                        </select> -->
+                        <BaseMultiSelect :assignTaskOption="profileList" @value="assignTaskTo" />
                     </div>
                     
                     <!-- <div class="form-group">
@@ -130,7 +145,6 @@ const emit = defineEmits(['close'])
 </div>
 
 </template>
-
 <style>
 .modal.fade.show .modal-dialog.md {
     max-width: 500px;

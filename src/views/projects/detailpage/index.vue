@@ -8,6 +8,7 @@ const id = ref('');
 const route = useRoute();
 const projectSelected = ref();
 const isLoading = ref(true)
+const mobileMenuClick = ref(false)
 
 async function projectLoad() {
     id.value = route.params.id;
@@ -29,7 +30,10 @@ onMounted(() => {
 <div class="detail-content-area">
     <BlockLoader v-if="isLoading" />
     <div v-if="!isLoading">
-        <DetailSidebar v-if="projectSelected" :image="projectSelected?.project_image" :name="projectSelected?.name" :type="projectSelected?.type" />   
+        <div @click="mobileMenuClick = !mobileMenuClick" class="detail-product-sidebar">
+            <i class="icon-three-dots" />
+        </div>
+        <DetailSidebar v-if="projectSelected" :image="projectSelected?.project_image" :name="projectSelected?.name" :type="projectSelected?.type" :mobilebar="mobileMenuClick" />   
         <div class="detail-inner-content-area">
             <div class="container">
                 <router-view />

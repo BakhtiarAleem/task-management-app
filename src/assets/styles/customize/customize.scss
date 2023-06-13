@@ -423,7 +423,9 @@ tfoot {
         padding-right: 0px;
     }
 }
-
+.ql-container.ql-snow ul {
+    padding: 0;
+}
 .tabs-container {
     &.custom-tab {
         .nav-item {
@@ -4614,4 +4616,36 @@ ul.teamDescLength {
             white-space: normal;
         }
     }
+}
+.table{
+    --bs-table-striped-bg: #fff;
+    --bs-table-bg: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    --bs-table-hover-color: #fff !important;
+    --bs-table-hover-bg: #138d90 !important;
+    &.table-hover{
+        tr{
+            cursor: pointer;
+        }
+        tr:hover{            
+            .bullet-icon{
+                background-color:  #fff !important;
+            }
+            .status.inline-status-table{
+                background-color:  #fff !important;
+                color: #138d90;
+            }
+        }        
+    }
+    thead tr {
+        background-color: #fff;
+    }
+    .profile-table {
+        display: flex;
+        align-items: center;
+        p {
+            margin-bottom: 0;
+        }
+    }    
 }

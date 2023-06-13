@@ -4,23 +4,14 @@ import { useRoute } from 'vue-router';
 import AddIssuePopup from '/src/components/popups/AddIssuePopup.vue'
 import store from "/store";
 
-
-
-
-
-
-
 const id = ref('');
 const route = useRoute();
 const projectIssue = ref();
 const modalClick = ref(false);
 
-
-
-
-
-
-
+function initialAvatar(value){
+    return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
+}
 
 async function projectLoad() {
     id.value = route.params.id;
@@ -54,40 +45,49 @@ onMounted(() => {
             </div>
         </div>    
         <div class="issue-listing">
-            <table class="table b-table table-striped table-hover">
-                <thead>
-                <tr>
-                   <th>ID</th> 
-                   <th>Task</th> 
-                   <th>Assign to</th>
-                   <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(issues, index) in projectIssue" :key="index">
-                    <td>
-                        {{ issues.id }}
-                    </td>
-                    <td>
-                        <div class="bullet-icon" :style="{'background-color': issues.status_task.color_indicator}">
-                </div>
-                <div class="item-title">
-                    <p>{{ issues.task_name }}</p>
-                </div>
-                    </td>
-                    <td>
-                        {{ issues.assign_to }}
-                    </td>
-                    <td>
-                        <div class="status inline-status-table" :style="{'background-color': issues.status_task.color_indicator}">
-                    {{ issues.status_task.name }}
-                </div>
-                     
-                    </td>
-                </tr>
-            </tbody>
-            </table>          
-
+            <div class="table-responsive">
+                <div class="table-content">
+                    <table class="table b-table table-striped table-hover">
+                        <thead>
+                        <tr>
+                        <th>ID</th> 
+                        <th>Task</th> 
+                        <th>Assign to</th>
+                        <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(issues, index) in projectIssue" :key="index">
+                            <td>
+                                {{ issues.id }}
+                            </td>
+                            <td>
+                                <div class="bullet-icon" :style="{'background-color': issues.status_task.color_indicator}">
+                        </div>
+                        <div class="item-title">
+                            <p>{{ issues.task_name }}</p>
+                        </div>
+                            </td>
+                            <td>
+                                <div v-if="issues.profiles" class="profile-table">
+                                    <img class="character-option-icon" :src="issues.profiles.avatar_url === null ? initialAvatar(issues.profiles.username) : issues.profiles.avatar_url">
+                                    <p>{{ issues.profiles.username }}</p>
+                                </div>
+                                <div v-if="!issues.profiles">
+                                    Not Assign
+                                </div>                        
+                            </td>
+                            <td>
+                                <div class="status inline-status-table" :style="{'background-color': issues.status_task.color_indicator}">
+                            {{ issues.status_task.name }}
+                        </div>
+                            
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>      
+                </div>    
+            </div>
 
         </div>  
         <AddIssuePopup :popup="modalClick" @close="modalClick = false"></AddIssuePopup>

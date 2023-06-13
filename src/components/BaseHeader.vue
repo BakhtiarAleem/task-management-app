@@ -4,6 +4,11 @@ import BaseLogo from '/src/components/BaseLogo.vue'
 import { useRouter } from 'vue-router';
 import store from "/store";
 
+
+function initialAvatar(value){
+    return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
+}
+
 const props = defineProps({
     navigations: Array,
     addClass: String
@@ -14,6 +19,7 @@ const addClassClick = ref(false);
 const user = computed(() => store?.state?.user || false);
 const username = computed(() => store?.state?.profile?.username || 'Anyonomous');
 const role = computed(() => store?.state?.profile?.role || '');
+const profileImage = computed(() => store?.state?.profile?.avatar_url ? store?.state?.profile?.avatar_url : initialAvatar(username.value));
 const router = useRouter();
 
 function clickAway() {
@@ -77,7 +83,7 @@ async function logOut() {
                                             class="user-avatar  rounded-circle mr-2"
                                         >
                                             <img
-                                                src="/src/assets/images/dummy/team-members/image3.png"
+                                                :src="profileImage"
                                             />
                                         </span>
                                         <span class="user-detail">                                         

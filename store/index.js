@@ -164,7 +164,7 @@ export default createStore({
     async projectIssues ({ commit }, value) {   
       let projectTypes = await supabase
          .from('tasks')
-         .select('*, status_task ( id, name, color_indicator )')
+         .select('*, status_task ( id, name, color_indicator ), profiles ( id, username, avatar_url, role )')
          .eq('project_id', value)
          return projectTypes.data   
     },
@@ -193,6 +193,27 @@ export default createStore({
       .from('status_task').select('*')
       this.state.taskStatus = taskStatus.data 
     },
+
+    async userProfile ({ commit }, value) {   
+      let profile = await supabase
+         .from('profiles')
+         .select('*')
+         .neq('id', this.state?.profile?.id)
+         console.log(profile.data)
+         return profile.data   
+    },
+
+
+    async addIssue ({ commit }, value) {   
+      let tasks = await supabase.from('tasks')
+      .insert([
+        { project_id: value.project_id, task_name: value.task_name, task_description: value.task_description, task_status_id: value.task_status_id, assign_to: value.assign_to },
+      ])
+         console.log(tasks.data)
+         return tasks.data   
+    },
+
+
 
     async logOut({ commit }) {
       await localStorage.removeItem("token");
