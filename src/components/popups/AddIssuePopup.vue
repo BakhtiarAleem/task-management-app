@@ -156,6 +156,8 @@ const emit = defineEmits(['close','reLoad'])
 </template>
 <style>
 .modal-content-area .ql-editor {
-    min-height: 150px;
+    min-height: auto;
+    max-height: 150px;
+    overflow: auto;
 }
 </style>
