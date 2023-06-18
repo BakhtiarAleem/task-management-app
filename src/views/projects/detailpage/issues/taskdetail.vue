@@ -5,9 +5,9 @@ import AddIssuePopup from '/src/components/popups/AddIssuePopup.vue'
 import BlockLoader from '/src/components/BlockLoader.vue'
 import store from "/store";
 
-const id = ref('');
+const taskDetailId = ref({});
 const route = useRoute();
-const projectIssue = ref();
+const issueDetail = ref();
 const modalClick = ref(false);
 const isLoading = ref(true);    
 function initialAvatar(value){
@@ -15,11 +15,14 @@ function initialAvatar(value){
 }
 
 async function issues() {
-    id.value = route.params.id;
+    taskDetailId.value = {
+        projectid: route.params.id,
+        taskid: route.params.taskid,
+    }
     isLoading.value = true
-    await store.dispatch('projectIssues', id.value).then((val) => {
-        projectIssue.value = val   
-       console.log(projectIssue.value)
+    await store.dispatch('taskDetail', taskDetailId.value).then((val) => {
+        issueDetail.value = val[0]
+        console.log(issueDetail.value)
     })
     isLoading.value = false
 }
@@ -38,16 +41,32 @@ onMounted(() => {
 
 <template>
     <div>
+     <BlockLoader class="loader-page-block" v-if="isLoading" />
+    <div v-if="!isLoading">
         <div class="task-left-sidearea">
             <div class="project-detail-page-title">            
-                <h3>Task Name</h3>
+                <h3>{{ issueDetail.task_name }}</h3>
             </div>    
-            <div class="task-description">
-
+            <div class="task-detail">
+                <div class="task-description" v-html="issueDetail.task_description"></div>
+                <div class="task-image-container">
+                    <div v-if="issueDetail.task_image" class="task-image" :style="{'background-image': 'url('+ issueDetail.task_image +')'}">
+                    </div>
+                </div>
+                <div v-if="issueDetail.task_comments.length" class="task-comment">
+                </div>
             </div>
         </div>
         <div class="task-right-sidearea">
-
+            <div class="task-assign">
+                
+            </div>
+            <div class="task-complete-data">
+                <div class="form-group">
+                    <input type="date" class="form-control" />
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </template>

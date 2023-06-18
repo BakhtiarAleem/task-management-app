@@ -159,19 +159,4 @@ router.afterEach((to, from) => {
   store.commit('setLoading', false);
 });
 
-
-// router.afterEach((to, from, next) => {
-//   // get current user info
-//   const currentUser = localStorage.getItem('token');  
-//   const requiresAuth = to.meta.requiresAuth
-//   console.log(currentUser)
-//   console.log(to.meta.requiresAuth)
-//   if(requiresAuth && currentUser === 'null') {
-//     router.push('/login/')
-//   }
-//   else {
-//     next()
-//   }
-// })
-
 export default router

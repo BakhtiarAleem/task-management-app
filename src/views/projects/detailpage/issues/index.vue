@@ -19,7 +19,6 @@ async function issues() {
   isLoading.value = true;
   await store.dispatch("projectIssues", id.value).then((val) => {
     projectIssue.value = val;
-    console.log(projectIssue.value);
   });
   isLoading.value = false;
 }

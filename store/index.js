@@ -218,7 +218,6 @@ export default createStore({
         let projectImageUrl = supabase.storage
           .from("task")
           .getPublicUrl(dataImage);
-        console.log(projectImageUrl.data.publicUrl);
         let orginiation = await supabase.from("project").insert([
           {
             name: value.name,
@@ -278,7 +277,6 @@ export default createStore({
         .from("profiles")
         .select("*")
         .neq("id", this.state?.profile?.id);
-      console.log(profile.data);
       return profile.data;
     },
 
@@ -290,7 +288,6 @@ export default createStore({
         let projectImageUrl = supabase.storage
           .from("task")
           .getPublicUrl(projectimage.data.path);
-        console.log(projectImageUrl.data.publicUrl);
         let tasks = await supabase.from("tasks").insert([
           {
             project_id: value.project_id,
@@ -301,7 +298,6 @@ export default createStore({
             task_image: projectImageUrl.data.publicUrl,
           },
         ]);
-        console.log(tasks.data);
         return tasks.data;
       }
       if (!value.uploadImage) {
@@ -314,11 +310,19 @@ export default createStore({
             assign_to: value.assign_to,
           },
         ]);
-        console.log(tasks.data);
         return tasks.data;
       }
     },
-
+    async taskDetail({ commit }, value) {
+		let taskDetail = await supabase
+		  .from("tasks")
+		  .select(
+			"*, status_task ( id, name, color_indicator ), profiles ( id, username, avatar_url, role ), task_comments (comment, image, created_at, commentBy(username,full_name,avatar_url,role))"
+		  )
+		  .eq("project_id", value.projectid)
+		  .eq("id", value.taskid);
+		return taskDetail.data;
+	},
     async logOut({ commit }) {
       await localStorage.removeItem("token");
       await localStorage.removeItem("profile");

@@ -57,6 +57,28 @@
             position: relative;
             top: 0;
         }
+        .task-left-sidearea{
+            width: calc(100% - 290px);
+            display: inline-block;
+            margin-right: 10px;    
+            .project-detail-page-title{
+                margin-bottom: 20px;
+            }
+            .task-detail{
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+            }
+        }
+        .task-right-sidearea{
+            display: inline-block;
+            width: 280px;
+            vertical-align: top;
+            background-color: #fff;
+            height: calc(100vh - 100px);
+            padding: 20px 20px;
+            border-radius: 8px;
+        }
     }
     .table-responsive .table-content {
         @include mobile {
