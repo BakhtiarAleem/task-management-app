@@ -58,7 +58,7 @@ import store from "/store";
 
             const authToken = computed(() => store.getters.token)
 
-async function orginization() {
+async function projects() {
     if(authToken.value != 'null'){
         isLoading.value = true
         await store.dispatch('project').then((value) => {
@@ -74,7 +74,7 @@ async function orginization() {
 
 
 onMounted(() => {
-    orginization()
+    projects()
 })
 
 
@@ -146,7 +146,7 @@ onMounted(() => {
                 </CardBlock>
             </div>
         </div>
-        <addProjectPopup :popup="modalClick" @close="modalClick = false"></addProjectPopup>
+        <addProjectPopup :popup="modalClick" @close="modalClick = false" @reload="projects"></addProjectPopup>
         <!-- <actionpopup
             title="Archive"
             content="Are you sure you want to archive this organization?"

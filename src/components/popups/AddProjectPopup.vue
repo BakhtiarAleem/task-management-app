@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
 import store from "/store";
+import BaseLoader from '/src/components/BaseLoader.vue'
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const optionsSelect = ref([
@@ -9,6 +10,7 @@ const optionsSelect = ref([
         text: 'Select Projects diagnostics category',
     },
 ]);
+const isLoading = ref(false);
 const name = ref();
 const category = ref(optionsSelect[0]?.name ? optionsSelect[0].name : null);
 const description = ref();
@@ -30,17 +32,18 @@ async function callOrginizationType() {
 
 async function submitForm(val) {
     val.preventDefault();    
+    isLoading.value = true;
     const data = {
         name: name.value,
         description: description.value,
         type: category.value,
         uploadImage: uploadImage.value,
     }
-    await store.dispatch('addOrginization', data).then(() => {
-        store.dispatch('project')
+    await store.dispatch('addProject', data).then(() => {
         emit('close', false)
-        router.go(0)
+        emit('reload')
     })
+    isLoading.value = false;
 }
 
 
@@ -65,7 +68,7 @@ onMounted(() => {
     callOrginizationType()
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close','reLoad'])
 
 </script>
 
@@ -121,7 +124,7 @@ const emit = defineEmits(['close'])
             <div class="modal-footer">
                 <button @click="emit('close', false)" class="btn btn-danger">Cancel</button>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" :class="isLoading ? 'disabled' : ''" class="btn btn-primary">Submit<BaseLoader/></button>
             </div>
         </form>
         </div>

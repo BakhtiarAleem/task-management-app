@@ -2,9 +2,11 @@
 import BaseMultiSelect from '/src/components/BaseMultiSelect.vue'
 import { ref, onMounted, computed, watch } from 'vue'
 import BaseEditor from '/src/components/BaseEditor.vue'
+import BaseLoader from '/src/components/BaseLoader.vue'
 import store from "/store";
 import { useRouter } from 'vue-router';
 const router = useRouter();
+const isLoading = ref(false);
 const name = ref();
 const description = ref();
 
@@ -20,6 +22,7 @@ const taskStatusSelected = ref(taskStatus[0]?.name ? taskStatus[0].name : null);
 
 async function submitForm(val) {
     val.preventDefault();    
+    isLoading.value = true;
     await store.dispatch('addIssue',{
         project_id: store.getters.projectSelected,
         task_name: name.value,
@@ -28,8 +31,10 @@ async function submitForm(val) {
         uploadImage: uploadImage.value,
         assign_to: selectedProfile.value,
   }).then((e) => {        
-     console.log(e)
     }) 
+    emit('close', false)
+    emit('reload')
+    isLoading.value = false;
 }
 
 function initialAvatar(value){
@@ -81,7 +86,7 @@ onMounted(() => {
     profile();
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close','reLoad'])
 
 </script>
 
@@ -141,7 +146,7 @@ const emit = defineEmits(['close'])
             <div class="modal-footer">
                 <button @click="emit('close', false)" class="btn btn-danger">Cancel</button>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" :class="isLoading ? 'disabled' : ''" class="btn btn-primary">Submit<BaseLoader/></button>
             </div>
         </form>
         </div>

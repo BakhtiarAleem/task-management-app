@@ -208,7 +208,7 @@ export default createStore({
       return projectTypes.data;
     },
 
-    async addOrginization({ commit }, value) {
+    async addProject({ commit }, value) {
       if (value.uploadImage) {
         const userId = this.state?.user?.id || this.state?.user?.sub;
         let projectimage = await supabase.storage

@@ -5,7 +5,7 @@ import BaseHeader from '/src/components/BaseHeader.vue'
 const navigationData = ref([
                 {
                     icon: 'icon-buildings',
-                    name: 'Organizations',
+                    name: 'Projects',
                     link: '/projects',
                 },
                 {

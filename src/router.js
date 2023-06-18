@@ -92,11 +92,21 @@ const routes = [
       {
         name: 'projects-detail-issues',
         path: '/projects/:id/issues/',
-        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/issues.vue'),
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/issues/index.vue'),
         meta:{    
           requiresAuth: true,    
           detailPage: true,
           title:'Issues | Project Detail | Task Issues',
+        }, 
+      },
+      {
+        name: 'projects-detail-issues-content',
+        path: '/projects/:id/issues/:taskid',
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/issues/taskdetail.vue'),
+        meta:{    
+          requiresAuth: true,    
+          detailPage: true,
+          title:'TaskID | Issues | Project Detail | Task Issues',
         }, 
       },
       {
