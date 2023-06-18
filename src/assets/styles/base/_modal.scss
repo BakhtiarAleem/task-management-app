@@ -6,6 +6,12 @@
     .modal-dialog {
         transition: 0.3s ease-in-out;
         margin: 4rem auto;
+        &.md {
+            max-width: 500px;
+        }
+        &.lg {
+            max-width: 750px;
+        }
         @include mobile {
             margin: 0;
             max-width: 100%;

@@ -47,7 +47,8 @@ async function submitForm(val) {
 
 
 function imageUpload(event) {
-    uploadImage.value = event.target.files[0]
+    uploadImage.value = event.target.files[0];
+    uploadPlaceholderImage.value = URL.createObjectURL(uploadImage.value);
 }
 
 const props = defineProps({

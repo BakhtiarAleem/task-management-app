@@ -396,6 +396,22 @@ img[lazy="loading"] {
     border-radius: 10px;
     margin-right: 8px;
 }
+.sign-in-google {
+    position: relative;
+    top: -13px;
+    &.comming-soon{
+        .btn{
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        h4 {
+            position: absolute;
+            right: 0;
+            top: -14px;
+            font-size: 12px;
+        }
+    }
+}
 
 @keyframes logokeyframe {
     0%  {    

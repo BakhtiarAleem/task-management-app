@@ -10,9 +10,10 @@ const description = ref();
 
 const authToken = computed(() => store.getters.token)
 const taskStatus = computed(() => store.getters.taskStatus)
-
+const uploadImage = ref();
 const profileList = ref([]);
 const selectedProfile = ref();
+const uploadPlaceholderImage = ref('/company-placeholder.png');
 const taskStatusSelected = ref(taskStatus[0]?.name ? taskStatus[0].name : null);
 
 
@@ -24,6 +25,7 @@ async function submitForm(val) {
         task_name: name.value,
         task_description: description.value,
         task_status_id: taskStatusSelected.value,
+        uploadImage: uploadImage.value,
         assign_to: selectedProfile.value,
   }).then((e) => {        
      console.log(e)
@@ -43,6 +45,11 @@ async function profile() {
     })
 }
 
+
+function imageUpload(event) {
+    uploadImage.value = event.target.files[0];
+    uploadPlaceholderImage.value = URL.createObjectURL(uploadImage.value);
+}
 
 async function taskStatusFunction() {
   if(authToken){
@@ -83,7 +90,7 @@ const emit = defineEmits(['close'])
 
 <template>
 <div class="modal fade" :class="popup ? 'show' : ''" tabindex="-1">
-  <div class="modal-dialog md">
+  <div class="modal-dialog lg">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Add Issue</h5>
@@ -101,7 +108,20 @@ const emit = defineEmits(['close'])
                         <label>Task Description</label>
                         <BaseEditor @value="taskDescription" />                    
                     </div>
-
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <label class="custom-file-label" for="inputGroupFile03">Upload Task Image</label>
+                                <div class="custom-file">
+                                    <input type="file" @change="imageUpload" class="custom-file-input form-control" id="inputGroupFile03">                           
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="custom-image" :style="{'background-image': 'url('+ uploadPlaceholderImage +')'}">                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Task Status</label>
                         <select v-model="taskStatusSelected" class="custom-select" required>  
@@ -112,24 +132,8 @@ const emit = defineEmits(['close'])
 
                     <div class="form-group">
                         <label>Assign Task To</label>
-                        <!-- <Multiselect v-model="assignTaskValue" :options="assignTaskOption"></Multiselect>
-                        <select v-model="taskStatusSelected" class="custom-select">  
-                            <option disabled value="null">Select Users</option>
-                            <option v-for="(option, index) in taskStatus" :key="index" :value="option.id" class="text-capitilize">{{ option.name }}</option>
-                        </select> -->
                         <BaseMultiSelect :assignTaskOption="profileList" @value="assignTaskTo" />
-                    </div>
-                    
-                    <!-- <div class="form-group">
-                        <label>Short bio</label>
-                        <input type="text" v-model="description" class="form-control" placeholder="Write short description about organization" />
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <label class="custom-file-label" for="inputGroupFile03">Upload Image</label>
-                        <div class="custom-file">
-                            <input type="file" @change="imageUpload" class="custom-file-input" id="inputGroupFile03">                           
-                        </div>
-                    </div> -->
+                    </div>                                       
                 
                 
                 </div>
@@ -146,9 +150,6 @@ const emit = defineEmits(['close'])
 
 </template>
 <style>
-.modal.fade.show .modal-dialog.md {
-    max-width: 500px;
-}
 .modal-content-area .ql-editor {
     min-height: 150px;
 }

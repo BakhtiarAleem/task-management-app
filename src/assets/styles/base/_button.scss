@@ -1,92 +1,114 @@
 .btn {
-    font-family: $button-family;
-    font-size: $button-size;
-    padding: $button-padding;
-    min-width: 120px;
-    position: relative;
-    &.disabled {
-        color: transparent !important;
-        background-color: #ccc;
-        border-color: #ccc;
-        .loader {
-            display: block;
-        }
+  font-family: $button-family;
+  font-size: $button-size;
+  padding: $button-padding;
+  min-width: 120px;
+  position: relative;
+  &.disabled {
+    color: transparent !important;
+    background-color: #ccc;
+    border-color: #ccc;
+    .loader {
+      display: block;
     }
-    &:focus {
-        box-shadow: none !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+  &.btn-link {
+    font-family: $font_regular;
+    text-decoration: underline;
+  }
+  i {
+    @include font-size(0.5);
+    margin-right: 4px;
+  }
+  &.btn-primary {
+    color: #fff;
+  }
+  &.btn-google {
+    border-radius: 6px;
+    background-color: #4081ec;
+    color: #fff;
+    padding: 0px;
+    .google-logo {
+        display: inline-block;
+        background-color: #fff;
+        vertical-align: top;
+        padding: 6px 5px;
+        margin-left: -1px;
+        margin-top: -1px;
+        margin-bottom: -3px;
+      img {
+        width: 22px;
+      }
     }
-    &.btn-link {
-        font-family: $font_regular;
-        text-decoration:underline;
+    span {
+        display: inline-block;
+        padding: 5px 9px;
     }
-    i{
-        @include font-size(0.5);
-        margin-right: 4px;
-    }
-    &.btn-primary {
-        color: #fff;
-    }
+  }
 }
-.btn-secondary{
-    &:active{
-        background: $pink !important;
-        border-color: $pink !important;
-    }
+.btn-secondary {
+  &:active {
+    background: $pink !important;
+    border-color: $pink !important;
+  }
 }
 
 .btn-outline-primary {
-    border-radius: 7px;
-    color: $label-color;
-    border-color: #ccc;
-    min-width: 90px;
-    cursor: pointer;
-    &.active,
-    &:hover {
-        color: $primary !important;
-        background-color: #fff !important;
-        border-color: #ccc !important;
-    }
-    &.focus {
-        box-shadow: 0 0 0 0.2rem rgba(204, 204, 204, 0.5) !important;
-    }
+  border-radius: 7px;
+  color: $label-color;
+  border-color: #ccc;
+  min-width: 90px;
+  cursor: pointer;
+  &.active,
+  &:hover {
+    color: $primary !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+  }
+  &.focus {
+    box-shadow: 0 0 0 0.2rem rgba(204, 204, 204, 0.5) !important;
+  }
 }
 
 .btn {
-    &.btn-xl {
-        min-width: 160px;
-        text-decoration: none;
-    }
+  &.btn-xl {
+    min-width: 160px;
+    text-decoration: none;
+  }
 
-    &.btn-pink {
-        background-color: $pink !important;
-        border-color: $pink !important;
-        min-width: 0;
-        text-decoration: none;
-    }
-    &.disable {
-        background-color: $second-button-color;
-        border-color: $second-button-color;
-        pointer-events: none;
-    }
-    &.default {
-        background-color: $second-button-color;
-        border-color: $second-button-color;
-        pointer-events: none;
-        opacity:1;
-        color: #fff;
-    }
+  &.btn-pink {
+    background-color: $pink !important;
+    border-color: $pink !important;
+    min-width: 0;
+    text-decoration: none;
+  }
+  &.disable {
+    background-color: $second-button-color;
+    border-color: $second-button-color;
+    pointer-events: none;
+  }
+  &.default {
+    background-color: $second-button-color;
+    border-color: $second-button-color;
+    pointer-events: none;
+    opacity: 1;
+    color: #fff;
+  }
 }
 .btn[disabled] {
-    span {
-        opacity: 0;
-    }
-    .loader {
-        display: block;
-    }
+  span {
+    opacity: 0;
+  }
+  .loader {
+    display: block;
+  }
 }
-.btn-group-toggle{
-    .btn{
-        min-width: 80px;
-        padding: $toggle-button-padding;
-    }
+.btn-group-toggle {
+  .btn {
+    min-width: 80px;
+    padding: $toggle-button-padding;
+  }
 }

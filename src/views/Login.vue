@@ -21,6 +21,18 @@ async function handleSignin() {
   isLoading.value = false;
 })
 }
+
+async function googleLogin() {
+  isLoading.value = true;
+  store.dispatch('googleLogin').then((e) => {
+  if(e === 'success'){
+    router.push('/projects')
+  }
+  isLoading.value = false;
+})
+}
+
+
 </script>
 
 <template>
@@ -28,14 +40,17 @@ async function handleSignin() {
     <h3 class="welcome-heading">Sign in to your account</h3>
     <div class="card">
       <div class="card-body auth-card-body">
+        <div class="sign-in-google comming-soon">
+          <button type="button" @click="googleLogin" class="btn btn-google right-side-btn"><div class="google-logo"><img src="/google-logo.png" /></div><span>Connect with Google</span></button>
+        </div>
         <form @submit.prevent="handleSignin">
           <div class="form-group">
             <label for="email">Email</label>
-            <input class="form-control" id="email" type="email" v-model="email" />
+            <input class="form-control" id="email" type="email" required v-model="email" />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input class="form-control" id="password" type="password" v-model="password" />
+            <input class="form-control" id="password" type="password" required v-model="password" />
           </div>
           <div>
             <button class="btn btn-primary" :class="isLoading ? 'disabled' : ''" type="submit">
