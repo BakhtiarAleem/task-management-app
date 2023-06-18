@@ -49,6 +49,12 @@ $Desktop1440: 1500px;
     }
 }
 
+@mixin MinDesktop1380 {
+    @media (min-width: #{$Desktop1380}) {
+        @content;
+    }
+}
+
 @mixin Desktop1440 {
     @media (max-width: #{$Desktop1440}) {
         @content;

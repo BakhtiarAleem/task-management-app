@@ -17,6 +17,11 @@ async function requestDemoSubmit() {
   isLoading.value = true;
   store.dispatch('requestDemo',requestDemo.value).then((e) => {
   isLoading.value = false;
+  requestDemo.value.fullname = null
+  requestDemo.value.phoneno = null
+  requestDemo.value.email = null
+  requestDemo.value.subject = null
+  requestDemo.value.message = null
 })
 }
 

@@ -46,6 +46,9 @@ hr {
         max-width: none;
         padding: 0px 40px;
     }
+    @include MinDesktop1380 {
+        max-width: 95%;
+    }
     @include windowS {
         // max-width: 1140px;
         // padding: 0px 75px;
@@ -346,7 +349,11 @@ header.header .fixed-header .logo {
     margin-top: -10px;
     @include mobile {
         margin-top: -4px;
-        width: 140px;
+        width: auto;
+        img{
+            width: auto;
+            height: 40px !important;
+        }
     }
 }
 
@@ -432,6 +439,10 @@ table.table.b-table{
             }
         }
     }
+}
+header.header .fixed-header .logo img {
+    width: auto;
+    height: 57px;
 }
 @keyframes logokeyframe {
     0%  {    
