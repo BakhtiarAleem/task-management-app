@@ -1,14 +1,14 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
-import AddIssuePopup from '/src/components/popups/AddIssuePopup.vue'
 import BlockLoader from '/src/components/BlockLoader.vue'
+import VueEasyLightbox from 'vue-easy-lightbox'
 import store from "/store";
 
 const taskDetailId = ref({});
 const route = useRoute();
 const issueDetail = ref();
-const modalClick = ref(false);
+const visible = ref(false);
 const isLoading = ref(true);    
 function initialAvatar(value){
     return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
@@ -48,13 +48,21 @@ onMounted(() => {
                 <h3>{{ issueDetail.task_name }}</h3>
             </div>    
             <div class="task-detail">
-                <div class="task-description" v-html="issueDetail.task_description"></div>
-                <div class="task-image-container">
-                    <div v-if="issueDetail.task_image" class="task-image" :style="{'background-image': 'url('+ issueDetail.task_image +')'}">
+                <div class="task-description" v-html="issueDetail.task_description"></div>            
+            </div>
+            <div class="task-image-container">
+                    <div v-if="issueDetail.task_image" @click="visible = !visible" class="task-image" :style="{'background-image': 'url('+ issueDetail.task_image +')'}">
                     </div>
-                </div>
-                <div v-if="issueDetail.task_comments.length" class="task-comment">
-                </div>
+                        <vue-easy-lightbox
+                            escDisabled
+                            moveDisabled
+                            :visible="visible"
+                            :imgs="issueDetail.task_image"
+                            :index="index"
+                            @hide="visible = false"
+                        ></vue-easy-lightbox>
+                </div>    
+            <div v-if="issueDetail.task_comments.length" class="task-comment">
             </div>
         </div>
         <div class="task-right-sidearea">

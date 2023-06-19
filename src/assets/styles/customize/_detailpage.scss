@@ -79,6 +79,19 @@
             padding: 20px 20px;
             border-radius: 8px;
         }
+        .task-image-container{
+            margin-top: 15px;
+            .task-image {
+                width: 130px;
+                height: 130px;
+                display: inline-block;
+                background-size: cover;
+                cursor: pointer;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                background-color: #fff;
+            }
+        }
     }
     .table-responsive .table-content {
         @include mobile {
@@ -286,5 +299,15 @@
 
     @include mobile {
         display: flex;
+    }
+}
+.vel-modal{
+    .vel-img-wrapper {
+        background-color: #fff;
+        opacity: 1;
+        box-shadow: none;
+        .vel-img {
+            background-color: transparent;
+        }
     }
 }
