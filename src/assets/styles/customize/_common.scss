@@ -420,6 +420,15 @@ img[lazy="loading"] {
     }
 }
 table.table.b-table{
+    thead{
+        tr{
+            background-color: #ddd;
+            th{
+                color: #111;
+                background-color: transparent;
+            }
+        }
+    }
     tr {
         position: relative;
         .select-project {

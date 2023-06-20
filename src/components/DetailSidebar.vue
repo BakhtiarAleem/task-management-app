@@ -6,15 +6,6 @@ const props = defineProps({
   type: String,
   mobilebar: Boolean,
 });
-function imageUrl(url) {
-  // return ''+ import.meta.env.VITE_SUPABASE_URL + '/storage/v1/object/public/project/' + url
-  return (
-    "" +
-    import.meta.env.VITE_SUPABASE_URL +
-    "/storage/v1/object/public/project/" +
-    props.image
-  );
-}
 import { useRoute, useRouter } from "vue-router";
 import store from "../../store";
 const route = useRoute();
@@ -35,7 +26,7 @@ onMounted(() => {
       <div class="project-selected">
         <div class="project-logo">
           <div class="image-section">
-            <img v-if="image" :src="imageUrl(image)" />
+            <img v-if="image" :src="image" />
           </div>
         </div>
         <div class="project-details">

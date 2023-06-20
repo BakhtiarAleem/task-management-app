@@ -14,6 +14,7 @@ export default createStore({
     projectSelected: null,
     taskStatus: null,
     loading: true,
+    projectDetail: null,
   },
   mutations: {
     loginUser(state, value) {
@@ -30,6 +31,9 @@ export default createStore({
     },
     setLoading(state, value) {
       state.loading = value;
+    },
+    setProjectDetail(state, value) {
+      state.projectDetail = value;
     },
   },
   getters: {
@@ -323,6 +327,23 @@ export default createStore({
 		  .eq("id", value.taskid);
 		return taskDetail.data;
 	},
+  async addComment({ commit }, value) {
+    const userId = this.state?.user?.id || this.state?.user?.sub;
+    let comment = await supabase.from("task_comments").insert([
+      {
+        comment: value.comment,
+        commentBy: userId,
+        taskid: value.taskid,
+      },
+    ]);
+    console.log()
+    if(comment.status === 201){
+      toast.success("Comment Added");
+    }
+    else{
+      toast.error(comment.error);
+    }
+  },
     async logOut({ commit }) {
       await localStorage.removeItem("token");
       await localStorage.removeItem("profile");

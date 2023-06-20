@@ -14,9 +14,9 @@ async function projectLoad() {
     id.value = route.params.id;
     isLoading.value = true
     await store.dispatch('projectDetail', id.value).then((val) => {
-        projectSelected.value = val
+        projectSelected.value = val[0]
+        store.state.projectDetail = val[0]
     })
-    projectSelected.value = projectSelected.value[0]
     isLoading.value = false
 }
 

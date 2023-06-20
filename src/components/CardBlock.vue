@@ -28,10 +28,6 @@ const limitationList = ref(5);
 const showDescription = ref(false);
 
 
-function imageUrl(url) {
-    return ''+ import.meta.env.VITE_SUPABASE_URL + '/storage/v1/object/public/project/' + url
-}
-
 
 function initialAvatar(value){
     return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
@@ -92,7 +88,7 @@ function initialAvatar(value){
                     >
                         <div class="image-section">
                             <img
-                                :src="imageUrl(mainImage)"/>
+                                :src="mainImage"/>
                         </div>
                     </div>
                     <!--image end -->
