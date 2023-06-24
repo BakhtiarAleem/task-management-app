@@ -229,6 +229,7 @@ export default createStore({
             project_image: projectImageUrl,
             type: value.type,
             project_created: userId,
+            project_status: 1,
           },
         ]);
         let checkOrginization = await supabase
@@ -284,6 +285,33 @@ export default createStore({
       return profile.data;
     },
 
+    async assignuserProfile({ commit }, value) {
+      let assignProfile = await supabase
+        .from("team")
+        .select("*, user_id( id, username, full_name, avatar_url, role )", )
+        .eq("project_id", value)
+        .neq("user_id", this.state?.profile?.id);
+      return assignProfile.data;
+    },
+
+    async teamMembers({ commit }, value) {
+      let teamMembers = await supabase
+        .from("team")
+        .select("*, user_id( id, username, full_name, avatar_url, role )", )
+        .eq("project_id", value)
+      return teamMembers.data;
+    },
+
+    async addMembertoProject({ commit }, value) {
+      let addTeamMember = await supabase
+        .from("team")
+        .select("*, user_id( id, username, full_name, avatar_url, role )", )
+        .neq("project_id", value)
+      return addTeamMember.data;
+    },
+
+
+
     async addIssue({ commit }, value) {
       if (value.uploadImage) {
         let projectimage = await supabase.storage
@@ -336,7 +364,6 @@ export default createStore({
         taskid: value.taskid,
       },
     ]);
-    console.log()
     if(comment.status === 201){
       toast.success("Comment Added");
     }
@@ -344,6 +371,37 @@ export default createStore({
       toast.error(comment.error);
     }
   },
+
+  async changeTaskStatus({ commit }, value) {
+    try {
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({
+          task_status_id: value.statusid
+        })
+        .eq("id", value.taskid);
+      toast.success('Task Status Changed');
+    } catch (error) {
+      toast.error(error);
+    }
+  },
+
+
+  async archiveProject({ commit }, value) {
+    try {
+      const { data, error } = await supabase
+        .from("project")
+        .update({
+          project_status: 2
+        })
+        .eq("id", value);
+      toast.error('Project Archived');
+    } catch (error) {
+      toast.error(error);
+    }
+  },
+
+
     async logOut({ commit }) {
       await localStorage.removeItem("token");
       await localStorage.removeItem("profile");

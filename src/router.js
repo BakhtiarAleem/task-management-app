@@ -100,6 +100,16 @@ const routes = [
         }, 
       },
       {
+        name: 'projects-detail-members',
+        path: '/projects/:id/members/',
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/members.vue'),
+        meta:{    
+          requiresAuth: true,    
+          detailPage: true,
+          title:'Members | Project Detail | Task Issues',
+        }, 
+      },
+      {
         name: 'projects-detail-issues-content',
         path: '/projects/:id/issues/:taskid',
         component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/issues/taskdetail.vue'),

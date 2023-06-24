@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import addProjectPopup from '/src/components/popups/AddProjectPopup.vue'
+import ArchiveProject from '/src/components/popups/ArchiveProject.vue'
 import CardBlock from '/src/components/CardBlock.vue'
 // import actionpopup from '/src/components/popups/ActionPopup.vue'
 import BlockLoader from '/src/components/BlockLoader.vue'
@@ -55,7 +56,9 @@ import store from "/store";
             ]);
 
             const manageCards = ref();
-
+            const archiveProject = ref(false);
+            const archiveProjectStoreId = ref();
+            const archiveProjectStoreName = ref();
             const authToken = computed(() => store.getters.token)
 
 async function projects() {
@@ -71,7 +74,11 @@ async function projects() {
     }
 }
 
-
+function archiveProjectFunction(projectid, projectName) {
+    archiveProjectStoreId.value = projectid
+    archiveProjectStoreName.value = projectName
+    archiveProject.value = true
+}
 
 onMounted(() => {
     projects()
@@ -123,19 +130,26 @@ onMounted(() => {
                         <div>
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <router-link
+                                        :to="{
+                                        name: 'projects-detail-members',
+                                        params: {
+                                            id: manage.id,
+                                        },
+                                        }"
+                                    >
                                         <i class="icon-team"></i>
                                         <span>Team members</span>
-                                    </a>
+                                    </router-link>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="#">
                                         <i class="icon-edit"></i>
                                         Modify
                                     </a>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a href="#">
+                                    <a class="cursor-pointer" @click="archiveProjectFunction(manage.id, manage.name)">
                                         <i class="icon-download"></i>
                                         Archive
                                     </a>
@@ -147,6 +161,7 @@ onMounted(() => {
             </div>
         </div>
         <addProjectPopup :popup="modalClick" @close="modalClick = false" @reload="projects"></addProjectPopup>
+        <ArchiveProject  :popup="archiveProject" :projectid="archiveProjectStoreId" :projectname="archiveProjectStoreName" @close="archiveProject = false" @reload="projects"></ArchiveProject>
         <!-- <actionpopup
             title="Archive"
             content="Are you sure you want to archive this organization?"

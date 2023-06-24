@@ -63,7 +63,7 @@ function initialAvatar(value){
                         <i class="icon-three-dots"></i>
                     </div>
 
-                    <div class="anchor-link">
+                    <div v-if="id" class="anchor-link">
                         <router-link :to="{
                             name: 'projects-detail',
                             params: {

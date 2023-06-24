@@ -8,7 +8,10 @@ import moment from 'moment';
 
 const taskDetailId = ref({});
 const route = useRoute();
+const toggleRightBar = ref(false); 
 const issueDetail = ref();
+const statusModalOpen = ref(false);
+const authToken = computed(() => store.getters.token)
 const visible = ref(false);
 const commentMessage = ref();
 const profile = computed(() => store?.state?.profile || 'Anyonomous');
@@ -21,6 +24,7 @@ function dateTime(value){
     return dateValue
 }
 const projectid = ref(route.params.id);
+const taskStatus = computed(() => store.getters.taskStatus)
 const taskid = ref(route.params.taskid);
 const project = computed(() => store.state.projectDetail)
 async function issues() {
@@ -31,7 +35,6 @@ async function issues() {
     isLoading.value = true
     await store.dispatch('taskDetail', taskDetailId.value).then((val) => {
         issueDetail.value = val[0]
-        console.log(issueDetail.value)
     })
     isLoading.value = false
 }
@@ -46,8 +49,26 @@ async function commenting() {
     })
 }
 
+async function changeStatus(value){
+    let datatask = {
+        statusid: value,
+        taskid: taskid.value,
+    }
+    statusModalOpen.value = false
+    await store.dispatch('changeTaskStatus', datatask).then((val) => {
+        issues()
+    })
+}
+
+async function taskStatusFunction() {
+  if(authToken){
+    await store.dispatch('taskStatus')
+  }
+}
+
 onMounted(() => {
     issues()
+    taskStatusFunction()
 });
 
 </script>
@@ -96,7 +117,7 @@ onMounted(() => {
             </div>
         </div>
         <div class="task-left-sidearea">
-            <div class="project-detail-page-title">            
+            <div class="project-detail-page-title full">            
                 <h3>{{ issueDetail.task_name }}</h3>
             </div>    
             <div class="task-detail">
@@ -151,9 +172,22 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-        <div class="task-right-sidearea">
+        <div @click="toggleRightBar = !toggleRightBar" class="task-right-sec-mobile">
+            <i class="icon-circle-left" />
+        </div>
+        <div :class="toggleRightBar ? 'active' : ''" class="task-right-sidearea">
             <div class="task-assign">
-                
+                <div class="task-status-selected" @click="statusModalOpen = !statusModalOpen" :style="{'background-color': ''+ issueDetail?.status_task?.color_indicator +''}">
+                    {{ issueDetail?.status_task?.name }}
+                    <div class="icon-caret"></div>
+                </div>
+                <div v-if="statusModalOpen" class="task-status-options">
+                    <ul>
+                        <li v-for="(task, index) in taskStatus" :key="index" @click="changeStatus(task.id)">
+                            {{ task.name }}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="task-complete-data">
                 <div class="task-side-action">

@@ -3,6 +3,7 @@ import { ref, onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 import AddIssuePopup from "/src/components/popups/AddIssuePopup.vue";
 import BlockLoader from "/src/components/BlockLoader.vue";
+import NoRecordFound from "/src/components/NoRecordFound.vue";
 import store from "/store";
 
 const id = ref("");
@@ -48,7 +49,7 @@ onMounted(() => {
     <div class="issue-listing">
       <BlockLoader class="loader-page-block" v-if="isLoading" />
       <div v-if="!isLoading" class="table-responsive">
-        <div class="table-content">
+        <div v-if="projectIssue.length" class="table-content">
           <table class="table b-table table-striped table-hover">
             <thead>
               <tr>
@@ -113,6 +114,9 @@ onMounted(() => {
               </tr>
             </tbody>
           </table>
+        </div>
+        <div v-if="!projectIssue.length">
+            <NoRecordFound />
         </div>
       </div>
     </div>

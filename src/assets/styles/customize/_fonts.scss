@@ -61,6 +61,12 @@ $other_font_bold: "LeagueSpartan-Bold";
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-circle-left:before {
+  content: "\ea44";
+}
+.icon-paragraph-left:before {
+  content: "\ea77";
+}
 .icon-phone:before {
   content: "\e942";
 }

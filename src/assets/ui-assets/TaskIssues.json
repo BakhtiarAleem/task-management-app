@@ -1,6 +1,18 @@
 {
   "selection": [
     {
+      "ligatures": "circle-left, left5",
+      "name": "circle-left",
+      "order": 0,
+      "prevSize": 32
+    },
+    {
+      "ligatures": "paragraph-left, wysiwyg25",
+      "name": "paragraph-left",
+      "order": 0,
+      "prevSize": 32
+    },
+    {
       "ligatures": "phone, telephone",
       "name": "phone",
       "order": 0,
@@ -197,11 +209,38 @@
       "width": 60,
       "height": 60
     },
-    "iconsHash": 1861341762
+    "iconsHash": 435774052
   },
   "height": 1024,
   "prevSize": 32,
   "icons": [
+    {
+      "paths": [
+        "M512 1024c282.77 0 512-229.23 512-512s-229.23-512-512-512-512 229.23-512 512 229.23 512 512 512zM512 96c229.75 0 416 186.25 416 416s-186.25 416-416 416-416-186.25-416-416 186.25-416 416-416z",
+        "M669.256 317.256l-90.512-90.512-285.254 285.256 285.256 285.254 90.508-90.508-194.744-194.746z"
+      ],
+      "tags": [
+        "circle-left",
+        "left",
+        "circle-previous",
+        "arrow"
+      ],
+      "defaultCode": 59972,
+      "grid": 16
+    },
+    {
+      "paths": [
+        "M0 64h1024v128h-1024zM0 256h640v128h-640zM0 640h640v128h-640zM0 448h1024v128h-1024zM0 832h1024v128h-1024z"
+      ],
+      "tags": [
+        "paragraph-left",
+        "wysiwyg",
+        "align-left",
+        "left"
+      ],
+      "defaultCode": 60023,
+      "grid": 16
+    },
     {
       "paths": [
         "M704 640c-64 64-64 128-128 128s-128-64-192-128-128-128-128-192 64-64 128-128-128-256-192-256-192 192-192 192c0 128 131.5 387.5 256 512s384 256 512 256c0 0 192-128 192-192s-192-256-256-192z"

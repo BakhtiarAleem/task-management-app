@@ -4,12 +4,12 @@ import { ref, onMounted, computed, watch } from 'vue'
 import BaseEditor from '/src/components/BaseEditor.vue'
 import BaseLoader from '/src/components/BaseLoader.vue'
 import store from "/store";
-import { useRouter } from 'vue-router';
-const router = useRouter();
+import { useRoute } from 'vue-router';
+const route = useRoute();
 const isLoading = ref(false);
 const name = ref();
 const description = ref();
-
+const projectid = ref(route.params.id);
 const authToken = computed(() => store.getters.token)
 const taskStatus = computed(() => store.getters.taskStatus)
 const uploadImage = ref();
@@ -42,10 +42,10 @@ function initialAvatar(value){
 }
 
 async function profile() {
-    await store.dispatch('userProfile').then((e) => {        
+    await store.dispatch('assignuserProfile', projectid.value).then((e) => {      
         for (let i = 0; i < e.length; i++) {
-        let image = e[i].avatar_url === null ? initialAvatar(e[i].username) : e[i].avatar_url
-        profileList.value.push({username: e[i].username, value: e[i].id, icon: image })
+        let image = e[i].user_id.avatar_url === null ? initialAvatar(e[i].user_id.username) : e[i].user_id.avatar_url
+        profileList.value.push({username: e[i].user_id.username, value: e[i].user_id.id, icon: image })
         }
     })
 }
