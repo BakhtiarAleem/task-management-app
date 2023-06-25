@@ -10,7 +10,9 @@ import store from "/store";
 
             const titleBarHeading = ref('Manage Projects');
             const modalClick = ref(false);
-            const isLoading = ref(true);           
+            const isLoading = ref(true);   
+            const projectType = ref(1);             
+            
             const cardMenuLinks = ref([
                 {
                     menuText: 'fdas',
@@ -24,12 +26,12 @@ import store from "/store";
             ]);            
             const optionsFilter = ref([
                 {
-                    text: 'Active',
-                    value: 'active',
+                    name: 'Active',
+                    value: 1,
                 },
                 {
-                    text: 'Archived',
-                    value: 'archived',
+                    name: 'Archived',
+                    value: 2,
                 },
             ]);  
             const menuList = ref([
@@ -92,7 +94,17 @@ onMounted(() => {
 
 <template>
     <div class="col-md-12">
-        <h3 class="main-heading">{{ titleBarHeading }}</h3>
+        <div class="title-row">
+            <h3 class="title-area">{{ titleBarHeading }}</h3>
+            <div class="switchArea">
+                <div class="btn-group-toggle btn-group">
+                    <label v-for="(filter, index) in optionsFilter" :key="index" :class="filter.value === projectType ? 'btn-primary' : 'btn-outline-primary'" class="btn btn-lg">
+                        <input type="radio" :value="filter.value" v-model="projectType" />
+                        <span>{{ filter.name }}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
         <BlockLoader class="loader-page" v-if="isLoading" />
         <div v-if="!isLoading" >
             <div v-if="!manageCards" class="row">
@@ -118,6 +130,7 @@ onMounted(() => {
                 <CardBlock
                     v-for="(manage, index) in manageCards"
                     :key="index"
+                    v-show="manage.project_status === projectType"
                     :id="manage.id"
                     :mainImage="manage.project_image"
                     :mainHeading="manage.name"

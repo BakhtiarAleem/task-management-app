@@ -8,7 +8,7 @@ import store from "/store";
 
 const id = ref("");
 const route = useRoute();
-const projectIssue = ref();
+const projectIssue = ref([]);
 const modalClick = ref(false);
 const isLoading = ref(true);
 function initialAvatar(value) {
@@ -49,7 +49,7 @@ onMounted(() => {
     <div class="issue-listing">
       <BlockLoader class="loader-page-block" v-if="isLoading" />
       <div v-if="!isLoading" class="table-responsive">
-        <div v-if="projectIssue.length" class="table-content">
+        <div v-if="projectIssue?.length" class="table-content">
           <table class="table b-table table-striped table-hover">
             <thead>
               <tr>
@@ -115,7 +115,7 @@ onMounted(() => {
             </tbody>
           </table>
         </div>
-        <div v-if="!projectIssue.length">
+        <div v-if="!projectIssue?.length">
             <NoRecordFound />
         </div>
       </div>

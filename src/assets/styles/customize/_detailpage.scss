@@ -106,6 +106,8 @@
                             display: inline-block;
                             vertical-align: text-top;
                             margin-right: 4px;
+                            border-radius: 4px;
+                            overflow: hidden;
                         }
 
                         .project-name {
@@ -131,7 +133,7 @@
         }
 
         .task-left-sidearea {
-            width: calc(100% - 340px);
+            width: calc(100% - 360px);
             display: inline-block;
             margin-right: 10px;
 
@@ -153,7 +155,7 @@
 
         .task-right-sidearea {
             display: inline-block;
-            width: 330px;
+            width: 350px;
             vertical-align: top;
             background-color: #fff;
             height: calc(100vh - 100px);
@@ -214,7 +216,51 @@
             }  
             .task-side-action {
                 border: 1px solid #ddd;
-                padding: 10px;
+                padding: 10px 0px;
+                .main-side-heading{
+                    padding: 0px 10px;
+                    border-bottom: 1px solid #ddd;
+                    h4{
+                        margin-bottom: 0px;
+                        font-size: 14px;
+                        color: $pink;
+                    }
+                }
+                .task-side-action-content {
+                    padding: 10px 10px;
+                    .field-data{
+                        margin-bottom: 10px;
+                        .form-group{
+                            margin-bottom: 0px;
+                        }
+                        .field-label{
+                            width: 38%;
+                            display: inline-block;
+                            vertical-align: top;
+                            padding-top: 7px;
+                        }
+                        .field-action{
+                            width: calc(100% - 38%);
+                            display: inline-block;
+                            .profile-image {
+                                width: 32px;
+                                border-radius: 32px;
+                                display: inline-block;
+                                overflow: hidden;
+                            }
+                            .profile-label{
+                                width: calc(100% - 32px);
+                                display: inline-block;
+                                vertical-align: top;
+                                padding-top: 7px;
+                                padding-left: 10px;
+                            }
+                        }
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
             }
             @include mobile{
                 height: calc(100vh - 45px);

@@ -206,7 +206,7 @@ export default createStore({
       let projectTypes = await supabase
         .from("tasks")
         .select(
-          "*, status_task ( id, name, color_indicator ), profiles ( id, username, avatar_url, role )"
+          "*, status_task ( id, name, color_indicator ), profiles!tasks_assign_to_fkey ( id, username, avatar_url, role )"
         )
         .eq("project_id", value);
       return projectTypes.data;
@@ -349,12 +349,21 @@ export default createStore({
 		let taskDetail = await supabase
 		  .from("tasks")
 		  .select(
-			"*, status_task ( id, name, color_indicator ), profiles ( id, username, avatar_url, role ), task_comments (comment, image, created_at, commentBy(username,full_name,avatar_url,role))"
+			"*, status_task ( id, name, color_indicator ), profiles!tasks_assign_to_fkey ( id, username, avatar_url, role ), task_comments (comment, image, created_at, commentBy(username,full_name,avatar_url,role))"
 		  )
 		  .eq("project_id", value.projectid)
 		  .eq("id", value.taskid);
 		return taskDetail.data;
 	},
+  async getProfileDetail({ commit }, value) {
+		let profileDetail = await supabase
+		  .from("profiles")
+		  .select(
+			"*"
+		  )
+		  .eq("id", value)
+		return profileDetail.data;
+	},  
   async addComment({ commit }, value) {
     const userId = this.state?.user?.id || this.state?.user?.sub;
     let comment = await supabase.from("task_comments").insert([

@@ -13,6 +13,7 @@ const issueDetail = ref();
 const statusModalOpen = ref(false);
 const authToken = computed(() => store.getters.token)
 const visible = ref(false);
+const reportedBy = ref();
 const commentMessage = ref();
 const profile = computed(() => store?.state?.profile || 'Anyonomous');
 const isLoading = ref(true);    
@@ -23,10 +24,17 @@ function dateTime(value){
     let dateValue = moment(value, "YYYYMMDD").fromNow()
     return dateValue
 }
+async function reportedByFunction(reportData) {
+    await store.dispatch('getProfileDetail', reportData).then((val) => {
+        reportedBy.value = val[0]
+    })
+} 
 const projectid = ref(route.params.id);
 const taskStatus = computed(() => store.getters.taskStatus)
 const taskid = ref(route.params.taskid);
 const project = computed(() => store.state.projectDetail)
+const currentProfile = computed(() => store?.state?.profile || 'Anyonomous');
+
 async function issues() {
     taskDetailId.value = {
         projectid: projectid.value,
@@ -35,6 +43,7 @@ async function issues() {
     isLoading.value = true
     await store.dispatch('taskDetail', taskDetailId.value).then((val) => {
         issueDetail.value = val[0]
+        reportedByFunction(issueDetail.value.reporter)
     })
     isLoading.value = false
 }
@@ -142,9 +151,9 @@ onMounted(() => {
             <div class="task-comment">
                 <label class="task-detail-label">Comments:</label>
                 <div class="task-comment-on send-comment">
-                    <div v-tooltip="profile?.full_name" class="commenter-id">
+                    <div v-tooltip="currentProfile?.full_name" class="commenter-id">
                         <div class="profile-image">
-                            <img :src="profile?.avatar_url != null ? profile?.avatar_url : initialAvatar(profile?.full_name)" />
+                            <img :src="currentProfile?.avatar_url != null ? currentProfile?.avatar_url : initialAvatar(currentProfile?.full_name)" />
                         </div>
                     </div>
                     <div class="commenter-message">
@@ -191,8 +200,57 @@ onMounted(() => {
             </div>
             <div class="task-complete-data">
                 <div class="task-side-action">
-                    <div class="form-group">
-                        <input type="date" class="form-control" />
+                    <div class="main-side-heading">
+                        <h4>Details</h4>
+                    </div>
+                    <div class="task-side-action-content">
+
+                        <div class="field-data">
+                            <div class="field-label">
+                                Assignee:
+                            </div>
+                            <div class="field-action">
+                                <div v-tooltip="profile?.full_name" class="commenter-id">
+                                    <div class="profile-image">
+                                        <img :src="profile?.avatar_url != null ? profile?.avatar_url : initialAvatar(profile?.full_name)" />
+                                    </div>
+                                    <div class="profile-label">
+                                        {{ profile?.full_name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-data">
+                            <div class="field-label">
+                                Reporter
+                            </div>
+                            <div class="field-action">
+                                <div v-tooltip="reportedBy?.full_name" class="commenter-id">
+                                    <div class="profile-image">
+                                        <img :src="reportedBy?.avatar_url != null ? reportedBy?.avatar_url : initialAvatar(reportedBy?.full_name)" />
+                                    </div>
+                                    <div class="profile-label">
+                                        {{ reportedBy?.full_name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="field-data">
+                            <div class="field-label">
+                                Task End Data
+                            </div>
+                            <div class="field-action">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" />
+                                </div>                                
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
