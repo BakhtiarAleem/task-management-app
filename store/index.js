@@ -409,8 +409,14 @@ export default createStore({
       toast.error(error);
     }
   },
-
-
+  async statusTask({ commit }, value) {
+    let statusTask = await supabase
+      .from("status_task")
+      .select(
+        "*"
+      );
+    return statusTask.data;
+  },
     async logOut({ commit }) {
       await localStorage.removeItem("token");
       await localStorage.removeItem("profile");

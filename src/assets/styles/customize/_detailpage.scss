@@ -576,6 +576,7 @@
     display: none;
     align-items: center;
     justify-content: center;
+    z-index: 9;
     border-radius: 6px;
     background-color: $pink;
     color: #fff;
@@ -622,4 +623,27 @@ label.task-detail-label {
 .no-record-found-data {
     max-width: 500px;
     margin: auto;
+}
+
+.sprint-card-row{
+    .sprint-card-data{
+        .sprint-card-header{
+            background-color: $primary;
+            text-transform: capitalize;
+            font-family: $font_bold;
+            padding: 10px;
+            color: #fff;
+            border-radius: 15px 15px 0px 0px;
+        }
+        .sprint-card-body{
+            background-color: #fff;
+            height: calc(100vh - 160px);
+            border-radius: 0px 0px 15px 15px;
+            box-shadow: 0px 0px 11px #ccc;
+            .list-group-item {
+                border: 1px solid #ccc;
+                border-radius: 11px;
+            }
+        }
+    }
 }
