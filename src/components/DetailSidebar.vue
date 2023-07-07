@@ -35,7 +35,7 @@ onMounted(() => {
         </div>
         <div class="navigation">
           <ul>
-            <li>
+            <!-- <li>
               <router-link
                 :to="{
                   name: 'projects-detail-sprint',
@@ -47,7 +47,7 @@ onMounted(() => {
                 <i class="icon-final-ico"></i>
                 <span>Sprint</span>
               </router-link>
-            </li>
+            </li> -->
             <li>
               <router-link
                 :to="{

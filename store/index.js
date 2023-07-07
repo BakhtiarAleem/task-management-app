@@ -15,6 +15,8 @@ export default createStore({
     taskStatus: null,
     loading: true,
     projectDetail: null,
+    sprintDrag: null,
+    sprintOldValue: null,
   },
   mutations: {
     loginUser(state, value) {
@@ -35,6 +37,13 @@ export default createStore({
     setProjectDetail(state, value) {
       state.projectDetail = value;
     },
+    setSprintDrag(state, value) {
+      state.sprintDrag = value;
+    },   
+    setSprintOldValue(state, value) {
+      state.sprintOldValue = value;
+    },     
+    
   },
   getters: {
     loginUser: (state) => {
@@ -52,6 +61,12 @@ export default createStore({
     loading: (state) => {
       return state.loading;
     },
+    getSprintDrag: (state) => {
+      return state.sprintDrag;
+    },
+    getSprintOldValue: (state) => {
+      return state.sprintOldValue;
+    },  
   },
   actions: {
     async loginUser({ commit }, value) {
@@ -405,6 +420,20 @@ export default createStore({
         })
         .eq("id", value);
       toast.error('Project Archived');
+    } catch (error) {
+      toast.error(error);
+    }
+  },
+
+  async activeProject({ commit }, value) {
+    try {
+      const { data, error } = await supabase
+        .from("project")
+        .update({
+          project_status: 1
+        })
+        .eq("id", value);
+      toast.success('Project is Active');
     } catch (error) {
       toast.error(error);
     }

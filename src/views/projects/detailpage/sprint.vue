@@ -3,6 +3,7 @@ import { ref, onMounted, computed, watch } from 'vue'
 import { VueDraggableNext } from "vue-draggable-next";
 const enabled = ref(true);
 import { useRoute } from "vue-router";
+
 import store from "/store";
 
 const list = ref([
@@ -13,10 +14,33 @@ const list = ref([
 ]);
 const dragging = ref(false);
 const isLoading = ref(true);
-const sprintData = ref(true);
-const sprintStatus = ref(true);
+const sprintData = ref([]);
+const drag = ref(true);
+const sprintStatus = ref([]);
 const id = ref();
 const route = useRoute();
+const listData = ref();
+
+
+function startData(e) {
+  store.commit("setSprintOldValue", e);
+  console.log(e)
+}
+function changeData(e) {
+  if(store.getters["setSprintOldValue"] != e){
+    console.log(store.getters["getSprintDrag"])
+    console.log(e)
+    drag.value = false
+  }
+}
+
+function endData(e) {
+ console.log(e)
+}
+
+function storeData(e) {
+  store.commit("setSprintDrag", e);
+}
 
 
 async function sprintFunction() {
@@ -58,17 +82,8 @@ onMounted(async () => {
                 {{ sprint.name }}
             </div>
             <div class="sprint-card-body">
-                <VueDraggableNext class="dragArea list-group w-full" :list="list" @change="log">
-                    <transition-group>
-                        <div
-                        class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
-                        v-for="element in sprintData"
-                        :key="element.task_name"
-                        v-show="sprint.id === element.task_status_id"
-                        >
-                        {{ element.task_name }}
-                        </div>
-                    </transition-group>
+                <VueDraggableNext :sort="drag" v-model="listData" group="sprint" class="dragArea list-group w-full" :list="sprintData" @change="changeData(sprint.id)" @start="startData(sprint.id)" @end="drag = false">
+                  <div v-for="item in sprintData" @drag="storeData(item.id)" v-show="item.task_status_id === sprint.id" :key="item.id" class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center">{{ item.task_name }}</div>
                 </VueDraggableNext>
             </div>
         </div>

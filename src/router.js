@@ -71,7 +71,7 @@ const routes = [
     path: '/projects/:id/',
     component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/index.vue'),
     redirect: {
-      name: "projects-detail-sprint"
+      name: "projects-detail-issues"
   },     
     meta:{    
       requiresAuth: true,    
@@ -79,16 +79,16 @@ const routes = [
       title:'Project Detail | Task Issues',
     }, 
     children: [
-      {
-        name: 'projects-detail-sprint',
-        path: '/projects/:id/sprint/',
-        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/sprint.vue'),
-        meta:{    
-          requiresAuth: true,    
-          detailPage: true,
-          title:'Sprint | Project Detail | Task Issues',
-        }, 
-      },
+      // {
+      //   name: 'projects-detail-sprint',
+      //   path: '/projects/:id/sprint/',
+      //   component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/sprint.vue'),
+      //   meta:{    
+      //     requiresAuth: true,    
+      //     detailPage: true,
+      //     title:'Sprint | Project Detail | Task Issues',
+      //   }, 
+      // },
       {
         name: 'projects-detail-issues',
         path: '/projects/:id/issues/',

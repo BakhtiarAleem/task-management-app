@@ -80,7 +80,18 @@ function archiveProjectFunction(projectid, projectName) {
     archiveProjectStoreId.value = projectid
     archiveProjectStoreName.value = projectName
     archiveProject.value = true
+    projectType.value = 2
 }
+
+async function activeProjectFunction(projectid, projectName) {
+    isLoading.value = true
+    await store.dispatch('activeProject', projectid).then((e) => { 
+        projects()
+        isLoading.value = false
+        projectType.value = 1
+    })
+}
+
 
 onMounted(() => {
     projects()
@@ -161,10 +172,16 @@ onMounted(() => {
                                         Modify
                                     </a>
                                 </li> -->
-                                <li>
+                                <li v-if="manage.project_status === 1">
                                     <a class="cursor-pointer" @click="archiveProjectFunction(manage.id, manage.name)">
                                         <i class="icon-download"></i>
                                         Archive
+                                    </a>
+                                </li>
+                                <li v-if="manage.project_status === 2">
+                                    <a class="cursor-pointer" @click="activeProjectFunction(manage.id)">
+                                        <i class="icon-download"></i>
+                                        Active
                                     </a>
                                 </li>
                             </ul>
