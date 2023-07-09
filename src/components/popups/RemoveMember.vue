@@ -2,14 +2,14 @@
 import { ref, onMounted, computed, watch } from 'vue'
 import BaseLoader from '/src/components/BaseLoader.vue'
 import store from "/store";
-import { useRoute } from 'vue-router';
 const isLoading = ref(false);
 
 
 const props = defineProps({
     popup: Boolean,
-    projectname: String,
+    memberName: String,
     projectid: Number,
+    userid: String,
 })
 
 
@@ -18,7 +18,11 @@ const props = defineProps({
 async function submitForm(val) {
     val.preventDefault();    
     isLoading.value = true;
-    await store.dispatch('archiveProject', props.projectid).then((e) => { 
+    await store.dispatch('removeTeamMember', {
+        projectID: props.projectid,
+        userID: props.userid,
+        username: props.memberName,
+  }).then((e) => { 
         emit('reLoad', true)     
         emit('close', true)  
         isLoading.value = false;
@@ -43,13 +47,13 @@ const emit = defineEmits(['close','reLoad'])
   <div class="modal-dialog sm">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Archive Project</h5>
+            <h5 class="modal-title">Remove Member</h5>
             <button type="button" @click="emit('close', false)" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form @submit="submitForm">
             <div class="modal-body">
                 <div class="modal-content-area">
-                  <p>Are Your Sure You Want to Archive <strong>{{ projectname }}</strong> Project ?</p>
+                  <p>Are Your Sure You Want to Remove <strong>{{ memberName }}</strong> from this Project ?</p>
                 
                 </div>
             </div>

@@ -395,14 +395,14 @@
 
         @include Desktop1440 {
             h4 {
-                font-size: 16px;
+                font-size: 14px;
                 margin-bottom: 6px;
             }
         }
 
         @include tabletL {
             h4 {
-                font-size: 16px;
+                font-size: 14px;
                 margin-bottom: 6px;
             }
         }
@@ -655,5 +655,11 @@ label.task-detail-label {
                 height: 100%;
             }
         }
+    }
+}
+
+.project-owner{
+    .detail-menu {
+        display: none;
     }
 }

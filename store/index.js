@@ -322,6 +322,7 @@ export default createStore({
         .from("team")
         .select("*, user_id( id, username, full_name, avatar_url, role )", )
         .neq("project_id", value)
+        .neq("user_id", this.state?.profile?.id)
       return addTeamMember.data;
     },
 
@@ -446,6 +447,30 @@ export default createStore({
       );
     return statusTask.data;
   },
+
+  async addTeamMember({ commit }, value) {
+    let team = await supabase.from("team").insert([
+      {
+        designation: value.designation,
+        project_id: value.project_id,
+        user_id: value.userId,
+      },
+    ]);
+    toast.success("New Member Added");
+    return team.data;
+  },
+
+  async removeTeamMember({ commit }, value) {
+    let team = await supabase
+    .from("team")
+    .delete()
+    .eq('project_id', value.projectID)
+    .eq('user_id', value.userID)
+
+    toast.error(value.username + " is Removed form Project");
+    return team.data;
+  },
+
     async logOut({ commit }) {
       await localStorage.removeItem("token");
       await localStorage.removeItem("profile");

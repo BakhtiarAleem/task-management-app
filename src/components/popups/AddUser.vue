@@ -9,18 +9,17 @@ const isLoading = ref(false);
 const projectid = ref(route.params.id);
 const authToken = computed(() => store.getters.token)
 const memberList = ref([]);
+const designation = ref()
+const memberSelected = ref()
 
 
 async function submitForm(val) {
     val.preventDefault();    
     isLoading.value = true;
-    await store.dispatch('addIssue',{
+    await store.dispatch('addTeamMember',{
         project_id: store.getters.projectSelected,
-        task_name: name.value,
-        task_description: description.value,
-        task_status_id: taskStatusSelected.value,
-        uploadImage: uploadImage.value,
-        assign_to: selectedProfile.value,
+        userId: memberSelected.value,
+        designation: designation.value,
   }).then((e) => {        
     }) 
     emit('close', false)
@@ -43,7 +42,9 @@ async function alreadyRegisterdUsers() {
     }
 }
 
-
+function selectedUser(n){
+    memberSelected.value = n
+}
 
 const props = defineProps({
   popup: Boolean
@@ -74,7 +75,11 @@ const emit = defineEmits(['close','reLoad'])
                 <div class="modal-content-area">
                     <div class="form-group">
                         <label>Add User</label>
-                        <BaseMultiSelect :assignTaskOption="memberList" @value="assignTaskTo" />
+                        <BaseMultiSelect :assignTaskOption="memberList" @value="selectedUser" />
+                    </div>
+                    <div class="form-group">
+                        <label>Designation</label>
+                        <input type="text" v-model="designation" required class="form-control" placeholder="Enter Designation" />
                     </div>
                 </div>
             </div>
