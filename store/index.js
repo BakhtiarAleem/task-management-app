@@ -471,6 +471,30 @@ export default createStore({
     return team.data;
   },
 
+  async inviteUser({ commit }, value) {
+    let inviteUser = await supabase.auth.admin.inviteUserByEmail(value)
+    if(inviteUser.error){
+      toast.error(inviteUser.error.message);
+    }
+    if(!inviteUser.error){
+      toast.success('Invite Send to User');
+    }
+    // toast.error(value.username + " is Removed form Project");
+    return inviteUser;
+  },
+
+  async createUserPassword({ commit }, value) {
+    let createUserPassword = await supabase.auth.admin.updateUserById(
+      '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
+      { password: 'new_password' }
+    )
+    // toast.error(value.username + " is Removed form Project");
+    return createUserPassword;
+  },
+
+
+
+
     async logOut({ commit }) {
       await localStorage.removeItem("token");
       await localStorage.removeItem("profile");

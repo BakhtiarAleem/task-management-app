@@ -93,7 +93,9 @@ import founder from '/src/assets/images/front/founder.png'
                             <div class="middle-aligner">
                                 <div class="inner">
                                     <div class="landing-graphics">
-                                        <img v-lazy="{ src: marysoftwares, loading: loadingImage, error: errorImage }" />
+                                        <a target="_blank" href="https://marysoftwares.online/">
+                                            <img v-lazy="{ src: marysoftwares, loading: loadingImage, error: errorImage }" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +120,7 @@ import founder from '/src/assets/images/front/founder.png'
                             <div class="inner">
                                 <h2>
                                     Hi! I'm Bakhtiar Aleem and the founder
-                                    of Mary Softwares.
+                                    of <a target="_blank" href="https://marysoftwares.online/">Mary Softwares</a>.
                                 </h2>
                                 <p>
                                     My passion is to provide solutions with simple and easy steps.

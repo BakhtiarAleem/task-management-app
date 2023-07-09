@@ -29,6 +29,15 @@ const routes = [
       title:'Request a Demo | Task Issues',
     },  
   },
+  {
+    name:'set-password',
+    path: '/setpassword',
+    component: () => import(/* webpackChunkName: "Home" */ '././views/SetPassword.vue'),
+    meta: {
+      layout: 'auth',
+      title:'Set Password | Task Issues',
+    },  
+  },
   { path: '/:pathMatch(.*)*', component: NotFound },
   {
     name:'login',
