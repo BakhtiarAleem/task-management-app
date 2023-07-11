@@ -30,6 +30,15 @@ const routes = [
     },  
   },
   {
+    name:'site-admin',
+    path: '/site-admin',
+    component: () => import(/* webpackChunkName: "Home" */ '././views/front/SiteAdmin.vue'),
+    meta: {
+      advertisementPage: true,
+      title:'Site Admin | Task Issues',
+    },  
+  },
+  {
     name:'set-password',
     path: '/setpassword',
     component: () => import(/* webpackChunkName: "Home" */ '././views/SetPassword.vue'),

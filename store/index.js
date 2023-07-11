@@ -287,6 +287,32 @@ export default createStore({
       }
     },
 
+    async updateProject({ commit }, value) {
+      if (value.uploadImage) {
+        const userId = this.state?.user?.id || this.state?.user?.sub;
+        let projectimage = await supabase.storage
+          .from("project")
+          .upload(value.name, value.uploadImage);
+        let dataImage = projectimage.data.path;
+        let projectImageUrl = supabase.storage
+          .from("project")
+          .getPublicUrl(dataImage);
+        let updateProject = await supabase.from("project").update([
+          {
+            name: value.name,
+            description: value.description,
+            project_image: projectImageUrl.data.publicUrl,
+            type: value.type,
+            project_created: userId,
+            project_status: 1,
+          },
+        ]).eq("id", value.id);
+        
+        toast.success("Project Updated");
+        return updateProject.data;
+      }
+    },
+
     async taskStatus({ commit }) {
       let taskStatus = await supabase.from("status_task").select("*");
       this.state.taskStatus = taskStatus.data;
@@ -361,6 +387,15 @@ export default createStore({
         return tasks.data;
       }
     },
+
+    async requestDemoData({ commit }, value) {
+      let requestDemo = await supabase
+        .from("request_demo")
+        .select("*")
+      return requestDemo.data;
+    },
+
+
     async taskDetail({ commit }, value) {
 		let taskDetail = await supabase
 		  .from("tasks")

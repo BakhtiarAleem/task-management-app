@@ -93,7 +93,7 @@ import errorImage from '/image-error.png'
                                             </div>
                                             <div class="col-xs-12 col-sm-12">
                                                 <button class="btn btn-primary" :class="isLoading ? 'disabled' : ''" type="submit">
-                                                    Sign in
+                                                    Send
                                                     <span>
                                                         <BaseLoader/>
                                                     </span>
