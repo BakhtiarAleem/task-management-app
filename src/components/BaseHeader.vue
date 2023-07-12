@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick, onMounted } from 'vue'
 import BaseLogo from '/src/components/BaseLogo.vue'
 import { useRouter } from 'vue-router';
 import store from "/store";
@@ -35,6 +35,18 @@ async function logOut() {
       
     })
 }
+
+
+async function getUserSetting() {
+    await store.dispatch('getUserSetting').then((e) => {
+        store.commit('loginUser', e[0])
+        store.commit('setProfile', e[0])
+    })
+}
+
+onMounted(() => {
+    getUserSetting()
+})
 
 </script>
 
@@ -97,13 +109,10 @@ async function logOut() {
                                         class="top-dropdown"
                                     >
                                         <li>
-                                            <a
-                                                href="javascript:void(0)"
-                                                v-b-modal.account-settings
-                                            >
+                                            <router-link :to="{name: 'settings'}">
                                                 <i class="icon-team-member"></i>
                                                 Account Setting
-                                            </a>
+                                            </router-link>
                                         </li>
                                         <li>
                                             <a class="cursor-pointer" @click="logOut">

@@ -3,6 +3,7 @@ import { supabase } from "/api/supabaseClient";
 import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 import jwt_decode from "jwt-decode";
+import dayjs from 'dayjs';
 
 const toast = useToast();
 
@@ -43,7 +44,9 @@ export default createStore({
     setSprintOldValue(state, value) {
       state.sprintOldValue = value;
     },     
-    
+    setProfile(state, value) {
+      state.profile = value;
+    },      
   },
   getters: {
     loginUser: (state) => {
@@ -288,7 +291,6 @@ export default createStore({
     },
 
     async updateProject({ commit }, value) {
-      if (value.uploadImage) {
         const userId = this.state?.user?.id || this.state?.user?.sub;
         let projectimage = await supabase.storage
           .from("project")
@@ -310,8 +312,40 @@ export default createStore({
         
         toast.success("Project Updated");
         return updateProject.data;
-      }
     },
+
+    async updateSettings({ commit }, value) {
+      const userId = this.state?.user?.id || this.state?.user?.sub;
+      let date = dayjs().format()
+      console.log(date)
+      let projectimage = await supabase.storage
+      .from("avatars")
+      .upload(value.fullname+''+date, value.uploadImage);
+    let dataImage = projectimage.data.path;
+    let projectImageUrl = supabase.storage
+      .from("avatars")
+      .getPublicUrl(dataImage);
+
+      let updateSettings = await supabase.from("profiles").update([
+        {
+          username: value.username,
+          full_name: value.fullname,
+          avatar_url: projectImageUrl.data.publicUrl,
+          website: value.website,
+          role: value.role,
+          updated_at: date,
+        },
+      ]).eq("id", userId);
+      return updateSettings;
+    },
+    
+
+    async getUserSetting({ commit }, value) {
+      const userId = this.state?.user?.id || this.state?.user?.sub;
+      let updateSettings = await supabase.from("profiles").select("*").eq("id", userId);
+      return updateSettings.data;
+    },
+
 
     async taskStatus({ commit }) {
       let taskStatus = await supabase.from("status_task").select("*");
