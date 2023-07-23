@@ -58,7 +58,7 @@ const emit = defineEmits(['close','reLoad'])
                 </div>
             </div>
             <div class="modal-footer">
-                <button @click="emit('close', false)" class="btn btn-danger">No</button>
+                <button type="button" @click="emit('close', false)" class="btn btn-danger">No</button>
 
                 <button type="submit" :class="isLoading ? 'disabled' : ''" class="btn btn-primary">Yes<BaseLoader/></button>
             </div>

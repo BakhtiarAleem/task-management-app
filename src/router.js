@@ -6,6 +6,7 @@ const routes = [
     name:'landing-page',
     path: '/',
     component: () => import(/* webpackChunkName: "Home" */ '././views/front/Landing.vue'),
+    props: (route) => ({ token: route.query.token, type:route.query.type }),
     meta: {
       advertisementPage: true,
       title:'Homepage | Task Issues',
@@ -42,6 +43,7 @@ const routes = [
     name:'set-password',
     path: '/setpassword',
     component: () => import(/* webpackChunkName: "Home" */ '././views/SetPassword.vue'),
+    props: (route) => ({ token: route.query.token, type:route.query.type }),
     meta: {
       layout: 'auth',
       title:'Set Password | Task Issues',
@@ -145,6 +147,16 @@ const routes = [
           requiresAuth: true,    
           detailPage: true,
           title:'Settings | Project Detail | Task Issues',
+        }, 
+      },
+      {
+        name: 'projects-report',
+        path: '/projects/:id/report/',
+        component: () => import(/* webpackChunkName: "ProjectsDetail" */'././views/projects/detailpage/report.vue'),
+        meta:{    
+          requiresAuth: true,    
+          detailPage: true,
+          title:'Members | Project Report | Task Issues',
         }, 
       },
     ],     

@@ -77,6 +77,19 @@ onMounted(() => {
             <li>
               <router-link
                 :to="{
+                  name: 'projects-report',
+                  params: {
+                    id: currentProject,
+                  },
+                }"
+              >
+                <i class="icon-Report"></i>
+                <span>Reports</span>
+              </router-link>
+            </li>            
+            <li>
+              <router-link
+                :to="{
                   name: 'projects-detail-settings',
                   params: {
                     id: currentProject,

@@ -218,7 +218,7 @@
                 border: 1px solid #ddd;
                 padding: 10px 0px;
                 .main-side-heading{
-                    padding: 0px 10px;
+                    padding: 4px 10px 8px 10px;
                     border-bottom: 1px solid #ddd;
                     h4{
                         margin-bottom: 0px;
@@ -445,7 +445,16 @@
             position: absolute;
             right: 0;
             top: 0;
-
+            &.filter-report{
+                width: calc(100% - 50%);
+                top: -8px;
+                @include mobile {
+                    width: 100%;
+                    top: 0;
+                    position: relative;
+                    margin-top: 13px;
+                }
+            }
             button {
                 position: relative;
                 padding-left: 42px;
@@ -461,8 +470,28 @@
                 }
             }
         }
+        @include mobile {
+            flex-direction: column;
+            align-items: normal;
+            .report-flex-title{
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+        }
     }
-
+    .report-flex-title {
+        display: flex;
+        align-items: center;
+    }
+    .vue-apexcharts{
+        .apexcharts-canvas {
+            @include mobile{
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+    }
     .issue-listing {
         margin-top: 20px;
 
@@ -662,4 +691,53 @@ label.task-detail-label {
     .detail-menu {
         display: none;
     }
+}
+label.hidden {
+    visibility: hidden;
+}
+.generate-chart-placeholder {
+    height: calc(100vh - 150px);
+    padding-top: 30px;
+    .row {
+        height: 100%;
+        .card.card-listing{
+            margin-bottom: 0px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            color: #706978;
+            padding: 50px 50px;
+            min-height: calc(100vh - 210px);
+            i{
+                font-size: 35px;
+            }
+            h2{
+                margin-bottom: 0;
+                margin-left: 20px;
+                color: #706978;
+                margin-top: 5px;
+            }
+        }
+    }
+}
+.generate-chart{
+    .card.card-listing {
+        margin-bottom: 0px;
+        padding: 50px;
+    }
+}
+
+.dp__action_select, .dp__range_end, .dp__range_start, .dp__active_date {
+    background: $primary !important;
+}
+.dp__overlay_cell_active{
+    background: $primary !important;       
+}
+.dp__today {
+    border: 1px solid $primary !important;
+}
+
+.dp__action_buttons button {
+    padding: 5px 7px !important;
+    height: auto;
 }

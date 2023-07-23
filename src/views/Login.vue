@@ -24,10 +24,10 @@ async function handleSignin() {
 
 async function googleLogin() {
   isLoading.value = true;
-  store.dispatch('googleLogin').then((e) => {
-  if(e === 'success'){
-    router.push('/projects')
-  }
+  store.dispatch('signInWithGoogle').then((e) => {
+  // if(e === 'success'){
+  //   router.push('/projects')
+  // }
   isLoading.value = false;
 })
 }
@@ -40,7 +40,7 @@ async function googleLogin() {
     <h3 class="welcome-heading">Sign in to your account</h3>
     <div class="card">
       <div class="card-body auth-card-body">
-        <div class="sign-in-google comming-soon">
+        <div class="sign-in-google">
           <button type="button" @click="googleLogin" class="btn btn-google right-side-btn"><div class="google-logo"><img src="/google-logo.png" /></div><span>Connect with Google</span></button>
         </div>
         <form @submit.prevent="handleSignin">

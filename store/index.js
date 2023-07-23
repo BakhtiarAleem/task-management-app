@@ -18,6 +18,7 @@ export default createStore({
     projectDetail: null,
     sprintDrag: null,
     sprintOldValue: null,
+    reportGenerated: null
   },
   mutations: {
     loginUser(state, value) {
@@ -46,7 +47,10 @@ export default createStore({
     },     
     setProfile(state, value) {
       state.profile = value;
-    },      
+    }, 
+    setReportGenerated(state, value) {
+      state.reportGenerated = value;
+    },          
   },
   getters: {
     loginUser: (state) => {
@@ -70,6 +74,9 @@ export default createStore({
     getSprintOldValue: (state) => {
       return state.sprintOldValue;
     },  
+    getReportGenerated: (state) => {
+      return state.reportGenerated;
+    }, 
   },
   actions: {
     async loginUser({ commit }, value) {
@@ -292,9 +299,10 @@ export default createStore({
 
     async updateProject({ commit }, value) {
         const userId = this.state?.user?.id || this.state?.user?.sub;
+        let date = dayjs().format()
         let projectimage = await supabase.storage
           .from("project")
-          .upload(value.name, value.uploadImage);
+          .upload(value.name+''+date, value.uploadImage);
         let dataImage = projectimage.data.path;
         let projectImageUrl = supabase.storage
           .from("project")
@@ -317,7 +325,6 @@ export default createStore({
     async updateSettings({ commit }, value) {
       const userId = this.state?.user?.id || this.state?.user?.sub;
       let date = dayjs().format()
-      console.log(date)
       let projectimage = await supabase.storage
       .from("avatars")
       .upload(value.fullname+''+date, value.uploadImage);
@@ -336,6 +343,7 @@ export default createStore({
           updated_at: date,
         },
       ]).eq("id", userId);
+      toast.success("Account Updated");
       return updateSettings;
     },
     
@@ -554,14 +562,74 @@ export default createStore({
 
   async createUserPassword({ commit }, value) {
     let createUserPassword = await supabase.auth.admin.updateUserById(
-      '6aa5d0d4-2a9f-4483-b6c8-0cf4c6c98ac4',
-      { password: 'new_password' }
+      value.userid,
+      { password: value.password }
     )
+    toast.success('Password Changed');
     // toast.error(value.username + " is Removed form Project");
     return createUserPassword;
   },
 
+  async signInWithGoogle({ commit }, value) {
+  // const { user, session, error } = await supabase.auth.signIn({
+  //   provider: 'google',
+  // });
+  const { error } = await supabase.auth.signIn({
+    provider: 'google',
+  }, { redirectTo: 'http://127.0.0.1:5173/projects/' });
+  return error;
+},
+  async generateReport({ commit }, value) {
+    await this.dispatch('taskStatus')
+    let taskData = this.state.taskStatus
+    let processData = {}
 
+    await taskData.forEach(row => {   
+      value.taskid = row.id 
+      this.dispatch('processTaskDataGenerate', value).then((e) => {   
+        processData[row.name] = e.data
+      })
+      this.state.reportGenerated = processData
+    });
+    return processData;
+  },
+
+  async processTaskDataGenerate({ commit }, value) {
+    let processData = await supabase
+      .from("tasks")
+      .select("*")
+      .gte('created_at', value.startDate)
+      .lte('created_at', value.endDate)
+      .eq("project_id", value.projectSelected)
+      .eq("task_status_id", value.taskid);
+    return processData;
+  },
+
+
+  async changePassword({ commit }, value) {
+    let updatePassword = await supabase.auth.update({
+      password: value,
+    });
+    return updatePassword;
+  },
+
+
+  async changeTaskEndDate({ commit }, value) {
+    console.log(value)
+    let taskEndDate = await supabase
+      .from("tasks")
+      .update({
+        task_complete_data: value.endDate
+      })
+      .eq("id", value.taskid);
+      if(taskEndDate.status === 204){
+        toast.success("Task End Date Changed");
+      }
+      else{
+        toast.success(taskEndDate.error);
+      }
+    return taskEndDate;
+  },
 
 
     async logOut({ commit }) {

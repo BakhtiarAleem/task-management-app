@@ -1,10 +1,13 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, nextTick  } from 'vue';
 import { useRoute } from 'vue-router';
 import BlockLoader from '/src/components/BlockLoader.vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 import store from "/store";
-import moment from 'moment';
+import Datepicker from 'vue3-datepicker'
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import dayjs from 'dayjs';
 
 const taskDetailId = ref({});
 const route = useRoute();
@@ -14,6 +17,7 @@ const statusModalOpen = ref(false);
 const authToken = computed(() => store.getters.token)
 const visible = ref(false);
 const reportedBy = ref();
+const dateCheckStatus = ref(false);
 const commentMessage = ref();
 const profile = computed(() => store?.state?.profile || 'Anyonomous');
 const isLoading = ref(true);    
@@ -21,7 +25,8 @@ function initialAvatar(value){
     return 'https://ui-avatars.com/api/background=a3216d&color=fff?name='+ value
 }
 function dateTime(value){
-    let dateValue = moment(value, "YYYYMMDD").fromNow()
+   
+    let dateValue = dayjs(value).format('DD/MM/YYYY')
     return dateValue
 }
 async function reportedByFunction(reportData) {
@@ -34,7 +39,7 @@ const taskStatus = computed(() => store.getters.taskStatus)
 const taskid = ref(route.params.taskid);
 const project = computed(() => store.state.projectDetail)
 const currentProfile = computed(() => store?.state?.profile || 'Anyonomous');
-
+const taskEndDate = ref();
 async function issues() {
     taskDetailId.value = {
         projectid: projectid.value,
@@ -43,6 +48,7 @@ async function issues() {
     isLoading.value = true
     await store.dispatch('taskDetail', taskDetailId.value).then((val) => {
         issueDetail.value = val[0]
+        taskEndDate.value = val[0]?.task_complete_data
         reportedByFunction(issueDetail.value.reporter)
     })
     isLoading.value = false
@@ -55,6 +61,7 @@ async function commenting() {
     }
     await store.dispatch('addComment', commentData).then((e) => {        
         commentMessage.value = null
+        issues()
     })
 }
 
@@ -74,6 +81,19 @@ async function taskStatusFunction() {
     await store.dispatch('taskStatus')
   }
 }
+async function taskEndDateChange() {
+    nextTick(() => {
+        let dataTask = {
+            taskid: taskid.value,
+            endDate: taskEndDate.value
+        }
+         store.dispatch('changeTaskEndDate', dataTask).then((val) => {
+            reportedBy.value = val[0]
+            dateCheckStatus.value = false
+            issues();
+        })
+    })
+} 
 
 onMounted(() => {
     issues()
@@ -158,7 +178,7 @@ onMounted(() => {
                     </div>
                     <div class="commenter-message">
                         <div class="form-group">
-                            <input type="text" @keyup.enter="commenting" placeholder="Add a comment..." v-model="commentMessage" class="form-control" />
+                            <textarea type="text" @keyup.enter="commenting" placeholder="Add a comment..." v-model="commentMessage" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -243,14 +263,11 @@ onMounted(() => {
                                 Task End Data
                             </div>
                             <div class="field-action">
-                                <div class="form-group">
-                                    <input type="date" class="form-control" />
+                                <div class="form-group">                                 
+                                    <VueDatePicker @update:model-value="taskEndDateChange()" v-model="taskEndDate"></VueDatePicker>
                                 </div>                                
                             </div>
-                        </div>
-
-
-
+                        </div>                        
                     </div>
                 </div>
             </div>
