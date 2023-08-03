@@ -365,8 +365,11 @@
         cursor: pointer;
 
         .image-section {
-            display: table-cell;
+            display: flex;
             vertical-align: middle;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
 
         img {

@@ -107,14 +107,20 @@ onMounted(() => {
                     <form @submit="generateReport">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group relative">
                                 <label>Start Date</label>
+                                <div class="date-show" v-if="startDate">
+                                    {{ startDate }}
+                                </div>
                                 <VueDatePicker :format="formatStartDate" v-model="startDate"></VueDatePicker>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group relative">
                                 <label>End Date</label>
+                                <div class="date-show" v-if="endDate">
+                                    {{ endDate }}
+                                </div>
                                 <VueDatePicker :format="formatEndtDate" v-model="endDate"></VueDatePicker>
                             </div>
                         </div>
@@ -162,3 +168,15 @@ onMounted(() => {
     </div>
   </div>
 </template>
+<style scoped>
+.form-group.relative {
+    position: relative;
+}
+.date-show {
+    position: absolute;
+    z-index: 1;
+    padding-left: 40px;
+    bottom: 9px;
+    font-weight: 600;
+}
+</style>

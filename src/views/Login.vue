@@ -40,9 +40,9 @@ async function googleLogin() {
     <h3 class="welcome-heading">Sign in to your account</h3>
     <div class="card">
       <div class="card-body auth-card-body">
-        <div class="sign-in-google">
+        <!-- <div class="sign-in-google">
           <button type="button" @click="googleLogin" class="btn btn-google right-side-btn"><div class="google-logo"><img src="/google-logo.png" /></div><span>Connect with Google</span></button>
-        </div>
+        </div> -->
         <form @submit.prevent="handleSignin">
           <div class="form-group">
             <label for="email">Email</label>

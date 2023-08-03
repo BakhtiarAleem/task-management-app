@@ -32,7 +32,7 @@ import Img7 from '/src/assets/images/front/landing/track.png'
 import frontImage from '/src/assets/images/front/landing-header-bg.png'
 import loadingImage from '/image-loading-small.gif'
 import errorImage from '/image-error.png'
-import webscreen from '/src/assets/images/front/landing/web-screens.png'
+import webscreen from '/src/assets/images/front/landing/web-screens.jpg'
 
 
 
