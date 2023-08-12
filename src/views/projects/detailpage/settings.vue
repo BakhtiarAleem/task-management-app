@@ -49,7 +49,6 @@ async function submitForm(val) {
         uploadImage: uploadImage.value,
     }
     await store.dispatch('updateProject', data).then((e) => {
-        console.log(e)
     })
     isLoading.value = false;
 }

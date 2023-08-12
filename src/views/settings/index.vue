@@ -44,7 +44,6 @@ async function submitForm(val) {
         uploadImage: uploadImage.value,
     }
     await store.dispatch('updateSettings', data).then((e) => {
-        console.log(e)
     })
     isLoading.value = false;
 }

@@ -44,7 +44,6 @@ async function alreadyRegisterdUsers() {
             Object.entries(data).forEach(element => {      
                 Object.entries(memberListing.value).forEach(innerElement => {
                     if(innerElement[1]?.user_id?.id !== element[1]?.id){
-                        console.log(element[1]?.avatar_url)
                         let image = element[1]?.avatar_url === null ? initialAvatar(element[1]?.username) : element[1]?.avatar_url
                         memberList.value.push({username: element[1]?.username, value: element[1]?.id, icon: image })
                     }

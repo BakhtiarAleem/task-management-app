@@ -55,8 +55,6 @@ const series =  ref([44, 55, 41, 17, 15]);
 
 async function generateReport(val) {
     val.preventDefault(); 
-    console.log(options.value)
-    console.log(series.value)
     chartData.value = false;
     isLoading.value = true;
     let dateReport = {

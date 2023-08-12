@@ -12,7 +12,6 @@ async function submitForm(val) {
     val.preventDefault();    
     isLoading.value = true;
     await store.dispatch('inviteUser', inviteUser.value).then((e) => { 
-        console.log(e)
         emit('reLoad', true)     
         emit('close', true)  
         isLoading.value = false;

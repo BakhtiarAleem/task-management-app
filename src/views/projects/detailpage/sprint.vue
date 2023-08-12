@@ -24,18 +24,14 @@ const listData = ref();
 
 function startData(e) {
   store.commit("setSprintOldValue", e);
-  console.log(e)
 }
 function changeData(e) {
   if(store.getters["setSprintOldValue"] != e){
-    console.log(store.getters["getSprintDrag"])
-    console.log(e)
     drag.value = false
   }
 }
 
 function endData(e) {
- console.log(e)
 }
 
 function storeData(e) {
@@ -48,7 +44,6 @@ async function sprintFunction() {
   isLoading.value = true;
   await store.dispatch("projectIssues", id.value).then((val) => {
     sprintData.value = val;
-    console.log(sprintData.value)
   });
   isLoading.value = false;
 }
