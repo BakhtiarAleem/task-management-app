@@ -17,8 +17,8 @@ const props = defineProps({
 const settingBox = ref(false);
 const addClassClick = ref(false);
 const user = computed(() => store?.state?.user || false);
-const username = computed(() => store?.state?.profile?.username || 'Anyonomous');
-const role = computed(() => store?.state?.profile?.role || '');
+const username = computed(() => store?.state?.profile?.username || 'no username Set');
+const role = computed(() => store?.state?.profile?.role || 'no role set');
 const profileImage = computed(() => store?.state?.profile?.avatar_url ? store?.state?.profile?.avatar_url : initialAvatar(username.value));
 const router = useRouter();
 

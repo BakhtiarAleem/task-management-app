@@ -61,6 +61,7 @@ import store from "/store";
             const archiveProject = ref(false);
             const archiveProjectStoreId = ref();
             const archiveProjectStoreName = ref();
+            const profile = computed(() => store?.state?.profile);
             const authToken = computed(() => store.getters.token)
 
 async function projects() {
@@ -70,6 +71,15 @@ async function projects() {
             if(value){
                 manageCards.value = null
                 manageCards.value = value
+                Object.keys(manageCards.value).forEach(index => {
+                    manageCards.value[index].team.forEach(team => {
+                        if(team.designation === 'Owner'){
+                            if(team?.user_id?.id === profile.value.id) {
+                                manageCards.value[index] = {...manageCards.value[index], owner: true };
+                            }
+                        }
+                    })
+                })
                 isLoading.value = false
             }
         })
@@ -151,7 +161,7 @@ onMounted(() => {
                     @card-click="redirect"
                 >
                 <template v-slot:menu>
-                        <div>
+                        <div>                            
                             <ul>
                                 <li>
                                     <router-link
@@ -166,13 +176,7 @@ onMounted(() => {
                                         <span>Team members</span>
                                     </router-link>
                                 </li>
-                                <!-- <li>
-                                    <a href="#">
-                                        <i class="icon-edit"></i>
-                                        Modify
-                                    </a>
-                                </li> -->
-                                <li v-if="manage.project_status === 1">
+                                <li v-if="manage.project_status === 1 && manage?.owner">
                                     <a class="cursor-pointer" @click="archiveProjectFunction(manage.id, manage.name)">
                                         <i class="icon-download"></i>
                                         Archive

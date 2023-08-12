@@ -18,7 +18,8 @@ export default createStore({
     projectDetail: null,
     sprintDrag: null,
     sprintOldValue: null,
-    reportGenerated: null
+    reportGenerated: null,
+    memberListed: null
   },
   mutations: {
     loginUser(state, value) {
@@ -50,7 +51,10 @@ export default createStore({
     }, 
     setReportGenerated(state, value) {
       state.reportGenerated = value;
-    },          
+    },     
+    setMemberListed(state, value) {
+      state.memberListed = value;
+    },      
   },
   getters: {
     loginUser: (state) => {
@@ -76,6 +80,9 @@ export default createStore({
     },  
     getReportGenerated: (state) => {
       return state.reportGenerated;
+    }, 
+    getMemberListed: (state) => {
+      return state.memberListed;
     }, 
   },
   actions: {
@@ -207,10 +214,9 @@ export default createStore({
         let project = await supabase
           .from("project")
           .select(
-            "*, team ( user_id(username,website,full_name,avatar_url,role) )"
+            "*, team ( designation, user_id(id, username,website,full_name,avatar_url,role) )"
           )
           .in("id", referencedProjectId);
-
         return project.data;
       }
     },
@@ -240,18 +246,19 @@ export default createStore({
     async addProject({ commit }, value) {
       if (value.uploadImage) {
         const userId = this.state?.user?.id || this.state?.user?.sub;
+        let date = dayjs().format()
         let projectimage = await supabase.storage
           .from("project")
-          .upload(value.name, value.uploadImage);
+          .upload(value.name+''+date, value.uploadImage);
         let dataImage = projectimage.data.path;
         let projectImageUrl = supabase.storage
-          .from("task")
+          .from("project")
           .getPublicUrl(dataImage);
         let orginiation = await supabase.from("project").insert([
           {
             name: value.name,
             description: value.description,
-            project_image: projectImageUrl,
+            project_image: projectImageUrl.data.publicUrl,
             type: value.type,
             project_created: userId,
             project_status: 1,
@@ -324,6 +331,7 @@ export default createStore({
 
     async updateSettings({ commit }, value) {
       const userId = this.state?.user?.id || this.state?.user?.sub;
+      if(value.uploadImage !== null) {
       let date = dayjs().format()
       let projectimage = await supabase.storage
       .from("avatars")
@@ -345,6 +353,22 @@ export default createStore({
       ]).eq("id", userId);
       toast.success("Account Updated");
       return updateSettings;
+    }
+    else{
+      let date = dayjs().format()
+
+      let updateSettings = await supabase.from("profiles").update([
+        {
+          username: value.username,
+          full_name: value.fullname,
+          website: value.website,
+          role: value.role,
+          updated_at: date,
+        },
+      ]).eq("id", userId);
+      toast.success("Account Updated"); 
+      return updateSettings;
+    }
     },
     
 
@@ -387,10 +411,9 @@ export default createStore({
 
     async addMembertoProject({ commit }, value) {
       let addTeamMember = await supabase
-        .from("team")
-        .select("*, user_id( id, username, full_name, avatar_url, role )", )
-        .neq("project_id", value)
-        .neq("user_id", this.state?.profile?.id)
+        .from("profiles")
+        .select("*")
+        .neq("id", this.state?.profile?.id)
       return addTeamMember.data;
     },
 
@@ -615,7 +638,6 @@ export default createStore({
 
 
   async changeTaskEndDate({ commit }, value) {
-    console.log(value)
     let taskEndDate = await supabase
       .from("tasks")
       .update({

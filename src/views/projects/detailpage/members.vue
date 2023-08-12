@@ -24,6 +24,7 @@ const removeMemberName= ref()
 async function members() {
     await store.dispatch('teamMembers', projectid.value).then((e) => {   
         manageCards.value = e
+        store.commit('setMemberListed', e)
         isLoading.value = false
     })
 }

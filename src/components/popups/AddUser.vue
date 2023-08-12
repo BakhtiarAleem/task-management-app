@@ -4,6 +4,11 @@ import { ref, onMounted, computed, watch } from 'vue'
 import BaseLoader from '/src/components/BaseLoader.vue'
 import store from "/store";
 import { useRoute } from 'vue-router';
+
+const props = defineProps({
+  popup: Boolean
+})
+
 const route = useRoute();
 const isLoading = ref(false);
 const projectid = ref(route.params.id);
@@ -11,7 +16,8 @@ const authToken = computed(() => store.getters.token)
 const memberList = ref([]);
 const designation = ref()
 const memberSelected = ref()
-
+const memberListing = computed(() => store.getters.getMemberListed)
+const popupWatch = computed(() => props.popup)
 
 async function submitForm(val) {
     val.preventDefault();    
@@ -34,10 +40,16 @@ function initialAvatar(value){
 async function alreadyRegisterdUsers() {
     if(authToken){
         await store.dispatch('addMembertoProject', projectid.value).then((e) => {      
-            for (let i = 0; i < e.length; i++) {
-            let image = e[i].user_id.avatar_url === null ? initialAvatar(e[i].user_id.username) : e[i].user_id.avatar_url
-            memberList.value.push({username: e[i].user_id.username, value: e[i].user_id.id, icon: image })
-            }
+            let data = e
+            Object.entries(data).forEach(element => {      
+                Object.entries(memberListing.value).forEach(innerElement => {
+                    if(innerElement[1]?.user_id?.id !== element[1]?.id){
+                        console.log(element[1]?.avatar_url)
+                        let image = element[1]?.avatar_url === null ? initialAvatar(element[1]?.username) : element[1]?.avatar_url
+                        memberList.value.push({username: element[1]?.username, value: element[1]?.id, icon: image })
+                    }
+                })       
+            });        
         })
     }
 }
@@ -46,14 +58,14 @@ function selectedUser(n){
     memberSelected.value = n
 }
 
-const props = defineProps({
-  popup: Boolean
-})
-
-
 onMounted(() => {
-    alreadyRegisterdUsers();
 })
+
+watch(popupWatch, (currentValue) => {
+    if(currentValue){
+        alreadyRegisterdUsers();
+    }
+});
 
 const emit = defineEmits(['close','reLoad'])
 
